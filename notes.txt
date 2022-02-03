@@ -1,0 +1,24 @@
+How could this app (server & client) be improved?
+- Maybe extend the JWT expiration?
+  - Complications: if we extend the JWT expiration, if anyone were to get ahold of this token, they'd have permissions/access
+    for longer periods of time.
+  - *Instructor note:* Instead of extending the JWT expiration (beyond 3-10mins) -> look into "Refresh Tokens"
+  - Instead of authenticating using just a name (or similar), actually implement username + password authentication
+    - *Instructor note:* DO NOT STORE THE PASSWORD AS PLAIN TEXT IN YOUR DB. Look into bcrypt (or Node's crypto package) and 
+    get an understanding of how to hash and salt passwords. 
+  - If you don't want to store the jwt token in state, look into other methods of storing it. 
+    - research if local storage or session storage would be okay to use, if you determine it's not, research cookies.
+- If a user tries to access a page, but they are not authenticated, are they presented with a message or some indicator as to why they
+  were redirected?? 
+- Maybe look into Public vs Protected routes with "react-router-dom" (you'll have to build these yourself)
+- Are you able to update/use react-router-dom v6? :) 
+- Add a GOOD README.md to your project!
+- Is your application error/warning free when you deploy to prod? Seeing errors in the console on a production app is not ideal.
+- If your heart so desires, how can you increase the security of your server? (look into a tool called Helmet)
+- Make this into a PWA?
+- Socket.io or Firebase for real-time data?
+- Maybe implement a Redis cache?
+- Payment APIs such as Stripe??
+- Bottom line - what awesome tools or features can you implement to make this Capstone Project AWESOME?!?!?!
+
+Bottom Bottom line, remember to HAVE FUN :D
