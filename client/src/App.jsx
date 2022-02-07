@@ -5,7 +5,7 @@ import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
 import CreatePost from './pages/CreatePost';
 import MyPosts from './pages/MyPosts';
-// import MyPosts from './pages/MyPosts';
+import Home from "./pages/Home"
 
 
 
@@ -19,13 +19,16 @@ function App() {
           <span><h1>FEEDBACK</h1></span>
           <ul className="nav">
             <li className='nav-item'>
-              <Link to="/">Dashboard</Link>
+              <Link to="/">Home</Link>
+            </li>
+            <li className='nav-item'>
+              <Link to="/dashboard">Dashboard</Link>
             </li>
             <li className='nav-item'>
               <Link to='/createpost'>Create Post</Link>
             </li>
             <li className='nav-item'>
-              <Link to='myposts'>My Posts</Link>
+              <Link to='/myposts'>My Posts</Link>
             </li>
             <li className='nav-item'>
               <Link to="/login">Login/Signup</Link>
@@ -47,7 +50,8 @@ function App() {
       </div>
 
       <Switch>
-        <Route exact path="/" render={() => <Dashboard user={user} />} />
+        <Route exact path="/" render={() => <Home user={user} />} />
+        <Route exact path="/dashboard" render={() => <Dashboard setUser={setUser} />} />
         <Route exact path="/login" render={() => <Login setUser={setUser} />} />
         <Route exact path="/createpost" render={() => <CreatePost setUser={setUser} />} />
         <Route exact path="/myposts" render={() => <MyPosts setUser={setUser} />} />
