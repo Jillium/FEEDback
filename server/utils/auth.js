@@ -1,4 +1,4 @@
-import jwt from 'jsonwebtoken';
+const jwt = require('jsonwebtoken');
 const jwtExpiration = '15s';
 
 const auth = {
@@ -26,4 +26,4 @@ const auth = {
   }
 };
 
-export default auth;
+module.exports = auth;

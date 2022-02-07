@@ -1,7 +1,7 @@
 const { Schema, model } = require('mongoose');
 const dateFormat = require('../utils/dateFormat');
 
-const ReplySchema = new Schema({
+const replySchema = new Schema({
     replyText: {
         type: String
     },
@@ -20,6 +20,6 @@ const ReplySchema = new Schema({
     }
 });
 
-const Reply = model('Reply', ReplySchema);
+const Reply = model('Reply', replySchema);
 
 module.exports = Reply;

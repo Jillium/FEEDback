@@ -1,2 +1,4 @@
-export { default as resolvers } from './resolvers.js';
-export { default as typeDefs } from './typeDefs.js';
+const typeDefs = require('./typeDefs');
+const resolvers = require('./resolvers');
+
+module.exports = { typeDefs, resolvers };

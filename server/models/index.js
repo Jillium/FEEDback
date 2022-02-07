@@ -1,18 +1,9 @@
-import mongoose from 'mongoose';
-import User from './User.js';
-import Post from './Post.js';
-import Comment from './Comment.js';
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/graphql_demo');
+const User = require('./User');
+const Post = require('./Post');
+const Comment = require('./Comment');
+const Reply = require('./Reply');
 
-const db = {
-  connection: mongoose.connection,
-  models: {
-    User,
-    Post,
-    Comment,
-    Reply
-  }
-};
 
-export default db;
+
+// user, post, comment, reply

@@ -2,7 +2,7 @@ const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
 
 
-const UserSchema = new Schema({
+const userSchema = new Schema({
   name: {
     type: String,
     required: true
@@ -47,6 +47,6 @@ UserSchema.virtual('friendCount').get(function() {
 });
 
 
-const User = model('User', UserSchema);
+const User = model('User', userSchema);
 
-export default User;
+module.exports = User;
