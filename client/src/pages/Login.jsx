@@ -15,7 +15,7 @@ const Login = (props) => {
   
   return (
     <div>
-      {/* <form onSubmit={(e) => {
+      <form onSubmit={(e) => {
         e.preventDefault();
         login({ variables: { name: username } });
       }}>
@@ -30,9 +30,9 @@ const Login = (props) => {
         </label>
 
         <button>Login</button>
-      </form> */}
+      </form>
 
-      <h1>Login form goes here</h1>
+      
     </div>
   );
 };

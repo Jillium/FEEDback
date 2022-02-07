@@ -19,3 +19,23 @@
 .nav-item {
     margin: 0 1rem;
 }
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: space-between;
+    align-items: flex-end;
+
+}
+
+.footer-list {
+    list-style-type: none;
+}
+
+.footer-item {
+    margin: 0 1rem;
+}

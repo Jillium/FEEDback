@@ -16,7 +16,7 @@ function App() {
     <Router>
       <div>
         <header className='header'>
-          <span><h1>Feedback</h1></span>
+          <span><h1>FEEDBACK</h1></span>
           <ul className="nav">
             <li className='nav-item'>
               <Link to="/">Dashboard</Link>
@@ -33,6 +33,17 @@ function App() {
            
           </ul>
         </header>
+
+        <main>
+
+        </main>
+
+        <footer className="footer">
+          <h4>Made by FEEDBACK 2022</h4>
+          <ul className='footer-list'>
+            <li className='footer-item'>Check us out on <a href="https://github.com/Jillium/FEEDback" target="_blank" rel="noreferrer">Github</a>!</li>
+          </ul>
+        </footer>
       </div>
 
       <Switch>
