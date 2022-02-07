@@ -1,0 +1,21 @@
+.header {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav {
+   list-style-type: none;
+   display: flex;
+   flex-direction: row;
+   flex-wrap: wrap;
+   justify-items: center;
+   justify-content: center;
+}
+
+.nav-item {
+    margin: 0 1rem;
+}
