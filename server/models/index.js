@@ -10,7 +10,8 @@ const db = {
   models: {
     User,
     Post,
-    Comment
+    Comment,
+    Reply
   }
 };
 

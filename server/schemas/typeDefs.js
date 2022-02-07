@@ -4,12 +4,12 @@ const typeDefs = gql`
   type User {
     _id: ID
     name: String
-    postss: [Post]
+    posts: [Post]
   }
 
   type Auth {
     token: ID!
-    author: Author
+    user: User
   }
 
   type Post {
@@ -17,6 +17,14 @@ const typeDefs = gql`
     title: String
     user: User
   }
+
+  type Comment {
+    _id: ID
+    commentText: String
+    CommentedBy: String
+  }
+
+  
 
   type Query {
     posts: [Post]
