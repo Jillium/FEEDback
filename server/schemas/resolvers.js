@@ -1,5 +1,7 @@
-import db from '../models/index.js';
-import auth from '../utils/auth.js';
+const db = require('../models/index');
+const auth = require('../utils/auth');
+const { Post, User } = require ("../models");
+
 
 const resolvers = {
   Query: {
@@ -29,4 +31,4 @@ const resolvers = {
 
 };
 
-export default resolvers;
+module.export = resolvers;
