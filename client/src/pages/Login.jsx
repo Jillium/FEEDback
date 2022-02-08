@@ -9,7 +9,7 @@ const Login = (props) => {
 
   useEffect((props) => {
     if (data && data.login) {
-      props.setUser({ token: data.login.token, author: data.login.author });
+      props.setUser({ token: data.login.token, user: data.login.user });
     }
   }, [data]);
   
