@@ -28,7 +28,7 @@ const userSchema = new Schema({
 );
 
 // set up pre-save middleware to create password
-UserSchema.pre('save', async function(next) {
+userSchema.pre('save', async function(next) {
   if (this.isNew || this.isModified('password')) {
     const saltRounds = 10;
     this.password = await bcrypt.hash(this.password, saltRounds);
@@ -38,11 +38,11 @@ UserSchema.pre('save', async function(next) {
 });
 
 // compare the incoming password with the hashed password
-UserSchema.methods.isCorrectPassword = async function(password) {
+userSchema.methods.isCorrectPassword = async function(password) {
   return bcrypt.compare(password, this.password);
 };
 
-UserSchema.virtual('friendCount').get(function() {
+userSchema.virtual('friendCount').get(function() {
   return this.friends.length;
 });
 
