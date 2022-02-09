@@ -2,7 +2,7 @@ const { Schema, model } = require('mongoose');
 const dateFormat = require('../utils/dateFormat');
 
 const replySchema = new Schema({
-    replyText: {
+    ReplyText: {
         type: String
     },
     RepliedBy: {

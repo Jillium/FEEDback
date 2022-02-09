@@ -1,5 +1,6 @@
 import './App.css';
 import React, { useState } from 'react';
+import { ApolloProvider, ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'; // v5
 import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
@@ -8,11 +9,21 @@ import MyPosts from './pages/MyPosts';
 import Home from "./pages/Home"
 
 
+const httpLink = createHttpLink({
+  uri: 'http://localhost:3001/graphql',
+});
+
+
+const client = new ApolloClient({
+  link: httpLink,
+  cache: new InMemoryCache(),
+});
 
 function App() {
-  const [user, setUser] = useState({ token: '', author: null });
+  const [user, setUser] = useState({ token: '', user: null });
   console.log(user);
   return (
+    <ApolloProvider client={client}>
     <Router>
       <div>
         <header className='header'>
@@ -57,6 +68,7 @@ function App() {
         <Route exact path="/myposts" render={() => <MyPosts setUser={setUser} />} />
       </Switch>
     </Router>
+    </ApolloProvider>
   );
 }
 

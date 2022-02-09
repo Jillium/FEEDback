@@ -6,15 +6,16 @@ const PostSchema = new Schema({
     type: String,
     required: true,
   },
-  postBody: {
+  PostBody: {
     type: String,
     required: 'You must include a question, comment, or concern regarding your post. (i.e. "How does my page layout look?" or "I wanted to share my color palette!")'
   },
-  postedBy: {
-    type: Schema.Types.ObjectId,
-    ref: 'User',
+  username: {
+    type: String,
+    required: true
+    // ref: 'User',
   },
-  Comments: [{
+  comments: [{
     type: Schema.Types.ObjectId,
     ref: 'Comment'
   }],
