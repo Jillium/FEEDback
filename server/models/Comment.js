@@ -2,7 +2,7 @@ const { Schema, model } = require('mongoose');
 const dateFormat = require('../utils/dateFormat');
 
 const CommentSchema = new Schema({
-  commentText: {
+  CommentText: {
     type: String
   },
   CommentedBy: {
