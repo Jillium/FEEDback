@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client';
 
 export const QUERY_POSTS = gql`
-  query posts($name: String) {
-    posts(name: $name) {
+  query posts($username: String) {
+    posts(username: $username) {
       _id
       PostBody
       createdAt
@@ -16,49 +16,51 @@ export const QUERY_POSTS = gql`
   }
 `;
 
-// export const QUERY_POST = gql`
-//   query post($id: ID!) {
-//     post(_id: $id) {
-//       _id
-//       title
-//       PostBody
-//       createdAt
-//       Comment {
-//         _id
-//         CommentText
-//         CommentedBy
-//         createdAt
-//         replies {
-//           ReplyText
-//           RepliedBy
-//           createdAt
-//         }
-//       }
-//     }
-//   }
-// `;
+export const QUERY_POST = gql`
+  query post($id: ID!) {
+    post(_id: $id) {
+      _id
+      title
+      PostBody
+      createdAt
+      Comment {
+        _id
+        CommentText
+        CommentedBy
+        createdAt
+        replies {
+          ReplyText
+          RepliedBy
+          createdAt
+        }
+      }
+    }
+  }
+`;
 
-// export const QUERY_USER = gql`
-//   query user($name: String!) {
-//     user(name: $name) {
-//       _id
-//       name
-//       email
-//       posts {
-//         _id
-//         title
-//         PostBody
-//         PostedBy
-//         Comments
-//         createdAt
-//       }
-//     }
-//   }
-// `;
+export const QUERY_USER = gql`
+  query user($username: String!) {
+    user(username: $username) {
+      _id
+      name
+      email
+      posts {
+        _id
+        title
+        PostBody
+        PostedBy
+        Comments
+        createdAt
+      }
+    }
+  }
+`;
+
+// I don't think we actually need to query these, we need mutations to add them 
 
 // export const QUERY_COMMENT = gql`
-// query comment($CommentedBy: String!) {
-//   reply(CommentedBy: $CommentedBy) {
+// query comment($username: String!) {
+//   reply(username: $username) {
 //     _id
 //     CommentText
 //     Replies: {
@@ -70,12 +72,12 @@ export const QUERY_POSTS = gql`
 // }
 // `;
 
-// export const QUERY_REPLY = gql `
-// query reply($RepliedBy: String!) {
-//   reply(RepliedBy: $RepliedBy) {
-//     _id
-//     ReplyText
-//     createdAt
-//   }
-// }
-// `;
+// // export const QUERY_REPLY = gql `
+// // query reply($RepliedBy: String!) {
+// //   reply(RepliedBy: $RepliedBy) {
+// //     _id
+// //     ReplyText
+// //     createdAt
+// //   }
+// // }
+// // `;
