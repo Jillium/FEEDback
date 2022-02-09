@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client';
 
 export const QUERY_POSTS = gql`
-  query posts($PostedBy: String) {
-    posts(PostedBy: $PostedBy) {
+  query posts($username: String) {
+    posts(username: $username) {
       _id
       PostBody
       createdAt
@@ -39,8 +39,8 @@ export const QUERY_POST = gql`
 `;
 
 export const QUERY_USER = gql`
-  query user($name: String!) {
-    user(name: $name) {
+  query user($username: String!) {
+    user(username: $username) {
       _id
       name
       email
@@ -56,26 +56,28 @@ export const QUERY_USER = gql`
   }
 `;
 
-export const QUERY_COMMENT = gql`
-query comment($CommentedBy: String!) {
-  reply(CommentedBy: $CommentedBy) {
-    _id
-    CommentText
-    Replies: {
-      ReplyText
-      RepliedBy
-      createdAt
-    }
-  }
-}
-`;
+// I don't think we actually need to query these, we need mutations to add them 
 
-export const QUERY_REPLY = gql `
-query reply($RepliedBy: String!) {
-  reply(RepliedBy: $RepliedBy) {
-    _id
-    ReplyText
-    createdAt
-  }
-}
-`;
+// export const QUERY_COMMENT = gql`
+// query comment($username: String!) {
+//   reply(username: $username) {
+//     _id
+//     CommentText
+//     Replies: {
+//       ReplyText
+//       RepliedBy
+//       createdAt
+//     }
+//   }
+// }
+// `;
+
+// // export const QUERY_REPLY = gql `
+// // query reply($RepliedBy: String!) {
+// //   reply(RepliedBy: $RepliedBy) {
+// //     _id
+// //     ReplyText
+// //     createdAt
+// //   }
+// // }
+// // `;
