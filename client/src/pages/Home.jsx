@@ -1,6 +1,7 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
 import { QUERY_POSTS } from "../graphql/queries";
+import PostList from '../components/PostList';
 
 
 function Home() {
@@ -14,8 +15,7 @@ function Home() {
     return (
         <main>
             <div>
-                <div>{/* print post list */}</div>
-                <h1>This is the homepage</h1>
+                <div><PostList posts={posts}/></div>
             </div>
         </main>
     );
