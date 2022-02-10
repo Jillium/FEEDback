@@ -5,8 +5,11 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
 import CreatePost from './pages/CreatePost';
-import MyPosts from './pages/MyPosts';
 import Home from "./pages/Home"
+import logo from "../src/assets/feedback.png";
+import logo2 from "../src/assets/Feedback2.png";
+import logo3 from "../src/assets/Feedback3.png";
+import SinglePost from './components/SinglePost';
 
 
 const httpLink = createHttpLink({
@@ -27,7 +30,7 @@ function App() {
     <Router>
       <div>
         <header className='header'>
-          <span><h1>FEEDBACK</h1></span>
+          <span><img src={logo3} alt="feedback logo"></img></span>
           <ul className="nav">
             <li className='nav-item'>
               <Link to="/">Home</Link>
@@ -37,9 +40,6 @@ function App() {
             </li>
             <li className='nav-item'>
               <Link to='/createpost'>Create Post</Link>
-            </li>
-            <li className='nav-item'>
-              <Link to='/myposts'>My Posts</Link>
             </li>
             <li className='nav-item'>
               <Link to="/login">Login/Signup</Link>
@@ -65,7 +65,7 @@ function App() {
         <Route exact path="/dashboard" render={() => <Dashboard setUser={setUser} />} />
         <Route exact path="/login" render={() => <Login setUser={setUser} />} />
         <Route exact path="/createpost" render={() => <CreatePost setUser={setUser} />} />
-        <Route exact path="/myposts" render={() => <MyPosts setUser={setUser} />} />
+        <Route exact path="/singlepost" render={() => <SinglePost setUser={setUser} />} />
       </Switch>
     </Router>
     </ApolloProvider>
