@@ -20,14 +20,16 @@ db.once('open', async () => {
   }
   
   const createdUsers = await User.collection.insertMany(userData);
-  console.log(createdUsers);
+  // console.log(createdUsers);
+  // console.log(createdUsers.username)
+  // console.log(userData)
 
 
   // // create friends
   
   for (let i = 0; i < 100; i += 1) {
     const randomUserIndex = Math.floor(Math.random() * createdUsers.insertedCount);
-    console.log(randomUserIndex);
+    // console.log(randomUserIndex);
     const userId = createdUsers.insertedIds[randomUserIndex];
 
     let friendId = userId;
@@ -35,13 +37,20 @@ db.once('open', async () => {
     while (friendId === userId) {
       const randomUserIndex = Math.floor(Math.random() * createdUsers.insertedCount);
       friendId = createdUsers.insertedIds[randomUserIndex];
-      console.log(friendId, userId);
+
+      
+      
     }
     
-    await User.updateOne({ _id: userId }, { $addToSet: { friends: friendId } });
+    const updatedUser = await User.updateOne({ _id: userId }, { $addToSet: { friends: friendId } });
+    console.log(updatedUser)
   }
+  
 
-  const foundUsers = await User.collection.find(userData);
+
+
+  // create posts
+
 
   let createdPosts = [];
   for (let i = 0; i < 100; i += 1) {
@@ -51,10 +60,11 @@ db.once('open', async () => {
     const randomUserIndex = Math.floor(Math.random() * createdUsers.insertedCount);
     const userId = createdUsers.insertedIds[randomUserIndex];
 
-    console.log('******************************************');
-    console.log(title);
-    console.log('**********************************************');
-    console.log(createdUsers.insertedIds[randomUserIndex]);
+
+
+  //   const randomUserIndex = Math.floor(Math.random() * createdUsers.insertedCount);
+  //   const { username, _id: userId } = createdUsers[randomUserIndex];
+
 
     const createdPost = await Post.create({ title, PostBody, userId });
 
@@ -66,7 +76,7 @@ db.once('open', async () => {
     createdPosts.push(createdPost);
   }
 
-  // create reactions
+  // // create reactions
   // for (let i = 0; i < 100; i += 1) {
   //   const CommentText = faker.lorem.words(Math.round(Math.random() * 20) + 1);
 
