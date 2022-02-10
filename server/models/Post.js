@@ -1,7 +1,7 @@
 const { Schema, model } = require('mongoose');
 const dateFormat = require('../utils/dateFormat');
 
-const PostSchema = new Schema({
+const postSchema = new Schema({
   title: {
     type: String,
     required: true,
@@ -24,8 +24,14 @@ const PostSchema = new Schema({
     default: Date.now,
     get: timestamp => dateFormat(timestamp)
 }
-});
+},
+{
+  toJSON: {
+    virtuals: true
+  }
+}
+);
 
-const Post = model("Post", PostSchema);
+const Post = model("Post", postSchema);
 
 module.exports = Post;
