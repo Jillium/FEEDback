@@ -1,63 +1,8 @@
-// const db = require('../config/connection');
-// const { User, Post } = require('../models');
-// const userSeeds = require('./userSeeds.json');
-// const postSeeds = require('./postSeeds.json');
-
-// db.once('open', async () => {
-//   try {
-//     await Post.deleteMany({});
-//     await User.deleteMany({});
-
-//     await User.create(userSeeds);
-
-//     for (let i = 0; i < postSeeds.length; i++) {
-//       const { _id, postAuthor } = await Post.create(postSeeds[i]);
-//       const user = await User.findOneAndUpdate(
-//         { username: postAuthor },
-//         {
-//           $addToSet: {
-//             posts: _id,
-//           },
-//         }
-//       );
-//     }
-
-//     for (let i = 0; i < commentSeeds.length; i++) {
-//       const { _id, commentAuthor } = await Comment.create(commentSeeds[i]);
-//       const user = await User.findOneAndUpdate(
-//         { username: commentAuthor },
-//         {
-//           $addToSet: {
-//             comments: _id,
-//           },
-//         }
-//       );
-//     }
-
-//     for (let i = 0; i < replySeeds.length; i++) {
-//       const { _id, replyAuthor } = await Reply.create(replySeeds[i]);
-//       const user = await User.findOneAndUpdate(
-//         { username: replyAuthor },
-//         {
-//           $addToSet: {
-//             comments: _id,
-//           },
-//         }
-//       );
-//     }
-//   } catch (err) {
-//     console.error(err);
-//     process.exit(1);
-//   }
-
-//   console.log('all done!');
-//   process.exit(0);
-// });
-
-const faker = require('faker');
+const { faker } = require('@faker-js/faker');
 
 const db = require('../config/connection');
-const { Post, User } = require('../models');
+const Post = require('../models/Post');
+const User = require('../models/User');
 
 db.once('open', async () => {
   await Post.deleteMany({});
@@ -67,61 +12,68 @@ db.once('open', async () => {
   const userData = [];
 
   for (let i = 0; i < 50; i += 1) {
-    const username = faker.internet.username();
+    const username = faker.internet.userName();
     const email = faker.internet.email(username);
     const password = faker.internet.password();
 
     userData.push({ username, email, password });
   }
-
+  
   const createdUsers = await User.collection.insertMany(userData);
+  console.log(createdUsers);
 
-  // create friends
+
+  // // create friends
+  
   for (let i = 0; i < 100; i += 1) {
-    const randomUserIndex = Math.floor(Math.random() * createdUsers.ops.length);
-    const { _id: userId } = createdUsers[randomUserIndex];
+    const randomUserIndex = Math.floor(Math.random() * createdUsers.insertedCount);
+    console.log(randomUserIndex);
+    const userId = createdUsers.insertedIds[randomUserIndex];
 
     let friendId = userId;
 
     while (friendId === userId) {
-      const randomUserIndex = Math.floor(Math.random() * createdUsers.ops.length);
-      friendId = createdUsers.ops[randomUserIndex];
+      const randomUserIndex = Math.floor(Math.random() * createdUsers.insertedCount);
+      friendId = createdUsers.insertedIds[randomUserIndex];
+      console.log(friendId, userId);
     }
-
+    
     await User.updateOne({ _id: userId }, { $addToSet: { friends: friendId } });
   }
 
-  // create posts
-  let createdThoughts = [];
-  for (let i = 0; i < 100; i += 1) {
-    const postBody = faker.lorem.words(Math.round(Math.random() * 20) + 1);
+  // create thoughts
 
-    const randomUserIndex = Math.floor(Math.random() * createdUsers.ops.length);
-    const { username, _id: userId } = createdUsers.ops[randomUserIndex];
 
-    const createdPost = await Post.create({ postBody, username });
-
-    const updatedUser = await User.updateOne(
-      { _id: userId },
-      { $push: { thoughts: createdPost._id } }
-    );
-
-    createdPosts.push(createdPost);
-  }
-
-  // // create reactions
+  // let createdPosts = [];
   // for (let i = 0; i < 100; i += 1) {
-  //   const reactionBody = faker.lorem.words(Math.round(Math.random() * 20) + 1);
+  //   const PostBody = faker.lorem.words(Math.round(Math.random() * 20) + 1);
+
+  //   const randomUserIndex = Math.floor(Math.random() * createdUsers.ops.length);
+  //   const { username, _id: userId } = createdUsers.ops[randomUserIndex];
+
+  //   const createdPost = await Post.create({ PostBody, username });
+
+  //   const updatedUser = await User.updateOne(
+  //     { _id: userId },
+  //     { $push: { posts: createdPost._id } }
+  //   );
+
+  //   createdPosts.push(createdPost);
+  // }
+
+  // create reactions
+  // for (let i = 0; i < 100; i += 1) {
+  //   const CommentText = faker.lorem.words(Math.round(Math.random() * 20) + 1);
 
   //   const randomUserIndex = Math.floor(Math.random() * createdUsers.ops.length);
   //   const { username } = createdUsers.ops[randomUserIndex];
 
-  //   const randomThoughtIndex = Math.floor(Math.random() * createdThoughts.length);
-  //   const { _id: thoughtId } = createdThoughts[randomThoughtIndex];
+  //   const randomPostIndex = Math.floor(Math.random() * createdPosts.length);
+  //   const { _id: postId } = createdPosts[randomPostIndex];
 
-  //   await Thought.updateOne(
-  //     { _id: thoughtId },
-  //     { $push: { reactions: { reactionBody, username } } },
+  //   await Post.updateOne(
+  //     { _id: postId },
+  //     { $push: { comments: { CommentText, username } } },
   //     { runValidators: true }
   //   );
   // }
@@ -129,3 +81,4 @@ db.once('open', async () => {
   console.log('all done!');
   process.exit(0);
 });
+

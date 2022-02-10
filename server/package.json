@@ -2,7 +2,7 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server/server.js",
   "type": "commonjs",
   "scripts": {
     "start": "node server.js",
@@ -21,5 +21,8 @@
     "graphql": "^16.3.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.1.9"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^6.0.0-alpha.5"
   }
 }
