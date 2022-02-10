@@ -41,25 +41,30 @@ db.once('open', async () => {
     await User.updateOne({ _id: userId }, { $addToSet: { friends: friendId } });
   }
 
-  // create thoughts
+  const foundUsers = await User.collection.find(userData);
 
+  let createdPosts = [];
+  for (let i = 0; i < 100; i += 1) {
+    const PostBody = faker.lorem.words(Math.round(Math.random() * 20) + 1);
+    const title = faker.lorem.words(Math.round(Math.random() * 2) + 1);
 
-  // let createdPosts = [];
-  // for (let i = 0; i < 100; i += 1) {
-  //   const PostBody = faker.lorem.words(Math.round(Math.random() * 20) + 1);
+    const randomUserIndex = Math.floor(Math.random() * createdUsers.insertedCount);
+    const userId = createdUsers.insertedIds[randomUserIndex];
 
-  //   const randomUserIndex = Math.floor(Math.random() * createdUsers.ops.length);
-  //   const { username, _id: userId } = createdUsers.ops[randomUserIndex];
+    console.log('******************************************');
+    console.log(title);
+    console.log('**********************************************');
+    console.log(createdUsers.insertedIds[randomUserIndex]);
 
-  //   const createdPost = await Post.create({ PostBody, username });
+    const createdPost = await Post.create({ title, PostBody, userId });
 
-  //   const updatedUser = await User.updateOne(
-  //     { _id: userId },
-  //     { $push: { posts: createdPost._id } }
-  //   );
+    const updatedUser = await User.updateOne(
+      { _id: userId },
+      { $push: { posts: createdPost._id } }
+    );
 
-  //   createdPosts.push(createdPost);
-  // }
+    createdPosts.push(createdPost);
+  }
 
   // create reactions
   // for (let i = 0; i < 100; i += 1) {
