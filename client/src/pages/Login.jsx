@@ -3,7 +3,8 @@ import { useMutation } from '@apollo/client';
 import { LOGIN_MUTATION } from '../graphql/mutations';
 
 const Login = (props) => {
-  const [formState, setFormState] = useState({ username: '', password: '' });
+  const [loginFormState, setLoginFormState] = useState({ loginUsername: '', loginPassword: '' });
+  const [signUpFormState, setSignUpFormState] = useState({ signUpUsername: '', signUpEmail: '', signUpPassword: '' });
   const [loginUsername, setLoginUsername] = useState('');
   const [signUpUsername, setSignUpUsername] = useState('');
   // loginmutation had loading and error in the {} but they were throwing errors so I removed them for the time being 
@@ -11,11 +12,21 @@ const Login = (props) => {
   const [addUser, { signUpData }] = useMutation(LOGIN_MUTATION);
 
   // update state based on form input changes
-  const handleChange = (event) => {
+  const handleLoginFormChange = (event) => {
     const { name, value } = event.target;
 
-    setFormState({
-      ...formState,
+    setLoginFormState({
+      ...loginFormState,
+      [name]: value,
+    });
+  };
+
+  // update state based on form input changes
+  const handleSignUpFormChange = (event) => {
+    const { name, value } = event.target;
+
+    setSignUpFormState({
+      ...signUpFormState,
       [name]: value,
     });
   };
@@ -28,7 +39,7 @@ const Login = (props) => {
   
   return (
     <div>
-      <form onSubmit={(e) => {
+      {/* <form onSubmit={(e) => {
         e.preventDefault();
         login({ variables: { name: username } });
       }}>
@@ -43,36 +54,36 @@ const Login = (props) => {
         </label>
 
         <button>Login</button>
-      </form>
+      </form> */}
 
       <form onSubmit={(e) => {
         e.preventDefault();
-        login({ variables: { name: username } });
+        login({ variables: { name: loginUsername } });
       }}>
               <h3 className='form-title'>Login</h3>
-              <label htmlFor="login-username">
+              <label htmlFor="loginUsername">
                 Username:
               </label>
               <input
                 className="form-input"
                 placeholder="Your Username"
-                name="login-username"
+                name="loginUsername"
                 type="text"
-                id="login-username"
-                value={formState.username}
-                onChange={handleChange}
+                id="loginUsername"
+                value={loginFormState.loginUsername}
+                onChange={handleLoginFormChange}
               />
-              <label htmlFor="login-password">
+              <label htmlFor="loginPassword">
                 Password:
               </label>
               <input
                 className="form-input"
                 placeholder="******"
-                name="login-password"
+                name="loginPassword"
                 type="password"
-                id="login-password"
-                value={formState.password}
-                onChange={handleChange}
+                id="loginPassword"
+                value={loginFormState.loginPassword}
+                onChange={handleLoginFormChange}
               />
               <button className="btn d-block w-100" type="submit">
                 Login
@@ -81,44 +92,44 @@ const Login = (props) => {
 
       <form onSubmit={(e) => {
         e.preventDefault();
-        addUser({ variables: { name: username } });
+        addUser({ variables: { name: signUpUsername } });
       }}>
               <h3 className='form-title'>Sign-Up</h3>
-              <label htmlFor="username">
+              <label htmlFor="signUpUsername">
                 Username:
               </label>
               <input
                 className="form-input"
                 placeholder="Your Username"
-                name="username"
+                name="signUpUsername"
                 type="text"
-                id="username"
-                value={formState.username}
-                onChange={handleChange}
+                id="signUpUsername"
+                value={signUpFormState.signUpUsername}
+                onChange={handleSignUpFormChange}
               />
-              <label htmlFor="email">
+              <label htmlFor="signUpEmail">
                 Email:
               </label>
               <input
                 className="form-input"
                 placeholder="Your Email"
-                name="email"
+                name="signUpEmail"
                 type="text"
-                id="email"
-                value={formState.email}
-                onChange={handleChange}
+                id="signUpEmail"
+                value={signUpFormState.signUpEmail}
+                onChange={handleSignUpFormChange}
               />
-              <label htmlFor="password">
+              <label htmlFor="signUpPassword">
                 Password:
               </label>
               <input
                 className="form-input"
                 placeholder="******"
-                name="password"
+                name="signUpPassword"
                 type="password"
-                id="password"
-                value={formState.password}
-                onChange={handleChange}
+                id="signUpPassword"
+                value={signUpFormState.signUpPassword}
+                onChange={handleSignUpFormChange}
               />
               <button className="btn d-block w-100" type="submit">
                 SignUp
