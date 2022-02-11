@@ -37,11 +37,11 @@ export const ADD_USER = gql`
   
   // need to figure out how to export comments here 
   export const ADD_POST = gql`
-    mutation addPost($PostBody: String!) {
-      addPost(PostBody: $PostBody) {
+    mutation addPost($postBody: String!) {
+      addPost(postBody: $postBody) {
         _id
         title
-        PostBody
+        postBody
         username
         createdAt
       }
@@ -54,7 +54,7 @@ export const ADD_USER = gql`
           _id
           comments {
             _id
-            CommentText
+            commentText
             username
             createdAt
           }

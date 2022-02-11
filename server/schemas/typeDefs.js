@@ -16,7 +16,7 @@ type User {
 type Post {
     _id: ID
     title: String
-    PostBody: String
+    postBody: String
     username: String
     createdAt: String
    }
