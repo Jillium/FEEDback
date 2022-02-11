@@ -4,9 +4,9 @@ const PostList = ({ posts, title }) => {
 
     // conditionally renders if there are no posts yet 
 
-    // if (!posts.length) {
-    //     return <h3>No Posts yet</h3>
-    // }
+    if (!posts.length) {
+        return <h3>No Posts yet</h3>
+    }
 
     return (
         <div>
