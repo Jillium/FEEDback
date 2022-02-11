@@ -37,9 +37,6 @@ const Login = (props) => {
       const { data } = await login({
         variables: { ...loginFormState },
       });
-      console.log({
-          variables: { ...loginFormState },
-        });
       Auth.login(data.login.token);
     } catch (e) {
       console.error(e);
@@ -59,9 +56,6 @@ const Login = (props) => {
       const { data } = await addUser({
         variables: { ...signUpFormState },
       });
-      console.log({
-          variables: { ...signUpFormState },
-        });
       Auth.login(data.addUser.token);
     } catch (e) {
       console.error(e);
@@ -92,7 +86,7 @@ const Login = (props) => {
                 placeholder="Your Email"
                 name="email"
                 type="text"
-                id="email"
+                id="login-email"
                 value={loginFormState.email}
                 onChange={handleLoginFormChange}
               />
@@ -104,7 +98,7 @@ const Login = (props) => {
                 placeholder="******"
                 name="password"
                 type="password"
-                id="password"
+                id="login-password"
                 value={loginFormState.password}
                 onChange={handleLoginFormChange}
               />
@@ -123,7 +117,7 @@ const Login = (props) => {
                 placeholder="Your Username"
                 name="username"
                 type="text"
-                id="username"
+                id="signup-username"
                 value={signUpFormState.username}
                 onChange={handleSignUpFormChange}
               />
@@ -135,7 +129,7 @@ const Login = (props) => {
                 placeholder="Your Email"
                 name="email"
                 type="text"
-                id="email"
+                id="signup-email"
                 value={signUpFormState.email}
                 onChange={handleSignUpFormChange}
               />
@@ -147,7 +141,7 @@ const Login = (props) => {
                 placeholder="******"
                 name="password"
                 type="password"
-                id="password"
+                id="signup-password"
                 value={signUpFormState.password}
                 onChange={handleSignUpFormChange}
               />
