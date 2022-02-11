@@ -47,25 +47,34 @@ db.once('open', async () => {
   }
   
 
+
+
   // create posts
 
 
-  // let createdPosts = [];
-  // for (let i = 0; i < 100; i += 1) {
-  //   const PostBody = faker.lorem.words(Math.round(Math.random() * 20) + 1);
+  let createdPosts = [];
+  for (let i = 0; i < 100; i += 1) {
+    const PostBody = faker.lorem.words(Math.round(Math.random() * 20) + 1);
+    const title = faker.lorem.words(Math.round(Math.random() * 2) + 1);
+
+    const randomUserIndex = Math.floor(Math.random() * createdUsers.insertedCount);
+    const userId = createdUsers.insertedIds[randomUserIndex];
+
+
 
   //   const randomUserIndex = Math.floor(Math.random() * createdUsers.insertedCount);
   //   const { username, _id: userId } = createdUsers[randomUserIndex];
 
-  //   const createdPost = await Post.create({ PostBody, username });
 
-  //   const updatedUser = await User.updateOne(
-  //     { _id: userId },
-  //     { $push: { posts: createdPost._id } }
-  //   );
+    const createdPost = await Post.create({ title, PostBody, userId });
 
-  //   createdPosts.push(createdPost);
-  // }
+    const updatedUser = await User.updateOne(
+      { _id: userId },
+      { $push: { posts: createdPost._id } }
+    );
+
+    createdPosts.push(createdPost);
+  }
 
   // // create reactions
   // for (let i = 0; i < 100; i += 1) {
