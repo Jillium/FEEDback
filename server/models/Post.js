@@ -14,6 +14,10 @@ const postSchema = new Schema({
     type: String,
     require: true
   },
+  postLink: {
+    type: String,
+    require: true
+  },
   // userId: {
   //   type: Schema.Types.ObjectId,
   //   required: true,
