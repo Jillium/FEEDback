@@ -21,14 +21,16 @@ db.once('open', async () => {
   }
   
   const createdUsers = await User.collection.insertMany(userData);
-  console.log(createdUsers);
+  // console.log(createdUsers);
+  // console.log(createdUsers.username)
+  // console.log(userData)
 
 
   // // create friends
   
   for (let i = 0; i < 100; i += 1) {
     const randomUserIndex = Math.floor(Math.random() * createdUsers.insertedCount);
-    console.log(randomUserIndex);
+    // console.log(randomUserIndex);
     const userId = createdUsers.insertedIds[randomUserIndex];
 
     let friendId = userId;
@@ -36,11 +38,19 @@ db.once('open', async () => {
     while (friendId === userId) {
       const randomUserIndex = Math.floor(Math.random() * createdUsers.insertedCount);
       friendId = createdUsers.insertedIds[randomUserIndex];
-      console.log(friendId, userId);
+
+      
+      
     }
     
-    await User.updateOne({ _id: userId }, { $addToSet: { friends: friendId } });
+    const updatedUser = await User.updateOne({ _id: userId }, { $addToSet: { friends: friendId } });
+    console.log(updatedUser)
   }
+  
+
+
+
+  // create posts
 
   // const foundUsers = await User.collection.find(userData);
 

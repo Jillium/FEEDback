@@ -1,34 +1,41 @@
 const db = require('../models/index');
 const auth = require('../utils/auth');
-const { Post, User } = require ("../models");
+const Post = require('../models/Post');
+const User = require('../models/User');
 
 
 const resolvers = {
   Query: {
-    posts: async (parent, args, context) => {
-      console.log(context);
-      if (!context.user) throw new Error('Unauthenticated user');
-      return await db.models.Post.find({}).populate('User');
+    // get all posts
+    posts: async (parent, { username }) => {
+      const params = username ? { username } : {};
+      return Post.find(params).sort({ createdAt: -1 });
     },
-  },
-
-  Mutation: {
-    login: async (parent, args) => {
-      try {
-        const user = await db.models.User.findOne({ name: args.name });
-
-        if (!user) throw new Error('No user found');
-
-        const token = auth.signToken({ _id: user._id, name: user.name });
-        console.log(token);
-
-        return { token, user };
-      } catch (error) {
-        console.log(error);
-      }
+    // get a post by id
+    post: async (parent, { _id }) => {
+      return Post.findOne({ _id });
+    },
+    // get all users
+    users: async () => {
+      return User.find()
+        .select("-__v -password")
+        // .populate('friends')
+        // .poppulate('posts')
+    },
+    // get a user by username 
+    user: async (parent, { username }) => {
+      return User.findOne({ username })
+      .select("-__v -password")
+      // .populate('friends')
+      // .populate('posts')
     }
   }
 
+  
+
+
+    
+   
 };
 
-module.export = resolvers;
+module.exports = resolvers;
