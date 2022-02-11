@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { ADD_USER, LOGIN_MUTATION } from '../graphql/mutations';
 
-//import Auth from '../utils/auth';
+import Auth from '../utils/auth';
 
 const Login = (props) => {
-  const [loginFormState, setLoginFormState] = useState({ username: '', password: '' });
+  const [loginFormState, setLoginFormState] = useState({ email: '', password: '' });
   const [signUpFormState, setSignUpFormState] = useState({ username: '', email: '', password: '' });
-  // loginmutation had loading and error in the {} but they were throwing errors so I removed them for the time being
+  
   const [login, { loginData }] = useMutation(LOGIN_MUTATION);
   const [addUser, { signUpData }] = useMutation(ADD_USER);
 
@@ -34,19 +34,19 @@ const Login = (props) => {
     event.preventDefault();
 
     try {
-      // const { data } = await login({
-      //   variables: { ...loginFormState },
-      // });
+      const { data } = await login({
+        variables: { ...loginFormState },
+      });
       console.log({
           variables: { ...loginFormState },
         });
-      //Auth.login(data.login.token);
+      Auth.login(data.login.token);
     } catch (e) {
       console.error(e);
     }
     // clear form values
     setLoginFormState({
-      username: '',
+      email: '',
       password: ''
     });
   };
@@ -56,13 +56,13 @@ const Login = (props) => {
     event.preventDefault();
 
     try {
-      // const { data } = await addUser({
-      //   variables: { ...signUpFormState },
-      // });
+      const { data } = await addUser({
+        variables: { ...signUpFormState },
+      });
       console.log({
           variables: { ...signUpFormState },
         });
-      //Auth.login(data.addUser.token);
+      Auth.login(data.addUser.token);
     } catch (e) {
       console.error(e);
     }
@@ -84,16 +84,16 @@ const Login = (props) => {
     <div>
       <form onSubmit={handleLoginFormSubmit}>
               <h3 className='form-title'>Login</h3>
-              <label htmlFor="username">
-                Username:
+              <label htmlFor="email">
+                Email:
               </label>
               <input
                 className="form-input"
-                placeholder="Your Username"
-                name="username"
+                placeholder="Your Email"
+                name="email"
                 type="text"
-                id="username"
-                value={loginFormState.username}
+                id="email"
+                value={loginFormState.email}
                 onChange={handleLoginFormChange}
               />
               <label htmlFor="password">

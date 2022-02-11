@@ -13,7 +13,7 @@ import SinglePost from './components/SinglePost';
 
 
 const httpLink = createHttpLink({
-  uri: 'http://localhost:3001/graphql',
+  uri: 'http://localhost:3005/graphql',
 });
 
 
