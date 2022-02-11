@@ -19,7 +19,13 @@ type Post {
     postBody: String
     username: String
     createdAt: String
+    postLink: String
    }
+
+ type Auth {
+   token: ID!
+   user: User
+ }  
 
  
 
@@ -30,8 +36,13 @@ type Post {
     posts(username: String): [Post]
     post(_id: ID!): Post
     users: [User]
-    user(username: String!): User
+    user(email: String!): User
   }
+
+ type Mutation {
+   login(email: String!, password: String!): Auth
+   addUser(username: String!, email: String!, password: String!): Auth
+ }
 
 
 `;

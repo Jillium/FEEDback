@@ -1,77 +1,102 @@
-// import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useMutation } from '@apollo/client';
+import { ADD_POST } from '../graphql/mutations';
+import { QUERY_POST, QUERY_USER } from '../graphql/queries';
 
+const PostForm = () => {
+    const [postBody, setBody] = useState('');
+    const [title, setTitle] = useState('');
+    const [url, setUrl] = useState('');
+    const [characterCount, setCharacterCount] = useState(0);
 
-// function CreatePost(props) {
+    const [addPost, { error }] = useMutation(ADD_POST, {
+    });
 
-//     const [
-//         user = { user }
-//     ] = props;
+    // update state based on form input changes
+    const handleTitleChange = (event) => {
+        if (event.target.value.length <= 280) {
+            setTitle(event.target.value);
+            setCharacterCount(event.target.value.length);
+        }
+    };
 
-//     const [formState, setFormState] = useState({ title: '', postBody: '', url: '' });
+    const handleBodyChange = (event) => {
+        if (event.target.value.length <= 280) {
+           
+            setBody(event.target.value);
+    
+            
+            setCharacterCount(event.target.value.length);
+        }
+    };
 
-//     const [errorMessage, setErrorMessage] = useState('');
+    const handleURLChange = (event) => {
+        if (event.target.value.length <= 280) {
+            setUrl(event.target.value);
+            
+            setCharacterCount(event.target.value.length);
+        }
+    };
 
-//     const { title, postBody, url } = formState;
+    // submit form
+    const handleFormSubmit = async (event) => {
+        event.preventDefault();
 
-//     function handleChange(e) {
-//         if (e.target.name === 'email') {
-//             const isValid = validateEmail(e.target.value);
-//             console.log(isValid);
-//             // isValid conditional statement
-//             if (!isValid) {
-//                 setErrorMessage('Your email is invalid.');
-//             } else {
-//                 setErrorMessage('');
-//             }
-//         } else {
-//             if (!e.target.value.length) {
-//                 setErrorMessage(`${e.target.name} is required.`);
-//             } else {
-//                 setErrorMessage('');
-//             }
-//         }
-//         if (!errorMessage) {
-//             setFormState({ ...formState, [e.target.name]: e.target.value });
-//         }
-//     }
+        try {
+            await addPost({
+                variables: {title, postBody, url }
+            });
 
-//     function handleSubmit(e) {
-//         e.preventDefault();
-//         console.log(formState);
-//     }
+            // clear form value
+            setBody('');
+            setTitle('');
+            setUrl('')
+            setCharacterCount(0);
+        } catch (e) {
+            console.error(e);
+        }
+    };
 
-//     return (
-//         <div>
-//             <h3>Create New Post Here:</h3>
-//             <form id="create-post-form" onSubmit={handleSubmit}>
-//                 <div>
-//                     {/* title */}
-//                     <label htmlFor="title">Title:</label>
-//                     <input type="text" defaultValue="A New Hope(Post)" onBlur={handleChange} name="name"></input>
-//                 </div>
+    return (
+        <div>
+            <p
+                className={`m-0 ${characterCount === 280 || error ? 'text-error' : ''}`}
+            >
+                Character Count: {characterCount}/280
+                {error && <span className="ml-2">Something went wrong...</span>}
+            </p>
+            <form
+                className="flex-row justify-center justify-space-between-md align-stretch"
+                onSubmit={handleFormSubmit}
+            >
+                <label>Title:</label>
+                <textarea
+                    placeholder="SoccerPRO"
+                    value={title}
+                    className="form-input col-12 col-md-9"
+                    onChange={handleTitleChange}
+                ></textarea>
 
-//                 <div>
-//                     {/* body */}
-//                     <label htmlFor="postBody" >Description:</label>
-//                     <input type="text" defaultValue="New website I created, hows the UX?" onBlue={handleChange} name="postBody"></input>
-//                 </div>
+                <label>Description:</label>
+                <textarea
+                    placeholder="Thoughts on UI and UX..."
+                    value={postBody}
+                    className="form-input col-12 col-md-9"
+                    onChange={handleBodyChange}
+                ></textarea>
+                <label>Live Site URL:</label>
+                <textarea
+                    placeholder="Enter your WWW..."
+                    value={url}
+                    className="form-input col-12 col-md-9"
+                    onChange={handleURLChange}
+                ></textarea>
+                <button className="btn col-12 col-md-3" type="submit">
+                    Post!
+                </button>
+            </form>
+        </div>
+    );
+};
 
-//                 <div>
-//                     {/* {URL} */}
-//                     <label htmlFor="url">URL To Live Site:</label>
-//                     <input type="text" defaultValue="Please Enter full URL Here" onBlue={handleChange}></input>
-//                     {errorMessage && (
-//                         <div>
-//                             <p className="error-text">{errorMessage}</p>
-//                         </div>
-//                     )}
-//                 </div>
-
-//                 <button type="submit">Post!</button>
-//             </form>
-//             <h4>Created by: {user}</h4>
-//         </div>
-//     )
-// }
-
-// export default CreatePost;
+export default PostForm;
