@@ -11,20 +11,18 @@ const Login = (props) => {
   const [login, { loginData }] = useMutation(LOGIN_MUTATION);
   const [addUser, { signUpData }] = useMutation(LOGIN_MUTATION);
 
-  // update state based on form input changes
+  // update state based on login form input changes
   const handleLoginFormChange = (event) => {
     const { name, value } = event.target;
-
     setLoginFormState({
       ...loginFormState,
       [name]: value,
     });
   };
 
-  // update state based on form input changes
+  // update state based on sign up form input changes
   const handleSignUpFormChange = (event) => {
     const { name, value } = event.target;
-
     setSignUpFormState({
       ...signUpFormState,
       [name]: value,
