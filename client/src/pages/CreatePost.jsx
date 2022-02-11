@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState, validateEmail } from 'react';
 
 
 function CreatePost(props) {

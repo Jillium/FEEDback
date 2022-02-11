@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useMutation } from '@apollo/client';
-import { LOGIN_MUTATION } from '../graphql/mutations';
+import { ADD_USER, LOGIN_MUTATION } from '../graphql/mutations';
+
+//import Auth from '../utils/auth';
 
 const Login = (props) => {
-  const [loginFormState, setLoginFormState] = useState({ loginUsername: '', loginPassword: '' });
-  const [signUpFormState, setSignUpFormState] = useState({ signUpUsername: '', signUpEmail: '', signUpPassword: '' });
-  const [loginUsername, setLoginUsername] = useState('');
-  const [signUpUsername, setSignUpUsername] = useState('');
-  // loginmutation had loading and error in the {} but they were throwing errors so I removed them for the time being 
+  const [loginFormState, setLoginFormState] = useState({ username: '', password: '' });
+  const [signUpFormState, setSignUpFormState] = useState({ username: '', email: '', password: '' });
+  // loginmutation had loading and error in the {} but they were throwing errors so I removed them for the time being
   const [login, { loginData }] = useMutation(LOGIN_MUTATION);
-  const [addUser, { signUpData }] = useMutation(LOGIN_MUTATION);
+  const [addUser, { signUpData }] = useMutation(ADD_USER);
 
   // update state based on login form input changes
   const handleLoginFormChange = (event) => {
@@ -29,58 +29,83 @@ const Login = (props) => {
     });
   };
 
-  useEffect((props) => {
-    if (loginData && loginData.login) {
-      props.setUser({ token: loginData.login.token, user: loginData.login.user });
+  // submit login form
+  const handleLoginFormSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      // const { data } = await login({
+      //   variables: { ...loginFormState },
+      // });
+      console.log({
+          variables: { ...loginFormState },
+        });
+      //Auth.login(data.login.token);
+    } catch (e) {
+      console.error(e);
     }
-  }, [loginData]);
-  
+    // clear form values
+    setLoginFormState({
+      username: '',
+      password: ''
+    });
+  };
+
+  // submit sign up form
+  const handleSignUpFormSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      // const { data } = await addUser({
+      //   variables: { ...signUpFormState },
+      // });
+      console.log({
+          variables: { ...signUpFormState },
+        });
+      //Auth.login(data.login.token);
+    } catch (e) {
+      console.error(e);
+    }
+    // clear form values
+    setSignUpFormState({
+      username: '',
+      email: '',
+      password: ''
+    });
+  };
+
+  // useEffect((props) => {
+  //   if (loginData && loginData.login) {
+  //     props.setUser({ token: loginData.login.token, user: loginData.login.user });
+  //   }
+  // }, [loginData]);
+
   return (
     <div>
-      {/* <form onSubmit={(e) => {
-        e.preventDefault();
-        login({ variables: { name: username } });
-      }}>
-        <label htmlFor="username">
-          <input
-            id="username"
-            type="text"
-            name="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </label>
-
-        <button>Login</button>
-      </form> */}
-
-      <form onSubmit={(e) => {
-        e.preventDefault();
-        login({ variables: { name: loginUsername } });
-      }}>
+      <form onSubmit={handleLoginFormSubmit}>
               <h3 className='form-title'>Login</h3>
-              <label htmlFor="loginUsername">
+              <label htmlFor="username">
                 Username:
               </label>
               <input
                 className="form-input"
                 placeholder="Your Username"
-                name="loginUsername"
+                name="username"
                 type="text"
-                id="loginUsername"
-                value={loginFormState.loginUsername}
+                id="username"
+                value={loginFormState.username}
                 onChange={handleLoginFormChange}
               />
-              <label htmlFor="loginPassword">
+              <label htmlFor="password">
                 Password:
               </label>
               <input
                 className="form-input"
                 placeholder="******"
-                name="loginPassword"
+                name="password"
                 type="password"
-                id="loginPassword"
-                value={loginFormState.loginPassword}
+                id="password"
+                value={loginFormState.password}
                 onChange={handleLoginFormChange}
               />
               <button className="btn d-block w-100" type="submit">
@@ -88,45 +113,42 @@ const Login = (props) => {
               </button>
       </form>
 
-      <form onSubmit={(e) => {
-        e.preventDefault();
-        addUser({ variables: { name: signUpUsername } });
-      }}>
+      <form onSubmit={handleSignUpFormSubmit}>
               <h3 className='form-title'>Sign-Up</h3>
-              <label htmlFor="signUpUsername">
+              <label htmlFor="username">
                 Username:
               </label>
               <input
                 className="form-input"
                 placeholder="Your Username"
-                name="signUpUsername"
+                name="username"
                 type="text"
-                id="signUpUsername"
-                value={signUpFormState.signUpUsername}
+                id="username"
+                value={signUpFormState.username}
                 onChange={handleSignUpFormChange}
               />
-              <label htmlFor="signUpEmail">
+              <label htmlFor="email">
                 Email:
               </label>
               <input
                 className="form-input"
                 placeholder="Your Email"
-                name="signUpEmail"
+                name="email"
                 type="text"
-                id="signUpEmail"
-                value={signUpFormState.signUpEmail}
+                id="email"
+                value={signUpFormState.email}
                 onChange={handleSignUpFormChange}
               />
-              <label htmlFor="signUpPassword">
+              <label htmlFor="password">
                 Password:
               </label>
               <input
                 className="form-input"
                 placeholder="******"
-                name="signUpPassword"
+                name="password"
                 type="password"
-                id="signUpPassword"
-                value={signUpFormState.signUpPassword}
+                id="password"
+                value={signUpFormState.password}
                 onChange={handleSignUpFormChange}
               />
               <button className="btn d-block w-100" type="submit">
@@ -134,7 +156,7 @@ const Login = (props) => {
               </button>
       </form>
 
-      
+
     </div>
   );
 };
