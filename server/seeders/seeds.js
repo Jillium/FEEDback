@@ -3,6 +3,7 @@ const { faker } = require('@faker-js/faker');
 const db = require('../config/connection');
 const Post = require('../models/Post');
 const User = require('../models/User');
+const Comment = require('../models/Comment');
 
 db.once('open', async () => {
   await Post.deleteMany({});
@@ -41,7 +42,7 @@ db.once('open', async () => {
     await User.updateOne({ _id: userId }, { $addToSet: { friends: friendId } });
   }
 
-  const foundUsers = await User.collection.find(userData);
+  // const foundUsers = await User.collection.find(userData);
 
   let createdPosts = [];
   for (let i = 0; i < 100; i += 1) {
@@ -51,11 +52,6 @@ db.once('open', async () => {
     const randomUserIndex = Math.floor(Math.random() * createdUsers.insertedCount);
     const userId = createdUsers.insertedIds[randomUserIndex];
 
-    console.log('******************************************');
-    console.log(title);
-    console.log('**********************************************');
-    console.log(createdUsers.insertedIds[randomUserIndex]);
-
     const createdPost = await Post.create({ title, PostBody, userId });
 
     const updatedUser = await User.updateOne(
@@ -64,6 +60,25 @@ db.once('open', async () => {
     );
 
     createdPosts.push(createdPost);
+  }
+
+  // create comments
+
+  let createdComments = [];
+  for (let i = 0; i < 100; i += 1) {
+    const commentText = faker.lorem.words(Math.round(Math.random() * 20) + 1);
+
+    const randomUserIndex = Math.floor(Math.random() * createdUsers.insertedCount);
+    const userId = createdUsers.insertedIds[randomUserIndex];
+
+    const createdComment = await Comment.create({ commentText, userId });
+
+    const updatedUser = await User.updateOne(
+      { _id: userId },
+      { $push: { comments: createdComment._id } }
+    );
+
+    createdComments.push(createdComment);
   }
 
   // create reactions

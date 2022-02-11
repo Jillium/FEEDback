@@ -5,8 +5,8 @@ const commentSchema = new Schema({
   commentText: {
     type: String
   },
-  username: {
-    type: String,
+  userId: {
+    type: Schema.Types.ObjectId,
     ref: 'User',
     required: true
   },
