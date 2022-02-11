@@ -62,7 +62,7 @@ const Login = (props) => {
       console.log({
           variables: { ...signUpFormState },
         });
-      //Auth.login(data.login.token);
+      //Auth.login(data.addUser.token);
     } catch (e) {
       console.error(e);
     }

@@ -18,7 +18,12 @@ const replySchema = new Schema({
         default: Date.now,
         get: timestamp => dateFormat(timestamp)
     }
-});
+},
+{
+    toJSON: {
+      virtuals: true
+    }
+  });
 
 const Reply = model('Reply', replySchema);
 
