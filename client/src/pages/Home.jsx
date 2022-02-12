@@ -3,7 +3,6 @@ import { useQuery } from '@apollo/client';
 import { QUERY_POSTS } from "../graphql/queries";
 import PostList from '../components/PostList';
 
-
 function Home() {
 
     const { loading, data } = useQuery(QUERY_POSTS);
