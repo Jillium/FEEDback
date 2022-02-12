@@ -55,10 +55,23 @@ export const ADD_COMMENT = gql`
       _id
       comments {
         _id
-        CommentText
+        commentText
         username
         createdAt
       }
     }
   }
 `;
+
+// export const REMOVE_FRIEND = gql`
+//   mutation removeFriend($id: ID!) {
+//     removeFriend(id: $id) {
+//       _id
+//       username
+//       friends {
+//         _id
+//         username
+//       }
+//     }
+//   }
+// `;

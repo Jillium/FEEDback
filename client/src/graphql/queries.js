@@ -4,12 +4,12 @@ export const QUERY_POSTS = gql`
   query posts($username: String) {
     posts(username: $username) {
       _id
-      PostBody
+      postBody
       createdAt
       Comments {
         _id
-        CommentText
-        CommentedBy
+        commentText
+        commentedBy
         createdAt
       }
     }
@@ -21,7 +21,7 @@ export const QUERY_POST = gql`
     post(_id: $id) {
       _id
       title
-      PostBody
+      postBody
       createdAt
       Comments {
         _id
@@ -42,10 +42,45 @@ export const QUERY_USER = gql`
       posts {
         _id
         title
-        PostBody
-        PostedBy
-        Comments
+        postBody
+        postedBy
+        comments
         createdAt
+      }
+    }
+  }
+`;
+
+export const QUERY_ME = gql`
+  {
+    me {
+      _id
+      username
+      email
+      friendCount
+      thoughts {
+        _id
+        postBody
+        createdAt
+      }
+      friends {
+        _id
+        username
+      }
+    }
+  }
+`;
+
+export const QUERY_ME_BASIC = gql`
+  {
+    me {
+      _id
+      username
+      email
+      friendCount
+      friends {
+        _id
+        username
       }
     }
   }
@@ -57,7 +92,7 @@ export const QUERY_USER = gql`
 // query comment($username: String!) {
 //   reply(username: $username) {
 //     _id
-//     CommentText
+//     commentText
 //     Replies: {
 //       ReplyText
 //       RepliedBy
