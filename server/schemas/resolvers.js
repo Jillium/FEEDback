@@ -54,7 +54,39 @@ const resolvers = {
     
       // const token = signToken(user);
       return user;
-    }
+    },
+
+    addPost: async (parent, args)  => {
+      if (args) {
+        const post = await Post.create({ ...args, username: username, postBody: postBody, postLink: postLink });
+
+        await User.findByIdAndUpdate(
+          { _id: _id },
+          { $push: { posts: post._id } },
+          { new: true }
+        );
+
+        return post;
+      }
+
+      throw new AuthenticationError('You need to be logged in!');
+    },
+   
+    // addPost: async (parent, args, context) => {
+    //   if (context.user) {
+    //     const post = await Post.create({ ...args, username: context.user.username, postBody: context.user.postBody, postLink: context.user.postLink });
+
+    //     await User.findByIdAndUpdate(
+    //       { _id: context.user._id },
+    //       { $push: { posts: post._id } },
+    //       { new: true }
+    //     );
+
+    //     return post;
+    //   }
+
+    //   throw new AuthenticationError('You need to be logged in!');
+    // },
   }
 
 
