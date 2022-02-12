@@ -44,7 +44,7 @@ const PostForm = () => {
 
         try {
             await addPost({
-                variables: {title, postBody, url }
+                variables: {title, postBody, postLink }
             });
 
             // clear form value
