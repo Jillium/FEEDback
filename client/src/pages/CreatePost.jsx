@@ -6,7 +6,7 @@ import { QUERY_POST, QUERY_USER } from '../graphql/queries';
 const PostForm = () => {
     const [postBody, setBody] = useState('');
     const [title, setTitle] = useState('');
-    const [url, setUrl] = useState('');
+    const [postLink, setPostLink] = useState('');
     const [characterCount, setCharacterCount] = useState(0);
 
     const [addPost, { error }] = useMutation(ADD_POST, {
@@ -30,9 +30,9 @@ const PostForm = () => {
         }
     };
 
-    const handleURLChange = (event) => {
+    const handlePostLinkChange = (event) => {
         if (event.target.value.length <= 280) {
-            setUrl(event.target.value);
+            setPostLink(event.target.value);
             
             setCharacterCount(event.target.value.length);
         }
@@ -44,13 +44,13 @@ const PostForm = () => {
 
         try {
             await addPost({
-                variables: { title, postBody, url }
+                variables: { title, postBody, postLink }
             });
 
             // clear form value
             setBody('');
             setTitle('');
-            setUrl('')
+            setPostLink('')
             setCharacterCount(0);
         } catch (e) {
             console.error(e);
@@ -87,9 +87,9 @@ const PostForm = () => {
                 <label>Live Site URL:</label>
                 <textarea
                     placeholder="Enter your WWW..."
-                    value={url}
+                    value={postLink}
                     className="form-input col-12 col-md-9"
-                    onChange={handleURLChange}
+                    onChange={handlePostLinkChange}
                 ></textarea>
                 <button className="btn col-12 col-md-3" type="submit">
                     Post!
