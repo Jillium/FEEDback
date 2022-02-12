@@ -49,7 +49,7 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
-    
+
     login: async (parent, { email, password }) => {
       // Check if the username is wrong #TBU
       const user = await User.findOne({ email });
@@ -63,7 +63,7 @@ const resolvers = {
       }
     
       const token = signToken(user);
-      return user;
+      return { token, user };
     },
 
     addPost: async (parent, args)  => {
