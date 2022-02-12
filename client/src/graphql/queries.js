@@ -23,17 +23,12 @@ export const QUERY_POST = gql`
       title
       postBody
       createdAt
-      Comment {
+      Comments {
         _id
         commentText
-        commentedBy
+        username
         createdAt
-        replies {
-          ReplyText
-          RepliedBy
-          createdAt
-        }
-      }
+       }
     }
   }
 `;
