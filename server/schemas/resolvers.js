@@ -1,14 +1,13 @@
 const db = require('../models/index');
 const auth = require('../utils/auth');
-const Post = require('../models/Post');
-const User = require('../models/User');
+const { User, Post, Comment, Reply } = require('../models')
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
 
 
 const resolvers = {
   Query: {
-    // get all posts
+    // get all post by username
     posts: async (parent, { username }) => {
       const params = username ? { username } : {};
       return Post.find(params).sort({ createdAt: -1 });
@@ -29,7 +28,7 @@ const resolvers = {
       return User.findOne({ username })
       .select("-__v -password")
       // .populate('friends')
-      // .populate('posts')
+      .populate('posts')
     }
   }, 
   Mutation: {
@@ -66,35 +65,28 @@ const resolvers = {
       return { token, user };
     },
 
-    addPost: async (parent, args)  => {
+    addPost: async (parent, { title, postBody, postLink, username })  => {
         
-        const post = await Post.create({ ...args });
+        const post = await Post.create({ title, postBody, postLink, username });
 
         await User.findOneAndUpdate(
-          
+          { username : username },
           { $push: { posts: post._id } },
           { new: true }
         );
 
-        return post;
-        
-
-      
+        return post; 
     },
 
-   
-
-  addComment: async (parent, { postId, commentText }) => {
+    addComment: async (parent, { postId, commentText, username }) => {
     
-        const updatedPost = await Post.findOneAndUpdate(
-            
-            { $push: { comments: { commentText } } },
-            { new: true, runValidators: true }
-        );
-        return updatedPost;
-    
-    
-}
+      const updatedPost = await Post.findOneAndUpdate(
+          { _id: postId },
+          { $push: { comments: { commentText, username } } },
+          { new: true, runValidators: true }
+      );
+      return updatedPost;
+    }
   
   }
 
