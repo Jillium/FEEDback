@@ -93,7 +93,7 @@ db.once('open', async () => {
 
   // create reactions
   // for (let i = 0; i < 100; i += 1) {
-  //   const CommentText = faker.lorem.words(Math.round(Math.random() * 20) + 1);
+  //   const commentText = faker.lorem.words(Math.round(Math.random() * 20) + 1);
 
   //   const randomUserIndex = Math.floor(Math.random() * createdUsers.ops.length);
   //   const { username } = createdUsers.ops[randomUserIndex];
@@ -103,7 +103,7 @@ db.once('open', async () => {
 
   //   await Post.updateOne(
   //     { _id: postId },
-  //     { $push: { comments: { CommentText, username } } },
+  //     { $push: { comments: { commentText, username } } },
   //     { runValidators: true }
   //   );
   // }
