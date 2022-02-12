@@ -67,41 +67,36 @@ const resolvers = {
     },
 
     addPost: async (parent, args)  => {
-        if (user) {
-        const post = await Post.create({ ...args, username: username });
+        
+        const post = await Post.create({ ...args });
 
-        await User.findByIdAndUpdate(
-          { _id: user._id },
+        await User.findOneAndUpdate(
+          
           { $push: { posts: post._id } },
           { new: true }
         );
 
         return post;
-        }
+        
 
-      // throw new AuthenticationError('You need to be logged in!');
+      
     },
+
    
-    // addPost: async (parent, args, context) => {
-    //   if (context.user) {
-    //     const post = await Post.create({ ...args, username: context.user.username, postBody: context.user.postBody, postLink: context.user.postLink });
 
-    //     await User.findByIdAndUpdate(
-    //       { _id: context.user._id },
-    //       { $push: { posts: post._id } },
-    //       { new: true }
-    //     );
-
-    //     return post;
-    //   }
-
-    //   throw new AuthenticationError('You need to be logged in!');
-    // },
-  }
-
-
+  addComment: async (parent, { postId, commentText }) => {
+    
+        const updatedPost = await Post.findOneAndUpdate(
+            
+            { $push: { comments: { commentText } } },
+            { new: true, runValidators: true }
+        );
+        return updatedPost;
+    
+    
+}
   
-
+  }
 
     
    

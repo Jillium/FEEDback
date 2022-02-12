@@ -20,7 +20,15 @@ type Post {
     username: String
     createdAt: String
     postLink: String
+    comments: [Comment]
    }
+ 
+ type Comment {
+   _id: ID
+   commentText: String
+   createdAt: String
+   username: String
+ }  
 
  type Auth {
    token: ID!
@@ -42,7 +50,8 @@ type Post {
  type Mutation {
    login(email: String!, password: String!): Auth
    addUser(username: String!, email: String!, password: String!): Auth
-   addPost(postBody: String!, postLink: String!): Post
+   addPost(postBody: String!, postLink: String!, title: String!, username: String!): Post
+   addComment(postId: ID!, commentText: String!): Post
 
  }
 

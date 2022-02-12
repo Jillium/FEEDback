@@ -38,8 +38,8 @@ export const ADD_FRIEND = gql`
   
 // need to figure out how to export comments here 
 export const ADD_POST = gql`
-  mutation addPost($PostBody: String!) {
-    addPost(PostBody: $PostBody) {
+  mutation addPost($postBody: String!, $postLink: String!, $title: String!, $username: String! ) {
+    addPost(postBody: $postBody, postLink: $postLink, title: $title, username: $username) {
       _id
       title
       PostBody
