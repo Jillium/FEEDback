@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const jwtExpiration = '5h';
+const jwtExpiration = '60s';
 require("dotenv").config();
 
 
