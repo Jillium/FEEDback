@@ -20,7 +20,7 @@ db.once('open', async () => {
   }
   
   const createdUsers = await User.collection.insertMany(userData);
-  // console.log(createdUsers);
+  console.log(createdUsers);
   // console.log(createdUsers.username)
   // console.log(userData)
 
@@ -43,7 +43,7 @@ db.once('open', async () => {
     }
     
     const updatedUser = await User.updateOne({ _id: userId }, { $addToSet: { friends: friendId } });
-    console.log(updatedUser)
+    //console.log(updatedUser)
   }
   
 

@@ -33,27 +33,37 @@ const resolvers = {
     }
   }, 
   Mutation: {
-    addUser: async (parent, args) => {
-      const user = await User.create(args);
-      // const token = signToken(user);
-      // return { token, user };
+    addUser: async (parent, { username, email, password }) => {
+      // Check if username is used #TBU
+      const previousUsername = await User.findOne({ username });
+      if (previousUsername) {
+        throw new AuthenticationError('Existed User');
+      }
+      // Check if email is used #TBU
+      const previousEmail = await User.findOne({ email });
+      if (previousEmail) {
+        throw new AuthenticationError('Existed Email'); 
+      }
+      // Create User
+      const user = await User.create({ username, email, password });
+      const token = signToken(user);
+      return { token, user };
     },
-    login: async (parent, { email, password }) => {
-      const user = await User.findOne({ email });
 
-    
+    login: async (parent, { email, password }) => {
+      // Check if the username is wrong #TBU
+      const user = await User.findOne({ email });
       if (!user) {
         throw new AuthenticationError('Incorrect credentials');
       }
-    
+      // Check if the password is wrong #TBU
       const correctPw = await user.isCorrectPassword(password);
-    
       if (!correctPw) {
         throw new AuthenticationError('Incorrect credentials');
       }
     
-      // const token = signToken(user);
-      return user;
+      const token = signToken(user);
+      return { token, user };
     },
 
     addPost: async (parent, args)  => {
