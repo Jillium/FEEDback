@@ -44,14 +44,14 @@ type Post {
     posts(username: String): [Post]
     post(_id: ID!): Post
     users: [User]
-    user(email: String!): User
+    user(username: String!): User
   }
 
  type Mutation {
    login(email: String!, password: String!): Auth
    addUser(username: String!, email: String!, password: String!): Auth
-   addPost(postBody: String!, postLink: String!, title: String!, username: String!): Post
-   addComment(postId: ID!, commentText: String!): Post
+   addPost(title: String!, postBody: String!, postLink: String!, username: String!): Post
+   addComment(postId: ID!, commentText: String!, username: String!): Post
 
  }
 
