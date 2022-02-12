@@ -2,7 +2,7 @@ const { Schema, model } = require('mongoose');
 const dateFormat = require('../utils/dateFormat');
 
 const replySchema = new Schema({
-    replyText: {
+    ReplyText: {
         type: String
     },
     RepliedBy: {
@@ -18,7 +18,12 @@ const replySchema = new Schema({
         default: Date.now,
         get: timestamp => dateFormat(timestamp)
     }
-});
+},
+{
+    toJSON: {
+      virtuals: true
+    }
+  });
 
 const Reply = model('Reply', replySchema);
 

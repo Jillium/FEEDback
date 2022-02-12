@@ -1,11 +1,14 @@
 const jwt = require('jsonwebtoken');
-const jwtExpiration = '15s';
+const jwtExpiration = '60s';
+require("dotenv").config();
+
 
 const auth = {
-  signToken: function ({ name, _id }) {
-    const payload = { name, _id };
+  signToken: function ({ username, email, _id }) {
+    const payload = { username, email, _id };
     return jwt.sign({ data: payload }, process.env.JWT_SECRET, { expiresIn: jwtExpiration });
   },
+
   authenticateToken: function (req) {
     let user = null;
     

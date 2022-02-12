@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 
 
 const userSchema = new Schema({
-  name: {
+  username: {
     type: String,
     required: true
   },
@@ -17,8 +17,14 @@ const userSchema = new Schema({
     minLength: 5
   },
   posts: [{ type: Schema.Types.ObjectId, ref: "Post" }],
-  comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
-  replies: [{ type: Schema.Types.ObjectId, ref: "Reply" }]
+  // comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
+  // replies: [{ type: Schema.Types.ObjectId, ref: "Reply" }],
+  friends: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'User'
+    }
+  ]
 },
   {
     toJSON: {

@@ -1,38 +1,111 @@
 import React from 'react';
-// import { Redirect } from 'react-router-dom';
-// import { useQuery } from '@apollo/client';
-// import { QUERY_BOOKS } from '../graphql/queries';
+import { Redirect, useParams } from 'react-router-dom';
 
-// books query will not be needed, but saving it to help set up post functionality. 
-// const Dashboard = (props) => {
-//   const { data, loading, error } = useQuery(QUERY_BOOKS, {
-//     context: {
-//       headers: {
-//         'Authorization': `Bearer ${props.user.token}`
-//       },
-//     },
-//     fetchPolicy: 'no-cache'
-//   });
+// import ThoughtForm from '../components/ThoughtForm';
+import PostList from '../components/PostList';
+import FriendList from '../components/FriendList';
 
-//   if (error) {
-//     return <Redirect to={"/login"} />
-//   }
+import { useQuery, useMutation } from '@apollo/client';
+import { QUERY_USER, QUERY_ME } from '../graphql/queries';
+import { ADD_FRIEND } from '../graphql/mutations';
+import Auth from '../graphql/auth';
 
-//   return (
-//     <div>
-//       <div>{loading ? <div>Loading...</div> : data?.books.map((book, index) =><div key={`book-${index}`}>{book.title}</div>)}</div>
-//     </div>
-//   );
-// };
+const Dashboard = (props) => {
+  const { username: userParam } = useParams();
 
-// export default Dashboard;
+  const [addFriend] = useMutation(ADD_FRIEND);
+  const { loading, data } = useQuery(userParam ? QUERY_USER : QUERY_ME, {
+    variables: { username: userParam },
+  });
 
+  const user = data?.me || data?.user || {};
 
-function Dashboard() {
+  // redirect to personal profile page if username is yours
+  if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
+    return <Redirect to="/dashboard" />;
+  }
+
+  if (loading) {
+    return <div>Loading. One Moment, Please...</div>;
+  }
+
+  if (!user?.username) {
+    return (
+      <h4>
+        You need to be logged in to see this. Please log in or sign up with a new account.
+      </h4>
+    );
+  }
+
+  const handleClick = async () => {
+    try {
+      await addFriend({
+        variables: { id: user._id },
+      });
+    } catch (e) {
+      console.error(e);
+    }
+  };
 
   return (
-    <h1>This is the dashboard</h1>
-  )
-}
+    <div>
+      <div className="flex-row mb-3">
+        <h2 className="bg-dark text-secondary p-3 display-inline-block">
+          Dashboard
+        </h2>
+
+        {/* {userParam && (
+          <button className="btn ml-auto" onClick={handleClick}>
+            Add Friend
+          </button>
+        )} */}
+      </div>
+
+      <div className="flex-row justify-space-between mb-3">
+        <div className="col-12 mb-3 col-lg-8">
+          <PostList
+            posts={user.posts}
+            title={`${user.username}'s thoughts...`}
+          />
+        </div>
+
+        <div className="col-12 col-lg-3 mb-3">
+          <FriendList
+            username={user.username}
+            friendCount={user.friendCount}
+            friends={user.friends}
+          />
+        </div>
+      </div>
+      <div className="mb-3">{!userParam}</div>
+    </div>
+  );
+};
 
 export default Dashboard;
+
+
+// function Dashboard() {
+
+// //   const { loading, data } = useQuery(QUERY_POSTS);
+// //   const [addFriend] = useMutation(ADD_FRIEND);
+
+// //   const posts = data?.posts || [];
+// //   console.log(posts);
+  
+
+//   return (
+//     <>
+//     <h1>This is the dashboard</h1>
+//     <h2>These are your posts</h2>
+//     <h2>This is your friends list</h2>
+//     {/* <PostList 
+//     posts={user.posts}/>
+//     <FriendList 
+//     username={user.username}
+//     friends={user.friends}/> */}
+//     </>
+//   )
+// }
+
+// export default Dashboard;
