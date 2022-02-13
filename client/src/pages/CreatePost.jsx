@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { ADD_POST } from '../graphql/mutations';
-import { QUERY_POST, QUERY_USER } from '../graphql/queries';
+import { Redirect, useParams } from 'react-router-dom';
+import Auth from '../utils/auth';
 
 const PostForm = () => {
     const [postBody, setBody] = useState('');
     const [title, setTitle] = useState('');
     const [postLink, setPostLink] = useState('');
+    const [username, setUsername] = useState('');
     const [characterCount, setCharacterCount] = useState(0);
 
     const [addPost, { error }] = useMutation(ADD_POST, {
@@ -44,7 +46,7 @@ const PostForm = () => {
 
         try {
             await addPost({
-                variables: { title, postBody, postLink }
+                variables: { username, title, postBody, postLink }
             });
 
             // clear form value
@@ -52,6 +54,10 @@ const PostForm = () => {
             setTitle('');
             setPostLink('')
             setCharacterCount(0);
+
+            // Auth.getProfile().data.username
+            return <Redirect to="/dashboard" />;
+
         } catch (e) {
             console.error(e);
         }
