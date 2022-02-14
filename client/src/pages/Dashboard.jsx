@@ -21,7 +21,7 @@ const Dashboard = (props) => {
   const user = data?.me || data?.user || {};
 
   // redirect to personal profile page if username is yours
-  if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
+  if (Auth.loggedIn()) {
     return <Redirect to="/dashboard" />;
   }
 
