@@ -56,13 +56,13 @@ db.once('open', async () => {
 
   let createdPosts = [];
   for (let i = 0; i < 100; i += 1) {
-    const PostBody = faker.lorem.words(Math.round(Math.random() * 20) + 1);
+    const postBody = faker.lorem.words(Math.round(Math.random() * 20) + 1);
     const title = faker.lorem.words(Math.round(Math.random() * 2) + 1);
 
     const randomUserIndex = Math.floor(Math.random() * createdUsers.insertedCount);
     const userId = createdUsers.insertedIds[randomUserIndex];
 
-    const createdPost = await Post.create({ title, PostBody, userId });
+    const createdPost = await Post.create({ title, postBody, userId });
 
     const updatedUser = await User.updateOne(
       { _id: userId },
@@ -76,12 +76,13 @@ db.once('open', async () => {
 
   let createdComments = [];
   for (let i = 0; i < 100; i += 1) {
+    const username = faker.internet.userName();
     const commentText = faker.lorem.words(Math.round(Math.random() * 20) + 1);
 
     const randomUserIndex = Math.floor(Math.random() * createdUsers.insertedCount);
     const userId = createdUsers.insertedIds[randomUserIndex];
 
-    const createdComment = await Comment.create({ commentText, userId });
+    const createdComment = await Comment.create({ commentText, username, userId });
 
     const updatedUser = await User.updateOne(
       { _id: userId },

@@ -52,39 +52,44 @@ export const QUERY_USER = gql`
 `;
 
 export const QUERY_ME = gql`
-  {
-    me {
+query Me {
+  me {
+    _id
+    username
+    email
+    password
+    posts {
       _id
+      title
+      postBody
       username
-      email
-      friendCount
-      thoughts {
+      createdAt
+      postLink
+      comments {
         _id
-        postBody
+        commentText
         createdAt
-      }
-      friends {
-        _id
         username
       }
     }
   }
+}
 `;
 
-export const QUERY_ME_BASIC = gql`
-  {
-    me {
-      _id
-      username
-      email
-      friendCount
-      friends {
-        _id
-        username
-      }
-    }
-  }
-`;
+// export const QUERY_ME_BASIC = gql`
+//   {
+//     me {
+//       _id
+//       username
+//       email
+//       friendCount
+//       friends {
+//         _id
+//         username
+//       }
+//     }
+//   }
+// `;
 
 // I don't think we actually need to query these, we need mutations to add them 
 

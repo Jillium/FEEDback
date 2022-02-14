@@ -10,6 +10,9 @@ const commentSchema = new Schema({
       ref: 'User',
       required: true
     },
+    userId: {
+      type: Schema.Types.ObjectId, ref: "User"
+    },
     createdAt: {
       type: Date,
       default: Date.now,
@@ -23,5 +26,7 @@ const commentSchema = new Schema({
   }
 );
 
-module.exports = commentSchema;
+const Comment = model("Comment", commentSchema);
+
+module.exports = Comment;
 
