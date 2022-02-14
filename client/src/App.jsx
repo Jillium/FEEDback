@@ -10,28 +10,28 @@ import Home from "./pages/Home"
 
 
 function App() {
-  const [user, setUser] = useState({ token: '', author: null });
+  const [user, setUser] = useState({ token: '', username: null });
   console.log(user);
   return (
     <Router>
       <div>
         <header className='header'>
-          <span><h1>FEEDBACK</h1></span>
+          <h1>FEEDBACK</h1>
           <ul className="nav">
             <li className='nav-item'>
-              <Link to="/">Home</Link>
+              <Link to="/" style={{ textDecoration: 'none' }}>Home</Link>
             </li>
             <li className='nav-item'>
-              <Link to="/dashboard">Dashboard</Link>
+              <Link to="/dashboard" style={{ textDecoration: 'none' }}>Dashboard</Link>
             </li>
             <li className='nav-item'>
-              <Link to='/createpost'>Create Post</Link>
+              <Link to='/createpost' style={{ textDecoration: 'none' }}>Create Post</Link>
             </li>
             <li className='nav-item'>
-              <Link to='/myposts'>My Posts</Link>
+              <Link to='/myposts' style={{ textDecoration: 'none' }}>My Posts</Link>
             </li>
             <li className='nav-item'>
-              <Link to="/login">Login/Signup</Link>
+              <Link to="/login" style={{ textDecoration: 'none' }}>Login/Signup</Link>
             </li>
            
           </ul>
