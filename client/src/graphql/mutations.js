@@ -35,18 +35,18 @@ export const ADD_FRIEND = gql`
   }
 `;
 
-  
+
 // need to figure out how to export comments here 
 export const ADD_POST = gql`
-  mutation addPost($postBody: String!, $postLink: String!, $title: String!, $username: String! ) {
-    addPost(postBody: $postBody, postLink: $postLink, title: $title, username: $username) {
-      _id
-      title
-      PostBody
-      username
-      createdAt
-    }
+mutation addPost($title: String!, $postBody: String!, $postLink: String!, $username: String!) {
+  addPost(title: $title, postBody: $postBody, postLink: $postLink, username: $username) {
+    _id
+    title
+    postBody
+    username
+    createdAt
   }
+}
 `;
 
 export const ADD_COMMENT = gql`

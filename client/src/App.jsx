@@ -18,7 +18,7 @@ import SinglePost from './components/SinglePost';
 import Auth from './utils/auth';
 
 const httpLink = createHttpLink({
-  uri: 'http://localhost:3005/graphql',
+  uri: '/graphql',
 });
 
 const authLink = setContext((_, { headers }) => {
