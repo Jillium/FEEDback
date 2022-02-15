@@ -8,11 +8,20 @@ const PostForm = () => {
     const [postBody, setBody] = useState('');
     const [title, setTitle] = useState('');
     const [postLink, setPostLink] = useState('');
-    const [username, setUsername] = useState('');
     const [characterCount, setCharacterCount] = useState(0);
+    const [redirectFlag, setRedirectFlag] = useState(false);
+    const [addPost, { error }] = useMutation(ADD_POST);
 
-    const [addPost, { error }] = useMutation(ADD_POST, {
-    });
+    const loggedIn = Auth.loggedIn();
+    if (!loggedIn) {
+        return <Redirect to="/login" />;
+    } else {
+        if (redirectFlag) {
+            return <Redirect to="/dashboard" />;
+        }
+    }
+
+    
 
     // update state based on form input changes
     const handleTitleChange = (event) => {
@@ -44,9 +53,17 @@ const PostForm = () => {
     const handleFormSubmit = async (event) => {
         event.preventDefault();
 
+        let username = '';
+        if (loggedIn) {
+            username = Auth.getProfile().data.username;
+        } else {
+            username = '';
+        }
+
         try {
+            
             await addPost({
-                variables: { username, title, postBody, postLink }
+                variables: { username, title, postBody, postLink },
             });
 
             // clear form value
@@ -54,13 +71,15 @@ const PostForm = () => {
             setTitle('');
             setPostLink('')
             setCharacterCount(0);
-
+            
             // Auth.getProfile().data.username
-            return <Redirect to="/dashboard" />;
+            //return <Redirect to="/dashboard" />;
+            return window.location.assign('/dashboard');
 
         } catch (e) {
             console.error(e);
         }
+
     };
 
     return (

@@ -13,7 +13,7 @@ import Home from "./pages/Home"
 import logo from "../src/assets/feedback.png";
 import logo2 from "../src/assets/Feedback2.png";
 import logo3 from "../src/assets/Feedback3.png";
-import SinglePost from './components/SinglePost';
+import SinglePost from './pages/SinglePost';
 
 import Auth from './utils/auth';
 
@@ -43,6 +43,7 @@ function App() {
   //console.log(Auth.getProfile());
   if (loggedIn) {
     console.log('You are in');
+    console.log(Auth.getProfile());
   } else {
     console.log('You are still out');
   }
@@ -93,10 +94,10 @@ function App() {
 
       <Switch>
         <Route exact path="/" render={() => <Home />} />
-        <Route exact path="/dashboard" render={() => <Dashboard />} />
+        <Route exact path="/dashboard/:username?" component={Dashboard} />
         <Route exact path="/login" render={() => <Login />} />
         <Route exact path="/createpost" render={() => <CreatePost />} />
-        <Route exact path="/singlepost" render={() => <SinglePost />} />
+        <Route exact path="/singlepost/:id" component={SinglePost}  />
       </Switch>
     </Router>
     </ApolloProvider>

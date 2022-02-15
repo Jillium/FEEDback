@@ -5,11 +5,7 @@ import { Link } from 'react-router-dom';
 import Auth from '../utils/auth';
 // import { useQuery } from '@apollo/client';
 
-const PostList = ({ posts, title }) => {
-
-    // conditionally renders if there are no posts yet 
-    // const { loading, data } = useQuery(QUERY_POSTS);
-    // const posts = data?.posts || [];
+const PostList = ({posts}) => {
 
     // const loggedIn = Auth.loggedIn();
 
@@ -17,10 +13,10 @@ const PostList = ({ posts, title }) => {
         return <h3>No Posts yet</h3>
     } else {
 
-        console.log(posts);
+        
         return (
             <div>
-                 <h3>{title}</h3>
+                 
                 {posts &&
                     posts.map(post => (
                         <div key={post._id} className="card mb-3">
@@ -36,17 +32,19 @@ const PostList = ({ posts, title }) => {
                                     style={{ fontWeight: 700 }}
                                     className="text-light"
                                 >
-                                    {post.username}
+                                Posted by {post.username}    
                                 </Link>{' '}
+                                
                                 Posted on {post.createdAt}
                             </p>
 
                             <div className="card-body">
                                 <div to={`/post/${post._id}`}>
+                                <h3>{post.title}</h3>
                                     <p>{post.postBody}</p>
                                     <p className="mb-0">
-                                        {/* Comments: {post.reactionCount} || Click to{' '}
-                          {thought.reactionCount ? 'see' : 'start'} the discussion! */}
+                                        {/* Comments: {post.commentCount} || Click to{' '}
+                          {post.commentCount ? 'see' : 'start'} the discussion! */}
                                     </p>
                                 </div>
                             </div>

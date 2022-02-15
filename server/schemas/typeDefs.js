@@ -42,6 +42,7 @@ type Post {
   
   type Query {
     me: User
+    allPosts: [Post]
     posts(username: String): [Post]
     post(_id: ID!): Post
     users: [User]
