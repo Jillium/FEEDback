@@ -6,12 +6,6 @@ export const QUERY_POSTS = gql`
       _id
       postBody
       createdAt
-      Comments {
-        _id
-        commentText
-        commentedBy
-        createdAt
-      }
     }
   }
 `;
@@ -23,12 +17,6 @@ export const QUERY_POST = gql`
       title
       postBody
       createdAt
-      Comments {
-        _id
-        commentText
-        username
-        createdAt
-       }
     }
   }
 `;
