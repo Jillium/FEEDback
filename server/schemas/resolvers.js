@@ -98,7 +98,7 @@ const resolvers = {
           console.log('Post Added')
           await User.findOneAndUpdate(
             { username : username },
-            // Push is not working
+            
             { $push: { posts: post._id } },
             { new: true }
           );
