@@ -2,6 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { QUERY_POST } from '../graphql/queries';
+import { LinkPreview } from '@dhaiwat10/react-link-preview';
 import auth from '../utils/auth';
 
 const SinglePost = props => {
@@ -17,7 +18,7 @@ const SinglePost = props => {
         return <div>Loading...</div>;
     }
     return (
-        
+
 
         <div>
             <h3>{post.title}</h3>
@@ -25,6 +26,9 @@ const SinglePost = props => {
             <p>
                 {post.postBody}
             </p>
+            <div>
+                <LinkPreview url={post.postLink} width='400px' />
+            </div>
             <p>Posted by {post.username} on {post.createdAt}</p>
             <span>Number of comments</span>
             <h3>Comments will go here</h3>
