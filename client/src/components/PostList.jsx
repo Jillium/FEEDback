@@ -16,25 +16,20 @@ const PostList = ({ posts, title }) => {
     if (!posts.length) {
         return <h3>No Posts yet</h3>
     } else {
-        // return (
-        //     <div>
-        //         <h3>Post title goes here</h3>
-        //         <p>
-        //             Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci minus quasi, unde perspiciatis amet rerum eius a hic repudiandae atque beatae, eveniet ullam. Non quibusdam officiis, iusto molestias laborum quo.
-        //         </p>
-        //         <div>
-        //             <LinkPreview url='https://www.youtube.com/watch?v=dQw4w9WgXcQ' width='400px' />;
-        //         </div>
-        //         <span>Posted by: username @ createdAt time</span>
-        //         <span>Number of comments</span>
-        //     </div>
-        // )
+
+        console.log(posts);
         return (
             <div>
-                
+                 <h3>{title}</h3>
                 {posts &&
                     posts.map(post => (
                         <div key={post._id} className="card mb-3">
+                            <Link
+                                to={`/singlepost/${post._id}`}
+                                style={{ fontWeight: 700 }}
+                                className="text-light"
+                            >See Discussion</Link>
+
                             <p className="card-header">
                                 <Link
                                     to={`/dashboard/${post.username}`}
@@ -45,22 +40,25 @@ const PostList = ({ posts, title }) => {
                                 </Link>{' '}
                                 Posted on {post.createdAt}
                             </p>
+
                             <div className="card-body">
-                                <Link to={`/post/${post._id}`}>
+                                <div to={`/post/${post._id}`}>
                                     <p>{post.postBody}</p>
                                     <p className="mb-0">
                                         {/* Comments: {post.reactionCount} || Click to{' '}
                           {thought.reactionCount ? 'see' : 'start'} the discussion! */}
                                     </p>
-                                </Link>
+                                </div>
                             </div>
+
                             <div>
-                                <LinkPreview url='https://www.youtube.com/watch?v=dQw4w9WgXcQ' width='400px' />;
+                                <LinkPreview url={post.postLink} width='400px' />
                             </div>
 
                         </div>
-                    ))}
-            </div>
+                    ))
+                }
+            </div >
         );
     }
 }
