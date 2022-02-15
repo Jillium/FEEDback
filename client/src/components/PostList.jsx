@@ -39,7 +39,7 @@ const PostList = ({posts}) => {
                             </p>
 
                             <div className="card-body">
-                                <div to={`/post/${post._id}`}>
+                                <div to={`/singlepost/${post._id}`}>
                                 <h3>{post.title}</h3>
                                     <p>{post.postBody}</p>
                                     <p className="mb-0">
