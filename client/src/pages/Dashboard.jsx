@@ -6,7 +6,7 @@ import PostList from '../components/PostList';
 import FriendList from '../components/FriendList';
 
 import { useQuery, useMutation } from '@apollo/client';
-import { QUERY_USER, QUERY_ME } from '../graphql/queries';
+import { QUERY_ME } from '../graphql/queries';
 import { ADD_FRIEND } from '../graphql/mutations';
 import Auth from '../graphql/auth';
 
@@ -14,11 +14,11 @@ const Dashboard = (props) => {
   const { username: userParam } = useParams();
 
   const [addFriend] = useMutation(ADD_FRIEND);
-  const { loading, data } = useQuery(userParam ? QUERY_USER : QUERY_ME, {
-    variables: { username: userParam },
-  });
+  const { loading, data } = useQuery(QUERY_ME);
 
   const user = data?.me || data?.user || {};
+
+  console.log(user);
 
   // redirect to personal profile page if username is yours
   if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {

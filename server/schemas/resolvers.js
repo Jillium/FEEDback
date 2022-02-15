@@ -7,6 +7,19 @@ const { signToken } = require('../utils/auth');
 
 const resolvers = {
   Query: {
+    me: async ( parent,args, context) => {
+      console.log(context.user);
+      if (context.user) {
+        const userData = await User.findOne({ _id: context.user._id })
+          .select('-__V -password')
+          .populate("posts")
+          .populate('friends')
+
+          return userData;
+      }
+
+      throw new AuthenticationError('Not logged in');
+    },
     // get all post by username
     posts: async (parent, { username }) => {
       const params = username ? { username } : {};
@@ -65,17 +78,20 @@ const resolvers = {
       return { token, user };
     },
 
-    addPost: async (parent, { title, postBody, postLink, username })  => {
-        
-        const post = await Post.create({ title, postBody, postLink, username });
+    addPost: async (parent, { title, postBody, postLink }, context)  => {
+        if(context.user) {
+        const post = await Post.create({ title, postBody, postLink, username: context.username, userid: context.user._id });
 
         await User.findOneAndUpdate(
           { username : username },
+          // Push is not working
           { $push: { posts: post._id } },
           { new: true }
         );
 
         return post; 
+      }
+      throw new AuthenticationError('You are not logged in');
     },
 
     addComment: async (parent, { postId, commentText, username }) => {
