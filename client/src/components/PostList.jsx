@@ -1,14 +1,14 @@
 import React from 'react';
 import { LinkPreview } from '@dhaiwat10/react-link-preview';
 import { Link } from 'react-router-dom';
-import { QUERY_POSTS } from '../graphql/queries';
+// import { QUERY_POSTS } from '../graphql/queries';
 import Auth from '../utils/auth';
-import { useQuery } from '@apollo/client';
+// import { useQuery } from '@apollo/client';
 
 const PostList = ({ posts, title }) => {
 
     // conditionally renders if there are no posts yet 
-    const { loading, data } = useQuery(QUERY_POSTS);
+    // const { loading, data } = useQuery(QUERY_POSTS);
     // const posts = data?.posts || [];
 
     // const loggedIn = Auth.loggedIn();

@@ -76,20 +76,20 @@ query Me {
 }
 `;
 
-// export const QUERY_ME_BASIC = gql`
-//   {
-//     me {
-//       _id
-//       username
-//       email
-//       friendCount
-//       friends {
-//         _id
-//         username
-//       }
-//     }
-//   }
-// `;
+export const QUERY_ME_BASIC = gql`
+query ME_BASIC {
+  me {
+    _id
+    username
+    email
+    friends {
+      friends {
+        _id
+        username
+      }
+    }
+  }
+}`
 
 // I don't think we actually need to query these, we need mutations to add them 
 
