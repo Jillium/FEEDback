@@ -43,8 +43,8 @@ const PostList = ({posts}) => {
                                 <h3>{post.title}</h3>
                                     <p>{post.postBody}</p>
                                     <p className="mb-0">
-                                        {/* Comments: {post.reactionCount} || Click to{' '}
-                          {thought.reactionCount ? 'see' : 'start'} the discussion! */}
+                                        {/* Comments: {post.commentCount} || Click to{' '}
+                          {post.commentCount ? 'see' : 'start'} the discussion! */}
                                     </p>
                                 </div>
                             </div>
