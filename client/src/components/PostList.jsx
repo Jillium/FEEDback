@@ -55,7 +55,7 @@ const PostList = ({ posts, title }) => {
                                 </Link>
                             </div>
                             <div>
-                                <LinkPreview url='https://www.youtube.com/watch?v=dQw4w9WgXcQ' width='400px' />;
+                                <LinkPreview url='https://www.youtube.com/watch?v=dQw4w9WgXcQ' width='400px' />
                             </div>
 
                         </div>
