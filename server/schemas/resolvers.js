@@ -21,9 +21,14 @@ const resolvers = {
       throw new AuthenticationError('Not logged in');
     },
     // get all post by username
+    allPosts: async () => {
+      return Post.find().sort({ createdAt: -1 })
+        .populate("comments");
+    },
+    // get all post by username
     posts: async (parent, { username }) => {
       const params = username ? { username } : {};
-      return Post.find(params).sort({ createdAt: -1 });
+      return Post.find(params).sort({ createdAt: -1 }).populate("comments");
     },
     // get a post by id
     post: async (parent, { _id }) => {
@@ -33,8 +38,8 @@ const resolvers = {
     users: async () => {
       return User.find()
         .select("-__v -password")
-        // .populate('friends')
-        // .poppulate('posts')
+        .populate('friends')
+        .populate('posts');
     },
     // get a user by username 
     user: async (parent, { username }) => {
@@ -78,20 +83,32 @@ const resolvers = {
       return { token, user };
     },
 
-    addPost: async (parent, { title, postBody, postLink }, context)  => {
-        if(context.user) {
-        const post = await Post.create({ title, postBody, postLink, username: context.username, userid: context.user._id });
+    addPost: async (parent, { username, title, postBody, postLink })  => {
+      if (username == '') {
+        console.log('it is empty username');
+        throw new AuthenticationError('You are not logged in');
+      } else {
+        console.log('username passed');
+        const user = await User.findOne({ username });
+        if (user) {
+          console.log('User found');
+          const ID = user._id;
+          console.log('ID : ', ID);
+          const post = await Post.create({ title, postBody, postLink, username, ID });
+          console.log('Post Added')
+          await User.findOneAndUpdate(
+            { username : username },
+            // Push is not working
+            { $push: { posts: post._id } },
+            { new: true }
+          );
 
-        await User.findOneAndUpdate(
-          { username : username },
-          // Push is not working
-          { $push: { posts: post._id } },
-          { new: true }
-        );
-
-        return post; 
+          return post; 
+        } else {
+          console.log('User not found');
+          throw new AuthenticationError('User not found! Either you are in trouble or I am in trouble');
+        }
       }
-      throw new AuthenticationError('You are not logged in');
     },
 
     addComment: async (parent, { postId, commentText, username }) => {

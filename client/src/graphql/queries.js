@@ -6,6 +6,11 @@ export const QUERY_POSTS = gql`
       _id
       postBody
       createdAt
+      comments {
+        _id
+        commentText
+        createdAt
+      }
     }
   }
 `;
