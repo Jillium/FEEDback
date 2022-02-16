@@ -8,11 +8,11 @@ import PostList from '../components/PostList';
 function Home() {
 
     const { loading, data } = useQuery(QUERY_POSTS);
-    const { data: userData } = useQuery(QUERY_ME_BASIC);
-    console.log(data);
+    // const { data: userData } = useQuery(QUERY_ME_BASIC);
+    
 
     const posts = data?.posts || [];
-    console.log(posts);
+    
 
 
     return (
