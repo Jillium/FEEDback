@@ -22,9 +22,7 @@ const postSchema = new Schema({
     type: String,
     require: true
   },
-  comments: [{
-    type: Schema.Types.ObjectId, ref: "Comment"
-  }],
+  comments: [commentSchema],
   createdAt: {
     type: Date,
     default: Date.now,
@@ -33,10 +31,15 @@ const postSchema = new Schema({
 },
 {
   toJSON: {
-    virtuals: true
+    virtuals: true,
+    getters: true
   }
 }
 );
+
+postSchema.virtual('commentCount').get(function() {
+  return this.comments.length;
+});
 
 const Post = model("Post", postSchema);
 
