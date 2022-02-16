@@ -22,7 +22,7 @@ const Dashboard = (props) => {
 
   // redirect to personal profile page if username is yours
   if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
-    return <Redirect to="/dashboard" />;
+    return <Redirect to="/dashboard/:username?" />;
   }
 
   if (loading) {
@@ -54,11 +54,11 @@ const Dashboard = (props) => {
           Dashboard
         </h2>
 
-        {/* {userParam && (
+        {userParam && (
           <button className="btn ml-auto" onClick={handleClick}>
             Add Friend
           </button>
-        )} */}
+        )}
       </div>
 
       <div className="flex-row justify-space-between mb-3">

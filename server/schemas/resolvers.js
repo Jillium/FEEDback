@@ -111,15 +111,43 @@ const resolvers = {
       }
     },
 
-    addComment: async (parent, { postId, commentText, username }) => {
+    addComment: async (parent, { username, commentText })  => {
+      if (username == '') {
+        console.log('it is empty username');
+        throw new AuthenticationError('You are not logged in');
+      } else {
+        console.log('username passed');
+        const post = await Post.findOne({ username });
+        if (post) {
+          console.log('Post found');
+          const ID = post._id;
+          console.log('ID : ', ID);
+          const comment = await Comment.create({ commentText, username, ID });
+          console.log('comment Added')
+          await User.findOneAndUpdate(
+            { username : username },
+            
+            { $push: { comments: { commentText, username } } },
+            { new: true, runValidators: true }
+          );
+
+          return post; 
+        } else {
+          console.log('Post not found');
+          throw new AuthenticationError('Post not found!');
+        }
+      }
+    },
+
+    // addComment: async (parent, { postId, commentText, username }) => {
     
-      const updatedPost = await Post.findOneAndUpdate(
-          { _id: postId },
-          { $push: { comments: { commentText, username } } },
-          { new: true, runValidators: true }
-      );
-      return updatedPost;
-    }
+    //   const updatedPost = await Post.findOneAndUpdate(
+    //       { _id: postId },
+    //       { $push: { comments: { commentText, username } } },
+    //       { new: true, runValidators: true }
+    //   );
+    //   return updatedPost;
+    // }
   
   }
 
