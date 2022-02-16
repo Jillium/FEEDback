@@ -43,7 +43,7 @@ function App() {
   //console.log(Auth.getProfile());
   if (loggedIn) {
     console.log('You are in');
-    console.log(Auth.getProfile());
+    //console.log(Auth.getProfile());
   } else {
     console.log('You are still out');
   }
