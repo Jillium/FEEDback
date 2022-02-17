@@ -7,6 +7,7 @@ import Auth from '../utils/auth';
 const Login = (props) => {
   const [loginFormState, setLoginFormState] = useState({ email: '', password: '' });
   const [signUpFormState, setSignUpFormState] = useState({ username: '', email: '', password: '' });
+  const [errorDisplayState, setErrorDisplayState] = useState({ message: '', show: false });
   
   const [login, { loginData }] = useMutation(LOGIN_MUTATION);
   const [addUser, { signUpData }] = useMutation(ADD_USER);
@@ -37,6 +38,7 @@ const Login = (props) => {
       const { data } = await login({
         variables: { ...loginFormState },
       });
+      // console.log(data);
       Auth.login(data.login.token);
     } catch (e) {
       console.error(e);
@@ -56,7 +58,15 @@ const Login = (props) => {
       const { data } = await addUser({
         variables: { ...signUpFormState },
       });
-      Auth.login(data.addUser.token);
+      console.log(data);
+      if (data.addUser.errorMessage == '') {
+        Auth.login(data.addUser.token);
+      } else {
+        setErrorDisplayState({
+          message: data.addUser.errorMessage,
+          show: true
+        });
+      }
     } catch (e) {
       console.error(e);
     }
@@ -66,6 +76,27 @@ const Login = (props) => {
       email: '',
       password: ''
     });
+  };
+
+  const Modal = ({ handleClose, show, children }) => {
+    const showHideClassName = show ? "modal display-block" : "modal display-none";
+  
+    return (
+      <div className={showHideClassName}>
+        <section className="modal-main">
+          {children}
+          <button onClick={handleClose}>Close</button>
+        </section>
+      </div>
+    );
+  };
+
+  const showModal = () => {
+    setErrorDisplayState({ ...errorDisplayState, show: true });
+  };
+
+  const hideModal = () => {
+    setErrorDisplayState({ ...errorDisplayState, show: false });
   };
 
   // useEffect((props) => {
@@ -149,6 +180,10 @@ const Login = (props) => {
                 SignUp
               </button>
       </form>
+
+      <Modal show={errorDisplayState.show} handleClose={hideModal}>
+          <p>{errorDisplayState.message}</p>
+      </Modal>
 
 
     </div>

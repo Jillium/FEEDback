@@ -42,10 +42,18 @@ function App() {
   //const [user, setUser] = useState({ token: '', user: null });
   const loggedIn = Auth.loggedIn();
   //console.log(user);
+<<<<<<< HEAD
   // console.log(Auth.getProfile());
   if (loggedIn) {
     console.log('You are in');
     // console.log(Auth.getProfile());
+=======
+  //console.log(Auth.getProfile());
+  var username = '';
+  if (loggedIn) {
+    console.log('You are in');
+    username = Auth.getProfile().data.username;
+>>>>>>> cf1cb45ec30aa2121e64f2fc5d3d7ab1283259ee
   } else {
     console.log('You are still out');
   }
@@ -54,16 +62,16 @@ function App() {
     <Router>
       <div>
         <header className='header'>
-          <span><img src={logo3} alt="feedback logo"></img></span>
+          <h1>FEEDBACK</h1>
           <ul className="nav">
             <li className='nav-item'>
-              <Link to="/">Home</Link>
+              <Link to="/" style={{ textDecoration: 'none' }}>Home</Link>
             </li>
             <li className='nav-item'>
-              <Link to="/dashboard">Dashboard</Link>
+              <Link to="/dashboard" style={{ textDecoration: 'none' }}>Dashboard</Link>
             </li>
             <li className='nav-item'>
-              <Link to='/createpost'>Create Post</Link>
+              <Link to='/createpost' style={{ textDecoration: 'none' }}>Create Post</Link>
             </li>
             <li className='nav-item'>
               {loggedIn ? (
@@ -82,7 +90,7 @@ function App() {
           </ul>
         </header>
 
-        <main>
+        <main className="main-background">
 
         </main>
 
