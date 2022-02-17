@@ -4,6 +4,7 @@ import { useQuery } from '@apollo/client';
 import { QUERY_POST } from '../graphql/queries';
 import { LinkPreview } from '@dhaiwat10/react-link-preview';
 import auth from '../utils/auth';
+import CommentForm from '../components/CommentForm';
 
 const SinglePost = props => {
     const { id: postID } = useParams();
@@ -32,7 +33,7 @@ const SinglePost = props => {
             <p>Posted by {post.username} on {post.createdAt}</p>
             <span>Number of comments</span>
             <h3>Comments will go here</h3>
-            {/* nest comments  */}
+            <CommentForm postId={post._id} />
         </div>
     )
 }
