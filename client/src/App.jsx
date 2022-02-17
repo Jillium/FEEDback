@@ -52,16 +52,16 @@ function App() {
     <Router>
       <div>
         <header className='header'>
-          <span><img src={logo3} alt="feedback logo"></img></span>
+          <h1>FEEDBACK</h1>
           <ul className="nav">
             <li className='nav-item'>
-              <Link to="/">Home</Link>
+              <Link to="/" style={{ textDecoration: 'none' }}>Home</Link>
             </li>
             <li className='nav-item'>
-              <Link to="/dashboard">Dashboard</Link>
+              <Link to="/dashboard" style={{ textDecoration: 'none' }}>Dashboard</Link>
             </li>
             <li className='nav-item'>
-              <Link to='/createpost'>Create Post</Link>
+              <Link to='/createpost' style={{ textDecoration: 'none' }}>Create Post</Link>
             </li>
             <li className='nav-item'>
               {loggedIn ? (
@@ -80,7 +80,7 @@ function App() {
           </ul>
         </header>
 
-        <main>
+        <main className="main-background">
 
         </main>
 
