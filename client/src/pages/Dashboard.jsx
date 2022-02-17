@@ -22,7 +22,7 @@ const Dashboard = (props) => {
 
   // redirect to personal profile page if username is yours
   if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
-    return <Redirect to="/dashboard/:username?" />;
+    return <Redirect to="/dashboard" />;
   }
 
   if (loading) {
