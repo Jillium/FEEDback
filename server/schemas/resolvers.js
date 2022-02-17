@@ -88,27 +88,20 @@ const resolvers = {
 
     addPost: async (parent, { username, title, postBody, postLink })  => {
       if (username == '') {
-        console.log('it is empty username');
         throw new AuthenticationError('You are not logged in');
       } else {
-        console.log('username passed');
         const user = await User.findOne({ username });
         if (user) {
-          console.log('User found');
           const ID = user._id;
-          console.log('ID : ', ID);
           const post = await Post.create({ title, postBody, postLink, username, ID });
-          console.log('Post Added')
           await User.findOneAndUpdate(
             { username : username },
-            
             { $push: { posts: post._id } },
             { new: true }
           );
 
           return post; 
         } else {
-          console.log('User not found');
           throw new AuthenticationError('User not found! Either you are in trouble or I am in trouble');
         }
       }
