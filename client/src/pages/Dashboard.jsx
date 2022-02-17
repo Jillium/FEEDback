@@ -8,7 +8,7 @@ import FriendList from '../components/FriendList';
 import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_ME } from '../graphql/queries';
 import { ADD_FRIEND } from '../graphql/mutations';
-import Auth from '../graphql/auth';
+import Auth from '../utils/auth';
 
 const Dashboard = (props) => {
   const { username: userParam } = useParams();
