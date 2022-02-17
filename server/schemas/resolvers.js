@@ -1,6 +1,6 @@
 const db = require('../models/index');
 const auth = require('../utils/auth');
-const { User, Post, Comment, Reply } = require('../models')
+const { User, Post } = require('../models')
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
 
@@ -21,9 +21,14 @@ const resolvers = {
       throw new AuthenticationError('Not logged in');
     },
     // get all post by username
+    allPosts: async () => {
+      return Post.find().sort({ createdAt: -1 })
+        .populate("comments");
+    },
+    // get all post by username
     posts: async (parent, { username }) => {
       const params = username ? { username } : {};
-      return Post.find(params).sort({ createdAt: -1 });
+      return Post.find(params).sort({ createdAt: -1 }).populate("comments");
     },
     // get a post by id
     post: async (parent, { _id }) => {
@@ -33,8 +38,8 @@ const resolvers = {
     users: async () => {
       return User.find()
         .select("-__v -password")
-        // .populate('friends')
-        // .poppulate('posts')
+        .populate('friends')
+        .populate('posts');
     },
     // get a user by username 
     user: async (parent, { username }) => {
@@ -49,20 +54,22 @@ const resolvers = {
       // Check if username is used #TBU
       const previousUsername = await User.findOne({ username });
       if (previousUsername) {
-        throw new AuthenticationError('Existed User');
+        throw new AuthenticationError('The username has been already registered!');
       }
       // Check if email is used #TBU
       const previousEmail = await User.findOne({ email });
       if (previousEmail) {
-        throw new AuthenticationError('Existed Email'); 
+        throw new AuthenticationError('The email has been already registered!');
       }
       // Create User
       const user = await User.create({ username, email, password });
       const token = signToken(user);
+      
       return { token, user };
     },
 
     login: async (parent, { email, password }) => {
+
       // Check if the username is wrong #TBU
       const user = await User.findOne({ email });
       if (!user) {
@@ -73,25 +80,31 @@ const resolvers = {
       if (!correctPw) {
         throw new AuthenticationError('Incorrect credentials');
       }
-    
+      
       const token = signToken(user);
+      
       return { token, user };
     },
 
-    addPost: async (parent, { title, postBody, postLink }, context)  => {
-        if(context.user) {
-        const post = await Post.create({ title, postBody, postLink, username: context.username, userid: context.user._id });
+    addPost: async (parent, { username, title, postBody, postLink })  => {
+      if (username == '') {
+        throw new AuthenticationError('You are not logged in');
+      } else {
+        const user = await User.findOne({ username });
+        if (user) {
+          const ID = user._id;
+          const post = await Post.create({ title, postBody, postLink, username, ID });
+          await User.findOneAndUpdate(
+            { username : username },
+            { $push: { posts: post._id } },
+            { new: true }
+          );
 
-        await User.findOneAndUpdate(
-          { username : username },
-          // Push is not working
-          { $push: { posts: post._id } },
-          { new: true }
-        );
-
-        return post; 
+          return post; 
+        } else {
+          throw new AuthenticationError('User not found! Either you are in trouble or I am in trouble');
+        }
       }
-      throw new AuthenticationError('You are not logged in');
     },
 
     addComment: async (parent, { postId, commentText, username }) => {

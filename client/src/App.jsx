@@ -13,7 +13,7 @@ import Home from "./pages/Home"
 import logo from "../src/assets/feedback.png";
 import logo2 from "../src/assets/Feedback2.png";
 import logo3 from "../src/assets/Feedback3.png";
-import SinglePost from './components/SinglePost';
+import SinglePost from './pages/SinglePost';
 
 import Auth from './utils/auth';
 
@@ -31,6 +31,8 @@ const authLink = setContext((_, { headers }) => {
   };
 });
 
+// console.log(authLink);
+
 const client = new ApolloClient({
   link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
@@ -40,9 +42,10 @@ function App() {
   //const [user, setUser] = useState({ token: '', user: null });
   const loggedIn = Auth.loggedIn();
   //console.log(user);
-  //console.log(Auth.getProfile());
+  // console.log(Auth.getProfile());
   if (loggedIn) {
     console.log('You are in');
+    // console.log(Auth.getProfile());
   } else {
     console.log('You are still out');
   }
@@ -51,16 +54,16 @@ function App() {
     <Router>
       <div>
         <header className='header'>
-          <span><img src={logo3} alt="feedback logo"></img></span>
+          <h1>FEEDBACK</h1>
           <ul className="nav">
             <li className='nav-item'>
-              <Link to="/">Home</Link>
+              <Link to="/" style={{ textDecoration: 'none' }}>Home</Link>
             </li>
             <li className='nav-item'>
-              <Link to="/dashboard">Dashboard</Link>
+              <Link to="/dashboard" style={{ textDecoration: 'none' }}>Dashboard</Link>
             </li>
             <li className='nav-item'>
-              <Link to='/createpost'>Create Post</Link>
+              <Link to='/createpost' style={{ textDecoration: 'none' }}>Create Post</Link>
             </li>
             <li className='nav-item'>
               {loggedIn ? (
@@ -79,7 +82,7 @@ function App() {
           </ul>
         </header>
 
-        <main>
+        <main className="main-background">
 
         </main>
 
@@ -93,10 +96,10 @@ function App() {
 
       <Switch>
         <Route exact path="/" render={() => <Home />} />
-        <Route exact path="/dashboard" render={() => <Dashboard />} />
+        <Route exact path="/dashboard/:username?" component={Dashboard} />
         <Route exact path="/login" render={() => <Login />} />
         <Route exact path="/createpost" render={() => <CreatePost />} />
-        <Route exact path="/singlepost" render={() => <SinglePost />} />
+        <Route exact path="/singlepost/:id" component={SinglePost}  />
       </Switch>
     </Router>
     </ApolloProvider>
