@@ -18,7 +18,7 @@ const Dashboard = (props) => {
 
   const user = data?.me || data?.user || {};
 
-  console.log(user);
+  // console.log(user);
 
   // redirect to personal profile page if username is yours
   if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
@@ -48,6 +48,7 @@ const Dashboard = (props) => {
   };
 
   return (
+
     <div>
       <div className="flex-row mb-3">
         <h2 className="bg-dark text-secondary p-3 display-inline-block">
