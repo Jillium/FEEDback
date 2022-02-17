@@ -5,47 +5,46 @@ import { Redirect, useParams } from 'react-router-dom';
 import Auth from '../utils/auth';
 
 const PostForm = () => {
-    const [postBody, setBody] = useState('');
-    const [title, setTitle] = useState('');
-    const [postLink, setPostLink] = useState('');
-    const [characterCount, setCharacterCount] = useState(0);
-    const [redirectFlag, setRedirectFlag] = useState(false);
+    // Store limit of text inputs
+    const characterLimit = {
+        title: 100,
+        postBody: 280,
+        postLink: 100
+    }
+    // State for postForm input
+    const [postFormState, setPostFormState] = useState(
+        {
+            title: '',
+            postBody: '',
+            postLink: ''
+        }
+    );
+    // State for keep character counts
+    const [characterCountState, setCharacterCountState] = useState(
+        {
+            title: 0,
+            postBody: 0,
+            postLink: 0
+        }
+    );
     const [addPost, { error }] = useMutation(ADD_POST);
 
     const loggedIn = Auth.loggedIn();
-    if (!loggedIn) {
-        return <Redirect to="/login" />;
-    } else {
-        if (redirectFlag) {
-            return <Redirect to="/dashboard" />;
-        }
-    }
-
-
 
     // update state based on form input changes
-    const handleTitleChange = (event) => {
-        if (event.target.value.length <= 280) {
-            setTitle(event.target.value);
-            setCharacterCount(event.target.value.length);
-        }
-    };
-
-    const handleBodyChange = (event) => {
-        if (event.target.value.length <= 280) {
-
-            setBody(event.target.value);
-
-
-            setCharacterCount(event.target.value.length);
-        }
-    };
-
-    const handlePostLinkChange = (event) => {
-        if (event.target.value.length <= 280) {
-            setPostLink(event.target.value);
-
-            setCharacterCount(event.target.value.length);
+    const handlePostFormChange = (event) => {
+        const { name, value } = event.target;
+        console.log('name : ', name);
+        console.log('value : ', value);
+        if (value.length <= characterLimit[name]) {
+            setPostFormState({
+                ...postFormState,
+                [name]: value,
+            });
+            setCharacterCountState({
+                ...characterCountState,
+                [name]: value.length,
+            });
         }
     };
 
@@ -56,23 +55,24 @@ const PostForm = () => {
         let username = '';
         if (loggedIn) {
             username = Auth.getProfile().data.username;
-        } else {
-            username = '';
-        }
+        } 
 
         try {
-
             await addPost({
-                variables: { username, title, postBody, postLink },
+                variables: { username, ...postFormState },
             });
-
             // clear form value
-            setBody('');
-            setTitle('');
-            setPostLink('')
-            setCharacterCount(0);
-
-            // Auth.getProfile().data.username
+            setPostFormState({
+                title: '',
+                postBody: '',
+                postLink: ''
+            });
+            setCharacterCountState({
+                title: 0,
+                postBody: 0,
+                postLink: 0
+            });
+            
             //return <Redirect to="/dashboard" />;
             return window.location.assign('/dashboard');
 
@@ -85,10 +85,22 @@ const PostForm = () => {
     return (
         <div className="create-post-cont">
             <p
-                className={`m-0 ${characterCount === 280 || error ? 'text-error' : ''} charcount`}
+                className={`m-0 ${characterCountState.title === characterLimit.title || error ? 'text-error' : ''} charcount`}
             >
-                Character Count: {characterCount}/280
-                {error && <span className="ml-2">Something went wrong...</span>}
+                Title Character Count: {characterCountState.title}/{characterLimit.title}
+                {error && <span className="ml-2">Title is too long...</span>}
+            </p>
+            <p
+                className={`m-0 ${characterCountState.postBody === characterLimit.postBody || error ? 'text-error' : ''} charcount`}
+            >
+                Description Character Count: {characterCountState.postBody}/{characterLimit.postBody}
+                {error && <span className="ml-2">Description is too long...</span>}
+            </p>
+            <p
+                className={`m-0 ${characterCountState.postLink === characterLimit.postLink || error ? 'text-error' : ''} charcount`}
+            >
+                Link Character Count: {characterCountState.postLink}/{characterLimit.postLink}
+                {error && <span className="ml-2">Link is too long...</span>}
             </p>
             <form
                 className="flex-row justify-center justify-space-between-md align-stretch"
@@ -98,18 +110,20 @@ const PostForm = () => {
                     <label>Title:</label>
                     <textarea
                         placeholder="SoccerPRO"
-                        value={title}
+                        name='title'
+                        value={postFormState.title}
                         className="form-input col-12 col-md-9"
-                        onChange={handleTitleChange}
+                        onChange={handlePostFormChange}
                     ></textarea>
                 </div>
                 <div className="text-area">
                     <label>Description:</label>
                     <textarea
                         placeholder="Thoughts on UI and UX..."
-                        value={postBody}
+                        name='postBody'
+                        value={postFormState.postBody}
                         className="form-input col-12 col-md-9"
-                        onChange={handleBodyChange}
+                        onChange={handlePostFormChange}
                     ></textarea>
                 </div>
 
@@ -117,9 +131,10 @@ const PostForm = () => {
                     <label>Live Site URL:</label>
                     <textarea
                         placeholder="Enter your WWW..."
-                        value={postLink}
+                        name='postLink'
+                        value={postFormState.postLink}
                         className="form-input col-12 col-md-9"
-                        onChange={handlePostLinkChange}
+                        onChange={handlePostFormChange}
                     ></textarea>
                 </div>
                 <button className="btn col-12 col-md-3" type="submit">
