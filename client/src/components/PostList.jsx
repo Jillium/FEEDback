@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import Auth from '../utils/auth';
 // import { useQuery } from '@apollo/client';
 
-const PostList = ({posts}) => {
+const PostList = ({ posts }) => {
 
     // const loggedIn = Auth.loggedIn();
 
@@ -13,18 +13,14 @@ const PostList = ({posts}) => {
         return <h3>No Posts yet</h3>
     } else {
 
-        
+
         return (
             <div>
-                 
+
                 {posts &&
                     posts.map(post => (
                         <div key={post._id} className="card mb-3">
-                            <Link
-                                to={`/singlepost/${post._id}`}
-                                style={{ fontWeight: 700 }}
-                                className="text-light"
-                            >See Discussion</Link>
+
 
                             <p className="card-header">
                                 <Link
@@ -32,21 +28,23 @@ const PostList = ({posts}) => {
                                     style={{ fontWeight: 700 }}
                                     className="text-light"
                                 >
-                                Posted by {post.username}    
+                                    Posted by {post.username}
                                 </Link>{' '}
-                                
+
                                 Posted on {post.createdAt}
                             </p>
 
+                           
                             <div className="card-body">
-                                <div to={`/singlepost/${post._id}`}>
-                                <h3>{post.title}</h3>
+                                <Link to={`/singlepost/${post._id}`} style={{ fontWeight: 700 }}
+                                className="text-light">
+                                    <h3>{post.title}</h3>
                                     <p>{post.postBody}</p>
                                     <p className="mb-0">
-                                        {/* Comments: {post.commentCount} || Click to{' '}
-                          {post.commentCount ? 'see' : 'start'} the discussion! */}
+                                        Comemnts: {post.commentCount} || Click to{' '}
+                                        {post.commentCount ? 'see' : 'start'} the discussion!
                                     </p>
-                                </div>
+                                </Link>
                             </div>
 
                             <div>

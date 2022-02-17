@@ -20,6 +20,7 @@ type Post {
     username: String
     createdAt: String
     postLink: String
+    commentCount: Int
     comments: [Comment]
    }
  
