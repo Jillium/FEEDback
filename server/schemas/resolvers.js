@@ -1,6 +1,6 @@
 const db = require('../models/index');
 const auth = require('../utils/auth');
-const { User, Post, Comment, Reply } = require('../models')
+const { User, Post } = require('../models')
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
 
