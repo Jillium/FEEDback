@@ -121,3 +121,31 @@
 .charcount {
     margin: 25px;
 }
+
+@media (max-width: 375px) {
+    .nav {
+        flex-wrap: nowrap;
+        font-size: small;
+        display: flex;
+        justify-content: flex-start;
+
+    }
+
+    .header {
+        display: block;
+        text-align: center;
+    }
+
+    .nav-item {
+        margin: 3px;
+    }
+
+    .footer {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-items: center;
+        font-size: small;
+    }
+}
