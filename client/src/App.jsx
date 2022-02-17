@@ -41,9 +41,10 @@ function App() {
   const loggedIn = Auth.loggedIn();
   //console.log(user);
   //console.log(Auth.getProfile());
+  var username = '';
   if (loggedIn) {
     console.log('You are in');
-    //console.log(Auth.getProfile());
+    username = Auth.getProfile().data.username;
   } else {
     console.log('You are still out');
   }
@@ -58,7 +59,7 @@ function App() {
               <Link to="/">Home</Link>
             </li>
             <li className='nav-item'>
-              <Link to="/dashboard">Dashboard</Link>
+              <Link to='/dashboard'>Dashboard</Link>
             </li>
             <li className='nav-item'>
               <Link to='/createpost'>Create Post</Link>

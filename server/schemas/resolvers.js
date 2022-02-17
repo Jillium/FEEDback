@@ -54,20 +54,22 @@ const resolvers = {
       // Check if username is used #TBU
       const previousUsername = await User.findOne({ username });
       if (previousUsername) {
-        throw new AuthenticationError('Existed User');
+        throw new AuthenticationError('The username has been already registered!');
       }
       // Check if email is used #TBU
       const previousEmail = await User.findOne({ email });
       if (previousEmail) {
-        throw new AuthenticationError('Existed Email'); 
+        throw new AuthenticationError('The email has been already registered!');
       }
       // Create User
       const user = await User.create({ username, email, password });
       const token = signToken(user);
+      
       return { token, user };
     },
 
     login: async (parent, { email, password }) => {
+
       // Check if the username is wrong #TBU
       const user = await User.findOne({ email });
       if (!user) {
@@ -78,8 +80,9 @@ const resolvers = {
       if (!correctPw) {
         throw new AuthenticationError('Incorrect credentials');
       }
-    
+      
       const token = signToken(user);
+      
       return { token, user };
     },
 
