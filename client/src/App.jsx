@@ -80,7 +80,7 @@ function App() {
           </ul>
         </header>
 
-        <main>
+        <main className="main-background">
 
         </main>
 

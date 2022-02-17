@@ -21,7 +21,7 @@ const PostForm = () => {
         }
     }
 
-    
+
 
     // update state based on form input changes
     const handleTitleChange = (event) => {
@@ -33,10 +33,10 @@ const PostForm = () => {
 
     const handleBodyChange = (event) => {
         if (event.target.value.length <= 280) {
-           
+
             setBody(event.target.value);
-    
-            
+
+
             setCharacterCount(event.target.value.length);
         }
     };
@@ -44,7 +44,7 @@ const PostForm = () => {
     const handlePostLinkChange = (event) => {
         if (event.target.value.length <= 280) {
             setPostLink(event.target.value);
-            
+
             setCharacterCount(event.target.value.length);
         }
     };
@@ -61,7 +61,7 @@ const PostForm = () => {
         }
 
         try {
-            
+
             await addPost({
                 variables: { username, title, postBody, postLink },
             });
@@ -71,7 +71,7 @@ const PostForm = () => {
             setTitle('');
             setPostLink('')
             setCharacterCount(0);
-            
+
             // Auth.getProfile().data.username
             //return <Redirect to="/dashboard" />;
             return window.location.assign('/dashboard');
@@ -83,9 +83,9 @@ const PostForm = () => {
     };
 
     return (
-        <div>
+        <div className="create-post-cont">
             <p
-                className={`m-0 ${characterCount === 280 || error ? 'text-error' : ''}`}
+                className={`m-0 ${characterCount === 280 || error ? 'text-error' : ''} charcount`}
             >
                 Character Count: {characterCount}/280
                 {error && <span className="ml-2">Something went wrong...</span>}
@@ -94,28 +94,34 @@ const PostForm = () => {
                 className="flex-row justify-center justify-space-between-md align-stretch"
                 onSubmit={handleFormSubmit}
             >
-                <label>Title:</label>
-                <textarea
-                    placeholder="SoccerPRO"
-                    value={title}
-                    className="form-input col-12 col-md-9"
-                    onChange={handleTitleChange}
-                ></textarea>
+                <div className="text-area">
+                    <label>Title:</label>
+                    <textarea
+                        placeholder="SoccerPRO"
+                        value={title}
+                        className="form-input col-12 col-md-9"
+                        onChange={handleTitleChange}
+                    ></textarea>
+                </div>
+                <div className="text-area">
+                    <label>Description:</label>
+                    <textarea
+                        placeholder="Thoughts on UI and UX..."
+                        value={postBody}
+                        className="form-input col-12 col-md-9"
+                        onChange={handleBodyChange}
+                    ></textarea>
+                </div>
 
-                <label>Description:</label>
-                <textarea
-                    placeholder="Thoughts on UI and UX..."
-                    value={postBody}
-                    className="form-input col-12 col-md-9"
-                    onChange={handleBodyChange}
-                ></textarea>
-                <label>Live Site URL:</label>
-                <textarea
-                    placeholder="Enter your WWW..."
-                    value={postLink}
-                    className="form-input col-12 col-md-9"
-                    onChange={handlePostLinkChange}
-                ></textarea>
+                <div className="text-area">
+                    <label>Live Site URL:</label>
+                    <textarea
+                        placeholder="Enter your WWW..."
+                        value={postLink}
+                        className="form-input col-12 col-md-9"
+                        onChange={handlePostLinkChange}
+                    ></textarea>
+                </div>
                 <button className="btn col-12 col-md-3" type="submit">
                     Post!
                 </button>
