@@ -54,7 +54,7 @@ type Post {
    addUser(username: String!, email: String!, password: String!): Auth
    addPost(title: String!, postBody: String!, postLink: String!, username: String!): Post
    addComment(postId: ID!, commentText: String!, username: String!): Post
-
+   addFriend(friendId: ID!): User
  }
 
 

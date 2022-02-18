@@ -38,6 +38,7 @@ const Dashboard = (props) => {
   }
 
   const handleClick = async () => {
+    console.log("clicked");
     try {
       await addFriend({
         variables: { id: user._id },
@@ -57,7 +58,7 @@ const Dashboard = (props) => {
 
         {userParam && (
           <button className="btn ml-auto" onClick={handleClick}>
-            Add Friend
+            Follow This User
           </button>
         )}
       </div>
