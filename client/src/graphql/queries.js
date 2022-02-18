@@ -27,13 +27,14 @@ export const QUERY_POST = gql`
       title
       postBody
       username
-      title
       postLink
       createdAt
+      commentCount
       comments {
         _id
         commentText
         createdAt
+        username
       }
     }
   }
