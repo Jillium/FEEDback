@@ -73,12 +73,12 @@ const resolvers = {
       // Check if the username is wrong #TBU
       const user = await User.findOne({ email });
       if (!user) {
-        throw new AuthenticationError('Incorrect credentials');
+        throw new AuthenticationError('Incorrect Credentials');
       }
       // Check if the password is wrong #TBU
       const correctPw = await user.isCorrectPassword(password);
       if (!correctPw) {
-        throw new AuthenticationError('Incorrect credentials');
+        throw new AuthenticationError('Incorrect Credentials');
       }
       
       const token = signToken(user);

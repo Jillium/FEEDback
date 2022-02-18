@@ -41,6 +41,11 @@ const Login = (props) => {
       // console.log(data);
       Auth.login(data.login.token);
     } catch (e) {
+      const errorMessage = `${e}`.split(':').reverse()[0];
+      setErrorDisplayState({
+        message: errorMessage,
+        show: true
+      });
       console.error(e);
     }
     // clear form values
@@ -58,16 +63,14 @@ const Login = (props) => {
       const { data } = await addUser({
         variables: { ...signUpFormState },
       });
-      console.log(data);
-      if (data.addUser.errorMessage == '') {
-        Auth.login(data.addUser.token);
-      } else {
-        setErrorDisplayState({
-          message: data.addUser.errorMessage,
-          show: true
-        });
-      }
+      
+      Auth.login(data.addUser.token);
     } catch (e) {
+      const errorMessage = `${e}`.split(':').reverse()[0];
+      setErrorDisplayState({
+        message: errorMessage,
+        show: true
+      });
       console.error(e);
     }
     // clear form values
@@ -96,7 +99,7 @@ const Login = (props) => {
   };
 
   const hideModal = () => {
-    setErrorDisplayState({ ...errorDisplayState, show: false });
+    setErrorDisplayState({ message: '', show: false });
   };
 
   // useEffect((props) => {
