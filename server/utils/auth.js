@@ -1,7 +1,8 @@
 const jwt = require('jsonwebtoken');
 
 
-const secret = process.env.JWT_SECRET;
+// const secret = process.env.JWT_SECRET;
+const secret = 'this is a super secret alablslsl'
 const expiration = '2h';
 
 module.exports = {
