@@ -14,7 +14,7 @@ const Dashboard = (props) => {
   const { username: userParam } = useParams();
 
   const [addFriend] = useMutation(ADD_FRIEND);
-  const { loading, data } = useQuery(QUERY_ME, QUERY_USER);
+  const { loading, data } = useQuery((!userParam) ? QUERY_ME : QUERY_USER, {variables: { username: userParam }});
 
   const user = data?.me || data?.user || {};
 

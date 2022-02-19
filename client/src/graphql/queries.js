@@ -58,7 +58,6 @@ export const QUERY_USER = gql`
         username
         postLink
         commentCount
-        postedBy
         createdAt
         comments {
           _id
