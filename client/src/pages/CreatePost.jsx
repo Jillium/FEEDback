@@ -27,9 +27,7 @@ const PostForm = () => {
             postLink: 0
         }
     );
-    const [addPost, { error }] = useMutation(ADD_POST);
-
-    const loggedIn = Auth.loggedIn();
+    const [addPost, { error }] = useMutation(ADD_POST); 
 
     // update state based on form input changes
     const handlePostFormChange = (event) => {
@@ -81,6 +79,11 @@ const PostForm = () => {
         }
 
     };
+
+    const loggedIn = Auth.loggedIn();
+    if (!loggedIn) {
+        return <Redirect to="/login" />; 
+    }
 
     return (
         <div className="create-post-cont">
