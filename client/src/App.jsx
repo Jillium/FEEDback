@@ -31,24 +31,14 @@ const authLink = setContext((_, { headers }) => {
   };
 });
 
-// console.log(authLink);
-
 const client = new ApolloClient({
   link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
 
 function App() {
-  //const [user, setUser] = useState({ token: '', user: null });
   const loggedIn = Auth.loggedIn();
-  //console.log(user);
-  // console.log(Auth.getProfile());
-  if (loggedIn) {
-    console.log('You are in');
-    // console.log(Auth.getProfile());
-  } else {
-    console.log('You are still out');
-  }
+  
   return (
     <ApolloProvider client={client}>
     <Router>
