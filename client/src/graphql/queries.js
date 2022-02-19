@@ -89,7 +89,7 @@ query ME_BASIC {
     _id
     username
     email
-    friends {
+    user {
       friends {
         _id
         username
