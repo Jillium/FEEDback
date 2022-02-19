@@ -7,6 +7,7 @@ type User {
   _id: ID
   username: String
   email: String
+  friendCount: Int
   password: String
   posts: [Post]
   friends: [User]
