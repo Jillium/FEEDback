@@ -44,15 +44,28 @@ export const QUERY_USER = gql`
   query user($username: String!) {
     user(username: $username) {
       _id
-      name
+      username
       email
+      friendCount
+      friends {
+        _id
+        username
+      }
       posts {
         _id
         title
         postBody
+        username
+        postLink
+        commentCount
         postedBy
-        comments
         createdAt
+        comments {
+          _id
+          commentText
+          createdAt
+          username
+        }
       }
     }
   }
@@ -89,7 +102,7 @@ query ME_BASIC {
     _id
     username
     email
-    friends {
+    user {
       friends {
         _id
         username

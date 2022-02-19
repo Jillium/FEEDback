@@ -27,6 +27,7 @@ export const ADD_FRIEND = gql`
     addFriend(friendId: $id) {
       _id
       username
+      friendcount
       friends {
         _id
         username
@@ -63,15 +64,15 @@ export const ADD_COMMENT = gql`
   }
 `;
 
-// export const REMOVE_FRIEND = gql`
-//   mutation removeFriend($id: ID!) {
-//     removeFriend(id: $id) {
-//       _id
-//       username
-//       friends {
-//         _id
-//         username
-//       }
-//     }
-//   }
-// `;
+export const REMOVE_FRIEND = gql`
+  mutation removeFriend($id: ID!) {
+    removeFriend(id: $id) {
+      _id
+      username
+      friends {
+        _id
+        username
+      }
+    }
+  }
+`;

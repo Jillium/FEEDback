@@ -6,15 +6,15 @@ import PostList from '../components/PostList';
 import FriendList from '../components/FriendList';
 
 import { useQuery, useMutation } from '@apollo/client';
-import { QUERY_ME } from '../graphql/queries';
+import { QUERY_ME, QUERY_USER } from '../graphql/queries';
 import { ADD_FRIEND } from '../graphql/mutations';
-import Auth from "../utils/auth"
+import Auth from '../utils/auth';
 
 const Dashboard = (props) => {
   const { username: userParam } = useParams();
 
   const [addFriend] = useMutation(ADD_FRIEND);
-  const { loading, data } = useQuery(QUERY_ME);
+  const { loading, data } = useQuery(QUERY_ME, QUERY_USER);
 
   const user = data?.me || data?.user || {};
 
@@ -38,6 +38,7 @@ const Dashboard = (props) => {
   }
 
   const handleClick = async () => {
+    console.log("clicked");
     try {
       await addFriend({
         variables: { id: user._id },
@@ -55,11 +56,11 @@ const Dashboard = (props) => {
           Dashboard
         </h2>
 
-        {/* {userParam && (
+        {userParam && (
           <button className="btn ml-auto" onClick={handleClick}>
-            Add Friend
+            Follow
           </button>
-        )} */}
+        )}
       </div>
 
       <div className="flex-row justify-space-between mb-3">
