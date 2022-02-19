@@ -38,7 +38,6 @@ const Login = (props) => {
       const { data } = await login({
         variables: { ...loginFormState },
       });
-      // console.log(data);
       Auth.login(data.login.token);
     } catch (e) {
       const errorMessage = `${e}`.split(':').reverse()[0];

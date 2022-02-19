@@ -32,8 +32,6 @@ const PostForm = () => {
     // update state based on form input changes
     const handlePostFormChange = (event) => {
         const { name, value } = event.target;
-        console.log('name : ', name);
-        console.log('value : ', value);
         if (value.length <= characterLimit[name]) {
             setPostFormState({
                 ...postFormState,
