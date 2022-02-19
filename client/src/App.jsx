@@ -14,6 +14,7 @@ import logo from "../src/assets/feedback.png";
 import logo2 from "../src/assets/Feedback2.png";
 import logo3 from "../src/assets/Feedback3.png";
 import SinglePost from './pages/SinglePost';
+import NoMatch from './pages/NoMatch';
 
 import Auth from './utils/auth';
 
@@ -64,7 +65,7 @@ function App() {
                 </>
               ) : (
                 <>
-                  <Link to="/login">Login/Signup</Link>
+                  <Link to="/login" style={{ textDecoration: 'none' }}>Login/Signup</Link>
                 </>
               )}
             </li>
@@ -90,6 +91,8 @@ function App() {
         <Route exact path="/login" render={() => <Login />} />
         <Route exact path="/createpost" render={() => <CreatePost />} />
         <Route exact path="/singlepost/:id" component={SinglePost}  />
+
+        <Route component={NoMatch} />
       </Switch>
     </Router>
     </ApolloProvider>
