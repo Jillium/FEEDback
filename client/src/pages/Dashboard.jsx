@@ -50,7 +50,7 @@ const Dashboard = (props) => {
 
   return (
 
-    <div>
+    <div className="dashboard-container main-background">
       <div className="flex-row mb-3">
         <h2 className="bg-dark text-secondary p-3 display-inline-block">
           Dashboard

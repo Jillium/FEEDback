@@ -27,7 +27,7 @@ const PostForm = () => {
             postLink: 0
         }
     );
-    const [addPost, { error }] = useMutation(ADD_POST); 
+    const [addPost, { error }] = useMutation(ADD_POST);
 
     // update state based on form input changes
     const handlePostFormChange = (event) => {
@@ -51,7 +51,7 @@ const PostForm = () => {
         let username = '';
         if (loggedIn) {
             username = Auth.getProfile().data.username;
-        } 
+        }
 
         try {
             await addPost({
@@ -68,7 +68,7 @@ const PostForm = () => {
                 postBody: 0,
                 postLink: 0
             });
-            
+
             //return <Redirect to="/dashboard" />;
             return window.location.assign('/dashboard');
 
@@ -80,33 +80,23 @@ const PostForm = () => {
 
     const loggedIn = Auth.loggedIn();
     if (!loggedIn) {
-        return <Redirect to="/login" />; 
+        return <Redirect to="/login" />;
     }
 
     return (
         <div className="create-post-cont">
-            <p
-                className={`m-0 ${characterCountState.title === characterLimit.title || error ? 'text-error' : ''} charcount`}
-            >
-                Title Character Count: {characterCountState.title}/{characterLimit.title}
-                {error && <span className="ml-2">Title is too long...</span>}
-            </p>
-            <p
-                className={`m-0 ${characterCountState.postBody === characterLimit.postBody || error ? 'text-error' : ''} charcount`}
-            >
-                Description Character Count: {characterCountState.postBody}/{characterLimit.postBody}
-                {error && <span className="ml-2">Description is too long...</span>}
-            </p>
-            <p
-                className={`m-0 ${characterCountState.postLink === characterLimit.postLink || error ? 'text-error' : ''} charcount`}
-            >
-                Link Character Count: {characterCountState.postLink}/{characterLimit.postLink}
-                {error && <span className="ml-2">Link is too long...</span>}
-            </p>
+
             <form
                 className="flex-row justify-center justify-space-between-md align-stretch"
                 onSubmit={handleFormSubmit}
             >
+                <p
+                    className={`m-0 ${characterCountState.title === characterLimit.title || error ? 'text-error' : ''} charcount`}
+                >
+                    Title Character Count: {characterCountState.title}/{characterLimit.title}
+                    {error && <span className="ml-2">Title is too long...</span>}
+                </p>
+
                 <div className="text-area">
                     <label>Title:</label>
                     <textarea
@@ -117,6 +107,14 @@ const PostForm = () => {
                         onChange={handlePostFormChange}
                     ></textarea>
                 </div>
+
+                <p
+                    className={`m-0 ${characterCountState.postBody === characterLimit.postBody || error ? 'text-error' : ''} charcount`}
+                >
+                    Description Character Count: {characterCountState.postBody}/{characterLimit.postBody}
+                    {error && <span className="ml-2">Description is too long...</span>}
+                </p>
+
                 <div className="text-area">
                     <label>Description:</label>
                     <textarea
@@ -127,6 +125,13 @@ const PostForm = () => {
                         onChange={handlePostFormChange}
                     ></textarea>
                 </div>
+
+                <p
+                    className={`m-0 ${characterCountState.postLink === characterLimit.postLink || error ? 'text-error' : ''} charcount`}
+                >
+                    Link Character Count: {characterCountState.postLink}/{characterLimit.postLink}
+                    {error && <span className="ml-2">Link is too long...</span>}
+                </p>
 
                 <div className="text-area">
                     <label>Live Site URL:</label>

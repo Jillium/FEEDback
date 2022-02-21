@@ -17,11 +17,13 @@ function Home() {
 
     return (
         <main>
-           <div>
+           <div className='main-background'>
           {loading ? (
             <div>Loading...</div>
           ) : (
-            <PostList posts={posts} />
+            <div className='home-list-container'>
+              <PostList posts={posts} />
+            </div>
           )}
         </div>
         </main>
