@@ -26,7 +26,7 @@ const SinglePost = props => {
     return (
 
 
-        <div>
+        <div className="single-post-container">
             <span>Posted by {post.username} on {post.createdAt}</span>
             <h3>{post.title}</h3>
             <p>{post.postLink}</p>

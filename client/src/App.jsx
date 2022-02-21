@@ -15,7 +15,7 @@ import logo2 from "../src/assets/Feedback2.png";
 import logo3 from "../src/assets/Feedback3.png";
 import SinglePost from './pages/SinglePost';
 import NoMatch from './pages/NoMatch';
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Auth from './utils/auth';
 
 const httpLink = createHttpLink({

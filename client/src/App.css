@@ -4,7 +4,7 @@
     --tertiary: #b2c2c1;
     --quatrinary: #CDD0CB;
     --light: #e1f5f4;
-    --dark: #E8EAE6;
+    --dark: grey;
     --error: rgb(228, 46, 1);
     --border-radius: 0.3rem;
     --spacing-one: calc(1rem * 0.25);
@@ -26,9 +26,11 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    /* position: fixed; */
+    height: 150px;
+    position: fixed;
     top: 0px;
     left: 0px;
+    z-index:1000; 
 }
 
 .nav {
@@ -53,7 +55,8 @@
     align-content: center;
     justify-content: space-between;
     align-items: flex-end;
-
+    height: 30px;
+    padding: 30px;
 }
 
 .footer-list {
@@ -65,7 +68,7 @@
 }
 /* app.jsx page */
 .main-background {
-    background-color: var(--dark);
+    background-color: var(--tertiary);
 }
 
 .header {
@@ -75,6 +78,9 @@
 .footer {
     background-color: var(--dark);
     left: 0px;
+    height: 30px;
+    padding: 30px;
+    z-index:1000 
 }
 /* create post page */
 .create-post-cont {
@@ -82,6 +88,7 @@
     width: 50%;
     height: 80%;
     border: 2px solid black;
+    border-radius: 4px;
     margin: auto;
     margin-top: 50px;
     background-color: var(--tertiary);
@@ -120,6 +127,38 @@
 
 .charcount {
     margin: 25px;
+}
+/* homepage */
+.home-list-container {
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 50px;
+    padding-top: 160px;
+}
+
+.list-body h3, p {
+    color: black;
+}
+
+.link-preview {
+    margin: 0 auto;
+    padding: 10px;
+}
+
+/* dashboard */
+.dashboard-container {
+    padding-top: 160px;
+    height: 100%;
+}
+
+/* singlepost */
+.single-post-container {
+    padding-top: 160px;
+}
+
+/* login */
+.login-container {
+    padding-top: 160px;
 }
 
 /* Modal */
@@ -176,5 +215,7 @@
         justify-content: center;
         align-items: center;
         font-size: small;
+        z-index:1000;
     }
+
 }

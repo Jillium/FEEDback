@@ -108,7 +108,7 @@ const Login = (props) => {
   // }, [loginData]);
 
   return (
-    <div>
+    <div className="login-container">
       <form onSubmit={handleLoginFormSubmit}>
               <h3 className='form-title'>Login</h3>
               <label htmlFor="email">
