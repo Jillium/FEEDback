@@ -51,6 +51,7 @@ const Dashboard = (props) => {
   return (
 
     <div className="dashboard-container main-background">
+
       <div className="flex-row mb-3">
         <h2 className="bg-dark text-secondary p-3 display-inline-block">
           Dashboard
@@ -63,24 +64,28 @@ const Dashboard = (props) => {
         )}
       </div>
 
-      <div className="flex-row justify-space-between mb-3 dashboard-posts">
-        <div className="col-12 mb-3 col-lg-8">
-          <PostList
-            posts={user.posts}
-            title={`${user.username}'s thoughts...`}
-          />
-        </div>
+      <div className ="dashboard-post-container">
 
-        <div className="col-12 col-lg-3 mb-3">
-          {console.log(user)}
-          <FriendList
-            username={user.username}
-            friendCount={user.friendCount}
-            friends={user.friends}
-          />
-        </div>
+            <div className="dashboard-list">
+          <div className="flex-row justify-space-between mb-3">
+              <PostList
+                posts={user.posts}
+                title={`${user.username}'s thoughts...`}
+              />
+            </div>
+          </div>
+
+            <div className="col-12 col-lg-3 mb-3">
+              {console.log(user)}
+              <FriendList
+                username={user.username}
+                friendCount={user.friendCount}
+                friends={user.friends}
+              />
+            </div>
+          <div className="mb-3">{!userParam}</div>
+
       </div>
-      <div className="mb-3">{!userParam}</div>
     </div>
   );
 };

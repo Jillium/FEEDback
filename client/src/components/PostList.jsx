@@ -15,7 +15,7 @@ const PostList = ({ posts }) => {
 
 
         return (
-            <div className="post-card"> 
+            <div className="post-card">
 
                 {posts &&
                     posts.map(post => (
@@ -35,7 +35,7 @@ const PostList = ({ posts }) => {
 
                                 <div className="link-preview post-card">
                                     <LinkPreview url={post.postLink} width='400px'
-                                    fallbackImageSrc='https://live.staticflickr.com/3238/3039847767_826d72d7a5_c.jpg' />
+                                        fallbackImageSrc='https://live.staticflickr.com/3238/3039847767_826d72d7a5_c.jpg' />
                                 </div>
 
                                 <p className="card-header post-card">
@@ -44,7 +44,9 @@ const PostList = ({ posts }) => {
                                         style={{ fontWeight: 700 }}
                                         className="text-light"
                                     >
-                                        Posted by {post.username}
+                                        <p>
+                                            Posted by {post.username}
+                                        </p>
                                     </Link>{' '}
 
                                     Posted on {post.createdAt}
