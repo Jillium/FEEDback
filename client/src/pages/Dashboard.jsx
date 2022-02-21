@@ -38,14 +38,14 @@ const Dashboard = (props) => {
   }
 
   const handleClick = async () => {
-    console.log("clicked");
-    try {
+    console.log("clicked", user);
+    // try {
       await addFriend({
-        variables: { id: user._id },
+        variables: { friendId: user._id },
       });
-    } catch (e) {
-      console.error(e);
-    }
+    // } catch (e) {
+    //   console.error(e);
+    // }
   };
 
   return (
@@ -72,6 +72,7 @@ const Dashboard = (props) => {
         </div>
 
         <div className="col-12 col-lg-3 mb-3">
+          {console.log(user)}
           <FriendList
             username={user.username}
             friendCount={user.friendCount}
