@@ -106,13 +106,13 @@ const resolvers = {
       }
     },
 
-    // addComment: async (parent, { postID, username, commentText })  => {
+    // addComment: async (parent, { username, commentText })  => {
     //   if (username == '') {
     //     console.log('it is empty username');
     //     throw new AuthenticationError('You are not logged in');
     //   } else {
     //     console.log('username passed');
-    //     const post = await Post.findOne({ postID });
+    //     const post = await Post.findOne({ username });
     //     if (post) {
     //       console.log('Post found');
     //       const ID = post._id;

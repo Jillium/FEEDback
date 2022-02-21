@@ -14,9 +14,9 @@ const CommentList = ({ comments }) => {
             comments.map(comment => (
               <p key={comment._id}>
                 {comment.commentText} {'// '}
-                <Link to={`/profile/${comment.username}`}>
+                {/* <Link to={`dashboard/${comment.username}`}> */}
                   {comment.username} on {comment.createdAt}
-                </Link>
+                {/* </Link> */}
               </p>
             ))}
         </div>
