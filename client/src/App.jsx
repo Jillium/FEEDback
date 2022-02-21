@@ -45,7 +45,7 @@ function App() {
     <Router>
       <div>
         <header className='header'>
-        <span><img src={logo3} alt="feedback logo"></img></span>
+        <span><img src={logo3} alt="feedback logo" className="logo"></img></span>
           <ul className="nav">
             <li className='nav-item'>
               <Link to="/" style={{ textDecoration: 'none' }}>Home</Link>

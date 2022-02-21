@@ -30,9 +30,13 @@
     position: fixed;
     top: 0px;
     left: 0px;
-    z-index:1000; 
+    z-index:1000;
+    background-color: gray;
 }
 
+.logo {
+    background-color: gray;
+}
 .nav {
    list-style-type: none;
    display: flex;
@@ -44,6 +48,7 @@
 
 .nav-item {
     margin: 0 1rem;
+    background-color: gray;
 }
 
 .footer {
@@ -90,8 +95,9 @@
     border: 2px solid black;
     border-radius: 4px;
     margin: auto;
-    margin-top: 50px;
+    margin-top: 160px;
     background-color: var(--tertiary);
+
 }
 
 .create-post-cont form {
@@ -149,6 +155,13 @@
 .dashboard-container {
     padding-top: 160px;
     height: 100%;
+    margin: 0;
+}
+
+.dashboard-posts {
+    height: 100%;
+    bottom: 0;
+    margin: 0;
 }
 
 /* singlepost */
