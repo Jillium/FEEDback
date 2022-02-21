@@ -77,6 +77,11 @@ query Me {
     username
     email
     password
+    friendCount
+    friends {
+      _id
+      username
+    }
     posts {
       _id
       title
