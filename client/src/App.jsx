@@ -45,7 +45,7 @@ function App() {
     <Router>
       <div>
         <header className='header'>
-        <span><img src={logo3} alt="feedback logo"></img></span>
+        <span><img src={logo3} alt="feedback logo" className='logo'></img></span>
           <ul className="nav">
             <li className='nav-item'>
               <Link to="/" style={{ textDecoration: 'none' }}>Home</Link>
@@ -76,7 +76,7 @@ function App() {
         </main>
 
         <footer className="footer">
-          <h4>Made by FEEDBACK 2022</h4>
+          <h4 className='footer-made-by'>Made by FEEDBACK 2022</h4>
           <ul className='footer-list'>
             <li className='footer-item'>Check us out on <a href="https://github.com/Jillium/FEEDback" target="_blank" rel="noreferrer">Github</a>!</li>
           </ul>
