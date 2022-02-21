@@ -156,9 +156,19 @@ const resolvers = {
           { new: true, runValidators: true }
       );
       return updatedPost;
-    }
+    },
+
+    removePost: async (parent, { postId }) => {
+      const removedPost = await Post.findOneAndDelete({ _id: postId });
+      if (!removedPost) {
+        throw new Error('Post is not found with such ID!');
+      }
+      return removedPost;
+    },
   
   }
+
+
 
     
    

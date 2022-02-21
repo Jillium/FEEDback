@@ -135,7 +135,7 @@ const Login = (props) => {
                 value={loginFormState.password}
                 onChange={handleLoginFormChange}
               />
-              <button className="btn d-block w-100" type="submit">
+              <button className="btn col-12 col-md-3" type="submit">
                 Login
               </button>
       </form>
@@ -178,7 +178,7 @@ const Login = (props) => {
                 value={signUpFormState.password}
                 onChange={handleSignUpFormChange}
               />
-              <button className="btn d-block w-100" type="submit">
+              <button className="btn col-12 col-md-3" type="submit">
                 SignUp
               </button>
       </form>

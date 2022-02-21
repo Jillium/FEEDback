@@ -72,3 +72,22 @@ export const REMOVE_FRIEND = gql`
     }
   }
 `;
+
+export const REMOVE_POST = gql`
+  mutation removePost($postId: ID!) {
+    removePost(postId: $postId) {
+      _id
+      title
+      postBody
+      username
+      createdAt
+      postLink
+      comments {
+        _id
+        commentText
+        createdAt
+        username
+      }
+    }
+  }
+`

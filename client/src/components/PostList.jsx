@@ -27,7 +27,7 @@ const PostList = ({ posts }) => {
                                         <h3>{post.title}</h3>
                                         <p>{post.postBody}</p>
                                         <p className="mb-0">
-                                            Comemnts: {post.commentCount} || Click to{' '}
+                                            Comments: {post.commentCount} || Click to{' '}
                                             {post.commentCount ? 'see' : 'start'} the discussion!
                                         </p>
                                     </Link>
