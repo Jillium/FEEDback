@@ -30,9 +30,13 @@
     position: fixed;
     top: 0px;
     left: 0px;
-    z-index:1000; 
+    z-index:1000;
+    background-color: gray;
 }
 
+.logo {
+    background-color: gray;
+}
 .nav {
    list-style-type: none;
    display: flex;
@@ -44,6 +48,7 @@
 
 .nav-item {
     margin: 0 1rem;
+    background-color: gray;
 }
 
 .footer {
@@ -90,8 +95,9 @@
     border: 2px solid black;
     border-radius: 4px;
     margin: auto;
-    margin-top: 50px;
+    margin-top: 160px;
     background-color: var(--tertiary);
+
 }
 
 .create-post-cont form {
@@ -148,8 +154,23 @@
 /* dashboard */
 .dashboard-container {
     padding-top: 160px;
-    height: 100%;
+    margin: 0;
 }
+
+.dashboard-list {
+    margin: 0 auto;
+}
+
+.dashboard-post-container {
+    width: 50%;
+    margin: 0 auto;
+}
+/* 
+.dashboard-posts {
+    height: 100%;
+    width: 50%;
+    margin: 0 auto;
+} */
 
 /* singlepost */
 .single-post-container {
@@ -190,32 +211,196 @@
 }
 /* Modal */
 
+/* Iphone se */
 @media (max-width: 375px) {
+
     .nav {
         flex-wrap: nowrap;
         font-size: small;
-        display: flex;
+       
         justify-content: flex-start;
 
     }
 
     .header {
-        display: block;
-        text-align: center;
+        
+       align-content: stretch;
+       align-items: flex-start;
+       padding: 30px;
     }
 
     .nav-item {
-        margin: 3px;
+        margin: 7px;
+    }
+
+    .logo {
+        height: 50px;
+        width:auto;
     }
 
     .footer {
         display: flex;
         flex-direction: row;
-        flex-wrap: nowrap;
+        flex-wrap: wrap;
         justify-content: center;
         align-items: center;
         font-size: small;
         z-index:1000;
+        /* position: fixed;
+        bottom: 0; */
     }
+
+    .footer-made-by {
+        padding-right: 50px;
+        padding-top: 15px;
+    }
+
+}
+
+/*  iphone 12 */
+
+@media (max-width: 414px ) {
+    
+    .nav {
+        flex-wrap: nowrap;
+        font-size: small;
+       
+        justify-content: flex-start;
+
+    }
+
+    .header {
+        
+       align-content: stretch;
+       align-items: flex-start;
+       padding: 30px;
+    }
+
+    .nav-item {
+        margin: 7px;
+    }
+
+    .logo {
+        height: 50px;
+        width:auto;
+    }
+
+    .footer {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        font-size: small;
+        z-index:1000;
+        /* position: fixed;
+        bottom: 0; */
+    }
+
+    .footer-made-by {
+        padding-right: 50px;
+        padding-top: 15px;
+    }
+
+
+}
+
+@media (max-width: 912px ) {
+    
+    .nav {
+        flex-wrap: nowrap;
+        font-size: large;
+       
+        justify-content: flex-start;
+        margin-top: 20px;
+
+    }
+
+    .header {
+        
+       align-content: center;
+       align-items: center;
+       
+    }
+
+    .nav-item {
+        margin: 7px;
+    }
+
+    .logo {
+        height: 75px;
+        width:auto;
+    }
+
+    .footer {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: baseline;
+        font-size: small;
+        z-index:1000;
+        /* position: fixed;
+        bottom: 0; */
+    }
+
+    .footer-made-by {
+        padding-right: 50px;
+        padding-top: 15px;
+    }
+
+
+}
+
+@media (max-width: 540px ) {
+    
+    .nav {
+        flex-wrap: nowrap;
+        font-size: medium;
+       
+        justify-content: flex-start;
+        margin-top: 20px;
+
+    }
+
+    .header {
+        
+       align-content: center;
+       align-items: center;
+       
+    }
+
+    .nav-item {
+        margin: 7px;
+    }
+
+    .logo {
+        height: 60px;
+        width:auto;
+    }
+
+    .footer {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-content: space-between;
+        justify-content: space-around;
+        align-items: baseline;
+        font-size: small;
+        z-index:1000;
+        /* position: fixed;
+        bottom: 0; */
+    }
+
+    .footer-made-by {
+        padding-right: 50px;
+        padding-top: 15px;
+    }
+
+    .footer-list {
+        margin-top: 1.5rem;
+    }
+    
+
 
 }
