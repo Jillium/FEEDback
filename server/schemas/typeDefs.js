@@ -37,11 +37,6 @@ type Post {
    user: User
  }  
 
- 
-
-
-
-  
   type Query {
     me: User
     allPosts: [Post]
@@ -57,6 +52,7 @@ type Post {
    addPost(title: String!, postBody: String!, postLink: String!, username: String!): Post
    addComment(postId: ID!, commentText: String!, username: String!): Post
    addFriend(friendId: ID!): User
+   removePost(postId: ID!): Post
  }
 
 
