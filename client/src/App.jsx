@@ -59,9 +59,7 @@ function App() {
             <li className='nav-item'>
               {loggedIn ? (
                 <>
-                  <a href="/" onClick={Auth.logout}>
-                    Logout
-                  </a>
+                  <Link to="/" onClick={Auth.logout} style={{ textDecoration: 'none' }}>Logout</Link>
                 </>
               ) : (
                 <>
