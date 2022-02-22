@@ -32,7 +32,7 @@ const CommentForm = ({ postId }) => {
             setText('');
         setCharacterCount(0);
 
-        // return window.location.assign('/dashboard');
+        
 
         } catch (e) {
             console.error(e);
