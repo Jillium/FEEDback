@@ -34,7 +34,7 @@ const PostList = ({ posts }) => {
                                 </div>
 
                                 <div className="link-preview post-card">
-                                    <LinkPreview url={post.postLink} width='300px' height='300px'
+                                    <LinkPreview url={post.postLink} width='300px' height='300px' 
                                         fallbackImageSrc='https://live.staticflickr.com/3238/3039847767_826d72d7a5_c.jpg' />
                                 </div>
 
