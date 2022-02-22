@@ -30,19 +30,47 @@ const SinglePost = props => {
     const handleClick = async () => {
         console.log("clicked");
         // try {
-          await removePost({
+        await removePost({
             variables: { postId: id },
-          });
+        });
         // } catch (e) {
         //   console.error(e);
         // }
         window.location.replace("/dashboard")
-      };
+    };
 
     return (
 
 
-        <div className="single-post-container">
+        <div className="single-post-container main-background">
+            <div className="single-post-card">
+
+                <h3 className='main-header-font'>{post.title}</h3>
+                {/* <p className='description-p'>{post.postLink}</p> */}
+                <p className='description-p'>
+                    {post.postBody}
+                </p>
+
+                <div>
+                    <p className='comment-p'>
+                        {post.commentCount > 0 && <CommentList comments={post.comments} />}
+                    </p>
+                </div>
+                <div>
+                    <LinkPreview url={post.postLink} width='300px' height='300px' fallbackImageSrc='https://live.staticflickr.com/3238/3039847767_826d72d7a5_c.jpg' />
+                </div>
+
+                <div>
+                    <button className="btn ml-auto" onClick={handleClick}>Delete This Post</button>
+                </div>
+
+                <div>
+                    <span>Posted by {post.username} on {post.createdAt}</span>
+                </div>
+
+                {auth.loggedIn() && <CommentForm postId={post._id} />}
+
+                {/* <div className="single-post-container">
             <span>Posted by {post.username} on {post.createdAt}</span>
             <h3>{post.title}</h3>
             <p>{post.postLink}</p>
@@ -52,12 +80,8 @@ const SinglePost = props => {
             <button className="btn ml-auto" onClick={handleClick}>Delete This Post</button>
             {post.commentCount > 0 && <CommentList comments={post.comments} />}
             <div>
-                <LinkPreview url={post.postLink} width='400px' />
+                <LinkPreview url={post.postLink} width='400px' /> */}
             </div>
-           
-            
-            
-            {auth.loggedIn() && <CommentForm postId={post._id} />}
         </div>
     )
 };
