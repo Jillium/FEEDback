@@ -1,17 +1,20 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { useQuery } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_POST } from '../graphql/queries';
+import { REMOVE_POST } from '../graphql/mutations';
 import { LinkPreview } from '@dhaiwat10/react-link-preview';
 import auth from '../utils/auth';
 import CommentForm from '../components/CommentForm';
 import CommentList from '../components/CommentList';
 
 const SinglePost = props => {
-    const { id: postID } = useParams();
+    const { id } = useParams();
+    console.log(id);
 
+    const [removePost] = useMutation(REMOVE_POST);
     const { loading, data } = useQuery(QUERY_POST, {
-        variables: { id: postID }
+        variables: { _id: id }
     });
 
     const post = data?.post || {};
@@ -23,6 +26,19 @@ const SinglePost = props => {
     if (loading) {
         return <div>Loading...</div>;
     }
+
+    const handleClick = async () => {
+        console.log("clicked");
+        // try {
+          await removePost({
+            variables: { postId: id },
+          });
+        // } catch (e) {
+        //   console.error(e);
+        // }
+        window.location.replace("/dashboard")
+      };
+
     return (
 
 
@@ -33,6 +49,7 @@ const SinglePost = props => {
             <p>
                 {post.postBody}
             </p>
+            <button className="btn ml-auto" onClick={handleClick}>Delete This Post</button>
             {post.commentCount > 0 && <CommentList comments={post.comments} />}
             <div>
                 <LinkPreview url={post.postLink} width='400px' />
