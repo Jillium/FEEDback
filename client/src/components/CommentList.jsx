@@ -7,7 +7,7 @@ const CommentList = ({ comments }) => {
     return (
         <div>
         <div>
-          <span>Comments</span>
+          <span className= "header-font">Comments</span>
         </div>
         <div>
           {comments &&

@@ -5,6 +5,7 @@
     --quatrinary: #CDD0CB;
     --light: #e1f5f4;
     --dark: grey;
+    --heading: #346751;
     --error: rgb(228, 46, 1);
     --border-radius: 0.3rem;
     --spacing-one: calc(1rem * 0.25);
@@ -60,8 +61,8 @@
     align-content: center;
     justify-content: space-between;
     align-items: flex-end;
-    height: 30px;
-    padding: 30px;
+    height: 35px;
+    padding: 35px;
 }
 
 .footer-list {
@@ -83,10 +84,24 @@
 .footer {
     background-color: var(--dark);
     left: 0px;
-    height: 30px;
-    padding: 30px;
-    z-index:1000 
+    height: 35px;
+    padding: 35x;
+    z-index:1000;
 }
+
+/* singlepost */
+.single-post-container {
+   padding-bottom: 200px;
+}
+
+
+
+.single-post-card {
+    margin-left: 15%;
+    margin-right: 30%;
+    
+}
+
 /* create post page */
 .create-post-cont {
     display: block;
@@ -121,9 +136,7 @@
 
 .btn {
     margin-bottom: 25px;
-    margin-right: 25%;
-    margin-left: 75%;
-    width: 125px;
+    width: 50px;
     height: 25px;
     background-color: var(--secondary);
     border-radius: 4px;
@@ -142,8 +155,13 @@
     padding-top: 160px;
 }
 
-.list-body h3, p {
+.list-body p {
     color: black;
+}
+
+.list-body h3, h4 {
+    color: var(--heading);
+    font-size:24px;
 }
 
 .link-preview {
@@ -165,6 +183,10 @@
     width: 50%;
     margin: 0 auto;
 }
+
+.dash-title {
+    
+}
 /* 
 .dashboard-posts {
     height: 100%;
@@ -180,6 +202,34 @@
 /* login */
 .login-container {
     padding-top: 160px;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.block-form-sections {
+    display: block;
+}
+
+.login-form {
+    padding: 30px;
+}
+
+/* util */
+.comment-p {
+    font-size: 18px;
+}
+
+.description-p {
+    font-size: 22px;
+}
+
+.main-header-font {
+    font-size: 28px;
+}
+.header-font {
+    color:#346751;
+    font-size: 24px;
 }
 
 /* Modal */
