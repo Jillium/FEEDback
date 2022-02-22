@@ -76,14 +76,14 @@ const SinglePost = props => {
             <p>{post.postLink}</p>
             <p>
                 {post.postBody}
-            </p> */}
-                {/* <button className="btn ml-auto" onClick={handleClick}>Delete This Post</button> */}
-                {/* {post.commentCount > 0 && <CommentList comments={post.comments} />}
+            </p>
+            <button className="btn ml-auto" onClick={handleClick}>Delete This Post</button>
+            {post.commentCount > 0 && <CommentList comments={post.comments} />}
             <div>
-                <LinkPreview url={post.postLink} width='400px' />
-            </div> */}
+                <LinkPreview url={post.postLink} width='400px' /> */}
             </div>
-            )
+        </div>
+    )
 };
 
-            export default SinglePost;
+export default SinglePost;
