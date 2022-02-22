@@ -175,6 +175,11 @@
 /* singlepost */
 .single-post-container {
     padding-top: 160px;
+    height: 100vh;
+}
+
+.comment-form {
+    height: 100vh;
 }
 
 /* login */

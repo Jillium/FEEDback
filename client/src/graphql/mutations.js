@@ -74,20 +74,20 @@ export const REMOVE_FRIEND = gql`
 `;
 
 export const REMOVE_POST = gql`
-  mutation removePost($postId: ID!) {
-    removePost(postId: $postId) {
-      _id
-      title
-      postBody
-      username
-      createdAt
-      postLink
-      comments {
-        _id
-        commentText
-        createdAt
-        username
-      }
-    }
+mutation Mutation($postId: ID!) {
+  removePost(postId: $postId) {
+    postBody
+    username
   }
-`
+}
+`;
+
+export const REMOVE_COMMENT = gql `
+mutation RemoveComment($postId: ID!, $commentId: ID!) {
+  removeComment(postId: $postId, commentId: $commentId) {
+    _id
+    title
+    postBody
+  }
+}
+`;
