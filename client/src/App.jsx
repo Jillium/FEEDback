@@ -14,7 +14,8 @@ import logo from "../src/assets/feedback.png";
 import logo2 from "../src/assets/Feedback2.png";
 import logo3 from "../src/assets/Feedback3.png";
 import SinglePost from './pages/SinglePost';
-
+import NoMatch from './pages/NoMatch';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Auth from './utils/auth';
 
 const httpLink = createHttpLink({
@@ -37,42 +38,34 @@ const client = new ApolloClient({
 });
 
 function App() {
-  //const [user, setUser] = useState({ token: '', user: null });
   const loggedIn = Auth.loggedIn();
-  //console.log(user);
-  //console.log(Auth.getProfile());
-  if (loggedIn) {
-    console.log('You are in');
-    console.log(Auth.getProfile());
-  } else {
-    console.log('You are still out');
-  }
+  
   return (
     <ApolloProvider client={client}>
     <Router>
       <div>
         <header className='header'>
-          <span><img src={logo3} alt="feedback logo"></img></span>
+
+        <span><img src={logo3} alt="feedback logo" className="logo"></img></span>
+
           <ul className="nav">
             <li className='nav-item'>
-              <Link to="/">Home</Link>
+              <Link to="/" style={{ textDecoration: 'none' }}>Home</Link>
             </li>
             <li className='nav-item'>
-              <Link to="/dashboard">Dashboard</Link>
+              <Link to="/dashboard" style={{ textDecoration: 'none' }}>Dashboard</Link>
             </li>
             <li className='nav-item'>
-              <Link to='/createpost'>Create Post</Link>
+              <Link to='/createpost' style={{ textDecoration: 'none' }}>Create Post</Link>
             </li>
             <li className='nav-item'>
               {loggedIn ? (
                 <>
-                  <a href="/" onClick={Auth.logout}>
-                    Logout
-                  </a>
+                  <Link to="/" onClick={Auth.logout} style={{ textDecoration: 'none' }}>Logout</Link>
                 </>
               ) : (
                 <>
-                  <Link to="/login">Login/Signup</Link>
+                  <Link to="/login" style={{ textDecoration: 'none' }}>Login/Signup</Link>
                 </>
               )}
             </li>
@@ -80,14 +73,14 @@ function App() {
           </ul>
         </header>
 
-        <main>
+        <main className="main-background">
 
         </main>
 
         <footer className="footer">
-          <h4>Made by FEEDBACK 2022</h4>
+          <h4 className='footer-made-by'>Made by FEEDBACK 2022</h4>
           <ul className='footer-list'>
-            <li className='footer-item'>Check us out on <a href="https://github.com/Jillium/FEEDback" target="_blank" rel="noreferrer">Github</a>!</li>
+            <li className='footer-item'>Check us out on <a href="https://github.com/Jillium/FEEDback" target="_blank" rel="noreferrer" style={{ textDecoration: 'none' }}>Github</a>!</li>
           </ul>
         </footer>
       </div>
@@ -98,6 +91,8 @@ function App() {
         <Route exact path="/login" render={() => <Login />} />
         <Route exact path="/createpost" render={() => <CreatePost />} />
         <Route exact path="/singlepost/:id" component={SinglePost}  />
+
+        <Route component={NoMatch} />
       </Switch>
     </Router>
     </ApolloProvider>

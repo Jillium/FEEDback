@@ -9,47 +9,62 @@ export const QUERY_POSTS = gql`
       title
       postLink
       createdAt
+      commentCount
       comments {
         _id
         commentText
         createdAt
+        username
       }
     }
   }
 `;
 
 export const QUERY_POST = gql`
-  query post($id: ID!) {
-    post(_id: $id) {
+query post($_id: ID!) {
+  post(_id: $_id) {
+    _id
+    title
+    postBody
+    username
+    postLink
+    createdAt
+    commentCount
+    comments {
       _id
-      title
-      postBody
-      username
-      title
-      postLink
+      commentText
       createdAt
-      comments {
-        _id
-        commentText
-        createdAt
-      }
+      username
     }
   }
+}
 `;
 
 export const QUERY_USER = gql`
   query user($username: String!) {
     user(username: $username) {
       _id
-      name
+      username
       email
+      friendCount
+      friends {
+        _id
+        username
+      }
       posts {
         _id
         title
         postBody
-        postedBy
-        comments
+        username
+        postLink
+        commentCount
         createdAt
+        comments {
+          _id
+          commentText
+          createdAt
+          username
+        }
       }
     }
   }
@@ -62,6 +77,11 @@ query Me {
     username
     email
     password
+    friendCount
+    friends {
+      _id
+      username
+    }
     posts {
       _id
       title
@@ -86,7 +106,7 @@ query ME_BASIC {
     _id
     username
     email
-    friends {
+    user {
       friends {
         _id
         username

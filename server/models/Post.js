@@ -22,14 +22,13 @@ const postSchema = new Schema({
     type: String,
     require: true
   },
-  comments: [{
-    type: Schema.Types.ObjectId, ref: "Comment"
-  }],
+  
   createdAt: {
     type: Date,
     default: Date.now,
     get: timestamp => dateFormat(timestamp)
-}
+},
+comments: [commentSchema]
 },
 {
   toJSON: {

@@ -7,6 +7,7 @@ import Auth from '../utils/auth';
 const Login = (props) => {
   const [loginFormState, setLoginFormState] = useState({ email: '', password: '' });
   const [signUpFormState, setSignUpFormState] = useState({ username: '', email: '', password: '' });
+  const [errorDisplayState, setErrorDisplayState] = useState({ message: '', show: false });
   
   const [login, { loginData }] = useMutation(LOGIN_MUTATION);
   const [addUser, { signUpData }] = useMutation(ADD_USER);
@@ -39,6 +40,11 @@ const Login = (props) => {
       });
       Auth.login(data.login.token);
     } catch (e) {
+      const errorMessage = `${e}`.split(':').reverse()[0];
+      setErrorDisplayState({
+        message: errorMessage,
+        show: true
+      });
       console.error(e);
     }
     // clear form values
@@ -56,8 +62,14 @@ const Login = (props) => {
       const { data } = await addUser({
         variables: { ...signUpFormState },
       });
+      
       Auth.login(data.addUser.token);
     } catch (e) {
+      const errorMessage = `${e}`.split(':').reverse()[0];
+      setErrorDisplayState({
+        message: errorMessage,
+        show: true
+      });
       console.error(e);
     }
     // clear form values
@@ -68,6 +80,27 @@ const Login = (props) => {
     });
   };
 
+  const Modal = ({ handleClose, show, children }) => {
+    const showHideClassName = show ? "modal display-block" : "modal display-none";
+  
+    return (
+      <div className={showHideClassName}>
+        <section className="modal-main">
+          {children}
+          <button onClick={handleClose}>Close</button>
+        </section>
+      </div>
+    );
+  };
+
+  const showModal = () => {
+    setErrorDisplayState({ ...errorDisplayState, show: true });
+  };
+
+  const hideModal = () => {
+    setErrorDisplayState({ message: '', show: false });
+  };
+
   // useEffect((props) => {
   //   if (loginData && loginData.login) {
   //     props.setUser({ token: loginData.login.token, user: loginData.login.user });
@@ -75,14 +108,14 @@ const Login = (props) => {
   // }, [loginData]);
 
   return (
-    <div>
-      <form onSubmit={handleLoginFormSubmit}>
+    <div className="login-container main-background col">
+      <form onSubmit={handleLoginFormSubmit} className="block-form-sections login-form col-6">
               <h3 className='form-title'>Login</h3>
-              <label htmlFor="email">
+              <label htmlFor="email" className="block-form-sections header-font">
                 Email:
               </label>
               <input
-                className="form-input"
+                className="form-input block-form-sections"
                 placeholder="Your Email"
                 name="email"
                 type="text"
@@ -90,11 +123,11 @@ const Login = (props) => {
                 value={loginFormState.email}
                 onChange={handleLoginFormChange}
               />
-              <label htmlFor="password">
+              <label htmlFor="password" className="block-form-sections header-font">
                 Password:
               </label>
               <input
-                className="form-input"
+                className="form-input block-form-sections"
                 placeholder="******"
                 name="password"
                 type="password"
@@ -102,18 +135,18 @@ const Login = (props) => {
                 value={loginFormState.password}
                 onChange={handleLoginFormChange}
               />
-              <button className="btn d-block w-100" type="submit">
+              <button className="btn block-form-sections" type="submit">
                 Login
               </button>
       </form>
 
-      <form onSubmit={handleSignUpFormSubmit}>
+      <form onSubmit={handleSignUpFormSubmit} className="block-form-sections login-form col-6">
               <h3 className='form-title'>Sign-Up</h3>
-              <label htmlFor="username">
+              <label htmlFor="username" className='block-form-sections header-font'>
                 Username:
               </label>
               <input
-                className="form-input"
+                className="form-input block-form-sections"
                 placeholder="Your Username"
                 name="username"
                 type="text"
@@ -121,11 +154,11 @@ const Login = (props) => {
                 value={signUpFormState.username}
                 onChange={handleSignUpFormChange}
               />
-              <label htmlFor="email">
+              <label htmlFor="email" className="block-form-sections header-font">
                 Email:
               </label>
               <input
-                className="form-input"
+                className="form-input block-form-sections"
                 placeholder="Your Email"
                 name="email"
                 type="text"
@@ -133,11 +166,11 @@ const Login = (props) => {
                 value={signUpFormState.email}
                 onChange={handleSignUpFormChange}
               />
-              <label htmlFor="password">
+              <label htmlFor="password" className="block-form-sections">
                 Password:
               </label>
               <input
-                className="form-input"
+                className="form-input block-form-sections"
                 placeholder="******"
                 name="password"
                 type="password"
@@ -145,10 +178,26 @@ const Login = (props) => {
                 value={signUpFormState.password}
                 onChange={handleSignUpFormChange}
               />
-              <button className="btn d-block w-100" type="submit">
+              <button className="btn block-form-sections" type="submit">
                 SignUp
               </button>
       </form>
+
+      <Modal show={errorDisplayState.show} handleClose={hideModal}>
+          <p>{errorDisplayState.message}</p>
+      </Modal>
+
+      <div>
+        <h3>Welcome to the site where we all know how much work goes into Websites!</h3>
+        <h4>Rules!</h4>
+        <ul>
+          <li>Contribute</li>
+          <li>Be Contructive</li>
+          <li>Don't post any malicious content</li>
+          <li>Give us feedback on our website too!</li>
+          <li>Have Fun!</li>
+        </ul>
+      </div>
 
 
     </div>

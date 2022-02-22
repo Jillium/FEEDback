@@ -7,6 +7,7 @@ type User {
   _id: ID
   username: String
   email: String
+  friendCount: Int
   password: String
   posts: [Post]
   friends: [User]
@@ -20,6 +21,7 @@ type Post {
     username: String
     createdAt: String
     postLink: String
+    commentCount: Int
     comments: [Comment]
    }
  
@@ -35,11 +37,6 @@ type Post {
    user: User
  }  
 
- 
-
-
-
-  
   type Query {
     me: User
     allPosts: [Post]
@@ -54,7 +51,9 @@ type Post {
    addUser(username: String!, email: String!, password: String!): Auth
    addPost(title: String!, postBody: String!, postLink: String!, username: String!): Post
    addComment(postId: ID!, commentText: String!, username: String!): Post
-
+   addFriend(friendId: ID!): User
+   removePost(postId: ID!): Post
+   removeComment(postId: ID!, commentId: ID!): Post
  }
 
 
