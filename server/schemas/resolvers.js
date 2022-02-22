@@ -7,14 +7,14 @@ const { signToken } = require('../utils/auth');
 
 const resolvers = {
   Query: {
-    me: async ( parent, args, context) => {
+    me: async (parent, args, context) => {
       if (context.user) {
         const userData = await User.findOne({ _id: context.user._id })
           .select('-__V -password')
           .populate("posts")
           .populate('friends')
 
-          return userData;
+        return userData;
       }
 
       throw new AuthenticationError('Not logged in');
@@ -43,11 +43,11 @@ const resolvers = {
     // get a user by username 
     user: async (parent, { username }) => {
       return User.findOne({ username })
-      .select("-__v -password")
-      .populate('friends')
-      .populate('posts')
+        .select("-__v -password")
+        .populate('friends')
+        .populate('posts')
     }
-  }, 
+  },
   Mutation: {
     addUser: async (parent, { username, email, password }) => {
       // Check if username is used #TBU
@@ -63,7 +63,7 @@ const resolvers = {
       // Create User
       const user = await User.create({ username, email, password });
       const token = signToken(user);
-      
+
       return { token, user };
     },
 
@@ -79,13 +79,13 @@ const resolvers = {
       if (!correctPw) {
         throw new AuthenticationError('Incorrect Credentials');
       }
-      
+
       const token = signToken(user);
-      
+
       return { token, user };
     },
 
-    addPost: async (parent, { username, title, postBody, postLink })  => {
+    addPost: async (parent, { username, title, postBody, postLink }) => {
       if (username == '') {
         throw new AuthenticationError('You are not logged in');
       } else {
@@ -94,12 +94,12 @@ const resolvers = {
           const ID = user._id;
           const post = await Post.create({ title, postBody, postLink, username, ID });
           await User.findOneAndUpdate(
-            { username : username },
+            { username: username },
             { $push: { posts: post._id } },
             { new: true }
           );
 
-          return post; 
+          return post;
         } else {
           throw new AuthenticationError('User not found! Either you are in trouble or I am in trouble');
         }
@@ -121,7 +121,7 @@ const resolvers = {
     //       console.log('comment Added')
     //       await User.findOneAndUpdate(
     //         { username : username },
-            
+
     //         { $push: { comments: { commentText, username } } },
     //         { new: true, runValidators: true }
     //       );
@@ -148,30 +148,47 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
 
-    addComment: async (parent, { postId, commentText, username }) => {
-    
-      const updatedPost = await Post.findOneAndUpdate(
+    addComment: async (parent, { postId, commentText, username }, context) => {
+      if (context.user) {
+        const updatedPost = await Post.findOneAndUpdate(
           { _id: postId },
           { $push: { comments: { commentText, username } } },
           { new: true, runValidators: true }
-      );
-      return updatedPost;
+        );
+        return updatedPost;
+      }
+      throw new AuthenticationError('You need to be logged in!');
     },
 
-    removePost: async (parent, { postId }) => {
-      const removedPost = await Post.findOneAndDelete({ _id: postId });
-      if (!removedPost) {
-        throw new Error('Post is not found with such ID!');
+    removePost: async (parent, { postId }, context) => {
+      if (context.user) {
+        const removedPost = await Post.findOneAndDelete({ _id: postId });
+        if (!removedPost) {
+          throw new Error('Post is not found with such ID!');
+        }
+        return removedPost;
       }
-      return removedPost;
+      throw new AuthenticationError('You need to be logged in!');
     },
-  
+
+    removeComment: async (parent, { postId, commentId }, context) => {
+      console.log(postId, commentId);
+      if (context.user) {
+        const updatedPost = await Post.findOneAndUpdate(
+          { _id: postId },
+          { $pull: { comments: { _id: commentId } } }
+        );
+        return updatedPost;
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    }
+
   }
 
 
 
-    
-   
+
+
 };
 
 module.exports = resolvers;

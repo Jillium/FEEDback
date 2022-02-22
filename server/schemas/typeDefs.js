@@ -53,6 +53,7 @@ type Post {
    addComment(postId: ID!, commentText: String!, username: String!): Post
    addFriend(friendId: ID!): User
    removePost(postId: ID!): Post
+   removeComment(postId: ID!, commentId: ID!): Post
  }
 
 

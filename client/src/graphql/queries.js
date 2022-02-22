@@ -21,23 +21,23 @@ export const QUERY_POSTS = gql`
 `;
 
 export const QUERY_POST = gql`
-  query post($id: ID!) {
-    post(_id: $id) {
+query post($_id: ID!) {
+  post(_id: $_id) {
+    _id
+    title
+    postBody
+    username
+    postLink
+    createdAt
+    commentCount
+    comments {
       _id
-      title
-      postBody
-      username
-      postLink
+      commentText
       createdAt
-      commentCount
-      comments {
-        _id
-        commentText
-        createdAt
-        username
-      }
+      username
     }
   }
+}
 `;
 
 export const QUERY_USER = gql`
