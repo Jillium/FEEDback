@@ -44,6 +44,7 @@
    flex-wrap: wrap;
    justify-items: center;
    justify-content: center;
+  
 }
 
 .nav-item {
@@ -70,6 +71,7 @@
 
 .footer-item {
     margin: 0 1rem;
+    text-decoration: none;
 }
 /* app.jsx page */
 .main-background {
@@ -211,15 +213,16 @@
 }
 /* Modal */
 
-/* Iphone se */
-@media (max-width: 375px) {
+
+@media only screen and (max-width: 375px) {
 
     .nav {
-        flex-wrap: nowrap;
+        margin-top: 15px;
         font-size: small;
-       
-        justify-content: flex-start;
+    }
 
+    .nav-item {
+        margin: 0 12px;
     }
 
     .header {
@@ -229,9 +232,7 @@
        padding: 30px;
     }
 
-    .nav-item {
-        margin: 7px;
-    }
+   
 
     .logo {
         height: 50px;
@@ -257,16 +258,14 @@
 
 }
 
-/*  iphone 12 */
 
-@media (max-width: 414px ) {
+
+@media only screen and (max-width: 414px ) and (min-width: 376px) {
     
     .nav {
-        flex-wrap: nowrap;
         font-size: small;
-       
         justify-content: flex-start;
-
+        
     }
 
     .header {
@@ -277,7 +276,7 @@
     }
 
     .nav-item {
-        margin: 7px;
+        margin: 10px;
     }
 
     .logo {
@@ -305,54 +304,7 @@
 
 }
 
-@media (max-width: 912px ) {
-    
-    .nav {
-        flex-wrap: nowrap;
-        font-size: large;
-       
-        justify-content: flex-start;
-        margin-top: 20px;
-
-    }
-
-    .header {
-        
-       align-content: center;
-       align-items: center;
-       
-    }
-
-    .nav-item {
-        margin: 7px;
-    }
-
-    .logo {
-        height: 75px;
-        width:auto;
-    }
-
-    .footer {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        align-items: baseline;
-        font-size: small;
-        z-index:1000;
-        /* position: fixed;
-        bottom: 0; */
-    }
-
-    .footer-made-by {
-        padding-right: 50px;
-        padding-top: 15px;
-    }
-
-
-}
-
-@media (max-width: 540px ) {
+ @media only screen and (max-width: 540px ) and (min-width: 415px) {
     
     .nav {
         flex-wrap: nowrap;
@@ -390,9 +342,9 @@
         z-index:1000;
         /* position: fixed;
         bottom: 0; */
-    }
+     } 
 
-    .footer-made-by {
+     .footer-made-by {
         padding-right: 50px;
         padding-top: 15px;
     }
@@ -403,4 +355,53 @@
     
 
 
-}
+}   
+
+ @media only screen and (max-width: 912px ) and (min-width: 541px) {
+    
+    .nav {
+        flex-wrap: nowrap;
+        font-size: large;
+       
+        justify-content: flex-start;
+        margin-top: 20px;
+
+    }
+
+    .header {
+        
+       align-content: center;
+       align-items: center;
+       
+    }
+
+    .nav-item {
+        margin: 7px;
+    }
+
+    .logo {
+        height: 75px;
+        width:auto;
+    }
+
+    .footer {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: baseline;
+        font-size: small;
+        z-index:1000;
+        /* position: fixed;
+        bottom: 0; */
+    } 
+
+    .footer-made-by {
+        padding-right: 50px;
+        padding-top: 15px;
+    }
+
+
+}  
+
+
