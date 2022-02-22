@@ -53,6 +53,11 @@
     background-color: gray;
 }
 
+.nav-item a {
+    color: var(--heading);
+    font-weight: bold;
+}
+
 .footer {
     position: fixed;
     bottom: 0;
