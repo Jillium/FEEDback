@@ -1,22 +1,14 @@
 import React from 'react';
 import { LinkPreview } from '@dhaiwat10/react-link-preview';
 import { Link } from 'react-router-dom';
-// import { QUERY_POSTS } from '../graphql/queries';
-import Auth from '../utils/auth';
-// import { useQuery } from '@apollo/client';
 
 const PostList = ({ posts }) => {
-
-    // const loggedIn = Auth.loggedIn();
 
     if (!posts.length) {
         return <h3>No Posts yet</h3>
     } else {
-
-
         return (
             <div className="post-card">
-
                 {posts &&
                     posts.map(post => (
                         <div key={post._id} className='card mb-3'>
@@ -33,8 +25,9 @@ const PostList = ({ posts }) => {
                                     </Link>
                                 </div>
 
-                                <div className="link-preview">
-                                    <LinkPreview url={post.postLink} descriptionLength={0} className='preview-box'
+                                <div className="link-preview post-card">
+                                    <a href={post.postLink}>{post.postLink}</a>
+                                    <LinkPreview url={post.postLink} width='300px' height='300px' descriptionLength={0}
                                         fallbackImageSrc='https://live.staticflickr.com/3238/3039847767_826d72d7a5_c.jpg' />
                                 </div>
 
@@ -44,11 +37,7 @@ const PostList = ({ posts }) => {
                                         style={{ fontWeight: 700 }}
                                         className="text-light"
                                     >
-
-                                        
                                             Posted by {post.username}, Posted on {post.createdAt}
-                                        
-
                                     </Link>{' '}
                                 </p>
                             </div>

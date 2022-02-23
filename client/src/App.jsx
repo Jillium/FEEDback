@@ -10,13 +10,11 @@ import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
 import CreatePost from './pages/CreatePost';
 import Home from "./pages/Home"
-import logo from "../src/assets/feedback.png";
-import logo2 from "../src/assets/Feedback2.png";
 import logo3 from "../src/assets/Feedback3.png";
 import SinglePost from './pages/SinglePost';
 import NoMatch from './pages/NoMatch';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Auth from './utils/auth';
+import Auth from './graphql/auth';
 
 const httpLink = createHttpLink({
   uri: '/graphql',
