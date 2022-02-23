@@ -264,6 +264,9 @@
 .padding-top {
     padding-top: 160px;
 }
+.light-color {
+    color: var(--light);
+}
 
 /* Modal */
 .modal {
