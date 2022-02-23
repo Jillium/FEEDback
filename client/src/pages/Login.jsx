@@ -99,6 +99,7 @@ const Login = (props) => {
 
   return (
     <div className="login-container main-background col">
+      
       <form onSubmit={handleLoginFormSubmit} className="block-form-sections login-form col-6">
         <h3 className='form-title'>Login</h3>
         <label htmlFor="email" className="block-form-sections header-font">
@@ -125,7 +126,7 @@ const Login = (props) => {
           value={loginFormState.password}
           onChange={handleLoginFormChange}
         />
-        <button className="btn block-form-sections" type="submit">
+        <button className="btn block-form-sections mt-3 light-color" type="submit">
           Login
         </button>
       </form>
@@ -168,7 +169,7 @@ const Login = (props) => {
           value={signUpFormState.password}
           onChange={handleSignUpFormChange}
         />
-        <button className="btn block-form-sections" type="submit">
+        <button className="btn block-form-sections mt-3 light-color" type="submit">
           SignUp
         </button>
       </form>
@@ -177,7 +178,7 @@ const Login = (props) => {
         <p>{errorDisplayState.message}</p>
       </Modal>
 
-      <div>
+      <div className="rules-container">
         <h3>Welcome to the site where we all know how much work goes into Websites!</h3>
         <h4>Rules!</h4>
         <ul>

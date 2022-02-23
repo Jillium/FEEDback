@@ -51,7 +51,7 @@ const SinglePost = props => {
 
                 <div>
                     {auth.loggedIn() && auth.getProfile().data.username === post.username && (
-                        <button className="btn btn-secondary ml-auto m-1" onClick={handleClick}>Delete This Post</button>
+                        <button className="btn btn-secondary ml-auto m-1 mt-4" onClick={handleClick}>Delete This Post</button>
                     )}
                 </div>
 
