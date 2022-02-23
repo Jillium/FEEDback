@@ -18,7 +18,7 @@ const userSchema = new Schema({
     password: {
       type: String,
       required: true,
-      minLength: [5, 'Password need to be at least 5 letters long!']
+      minLength: [5, 'Password need to be at least 5 characters long!']
     },
     posts: [{ type: Schema.Types.ObjectId, ref: "Post" }],
     friends: [
