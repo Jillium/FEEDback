@@ -1,7 +1,6 @@
 import React from 'react';
 import { Redirect, useParams } from 'react-router-dom';
 
-// import ThoughtForm from '../components/ThoughtForm';
 import PostList from '../components/PostList';
 import FriendList from '../components/FriendList';
 

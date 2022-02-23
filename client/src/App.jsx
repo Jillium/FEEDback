@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'; // v5
 import { ApolloProvider, ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
 
@@ -15,6 +15,7 @@ import SinglePost from './pages/SinglePost';
 import NoMatch from './pages/NoMatch';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Auth from './graphql/auth';
+
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -78,7 +79,7 @@ function App() {
         <footer className="footer">
           <h4 className='footer-made-by'>Made by FEEDBACK 2022</h4>
           
-          <h4 className='footer-made-by'>Check us out on <a href="https://github.com/Jillium/FEEDback" target="_blank" rel="noreferrer" style={{ textDecoration: 'none' }}>Github</a>!</h4>
+          <h4 className='footer-made-by'>Check us out on <a href="https://github.com/Jillium/FEEDback" target="_blank" rel="noreferrer" style={{ textDecoration: 'none', color: 'black' }}>Github</a></h4>
           
         </footer>
       </div>
