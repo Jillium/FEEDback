@@ -104,7 +104,7 @@
 
 
 .single-post-card {
-    margin-left: 15%;
+    margin-left: 30%;
     margin-right: 30%;
     
 }
@@ -269,6 +269,14 @@
     color: var(--light);
 }
 
+.single-post-center {
+    text-align: center;
+}
+/* .spc-preview {
+    margin-left: 30%;
+    margin-right: 30%;
+} */
+
 /* Modal */
 .modal {
     position: fixed;
@@ -351,6 +359,15 @@
         padding-top: 160px;
     }
 
+    .spc-preview {
+        width: 200%;
+        margin: 0;
+    }
+
+    .single-post-card {
+        margin: 0;
+    }
+
 }
 
 
@@ -403,6 +420,10 @@
         margin: 0 auto;
         margin-top: 50px;
         padding-top: 160px;
+    }
+
+    .single-post-card {
+        margin: 0;
     }
 
 
@@ -461,6 +482,10 @@
         padding-top: 160px;
     }
 
+    .single-post-card {
+        margin: 0;
+    }
+
 
 }   
 
@@ -516,7 +541,9 @@
         padding-top: 160px;
     }
 
-
+    .single-post-card {
+        margin: 0;
+    }
   
 
 
