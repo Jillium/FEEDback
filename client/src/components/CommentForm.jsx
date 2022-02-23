@@ -46,7 +46,7 @@ const CommentForm = ({ postId }) => {
                     value={commentText}
                     onChange={handleChange}>
                 </textarea>
-                <button type="submit">Submit</button>    
+            <button className="mt-2" type="submit">Submit</button>    
             </form>
         </div>
     );
