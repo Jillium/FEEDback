@@ -54,7 +54,7 @@ const PostForm = () => {
         }
         postFormState.postLink = postFormState.postLink.trim();
         let linkHead = postFormState.postLink.substring(0,4).toLowerCase();
-        if (linkhead !== 'http') {
+        if (linkHead !== 'http') {
             postFormState.postLink = 'http://' + postFormState.postLink;
         }
 
