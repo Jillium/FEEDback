@@ -240,6 +240,7 @@
 .comment-p {
     font-size: 16px;
     color: black;
+    padding: 5px;
 }
 
 .comment-form textarea {

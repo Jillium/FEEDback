@@ -45,7 +45,6 @@ const SinglePost = props => {
                 </p>
 
                 <div>
-                    <a href={post.postLink}>{post.postLink}</a>
                     <LinkPreview url={post.postLink} width='300px' height='300px' fallbackImageSrc='https://live.staticflickr.com/3238/3039847767_826d72d7a5_c.jpg' />
                 </div>
 
@@ -56,13 +55,13 @@ const SinglePost = props => {
                 </div>
 
                 <div>
+                    <span>Posted by {post.username} on {post.createdAt}</span>
+                </div>
+                
+                <div>
                     <p className='comment-p'>
                         {post.commentCount > 0 && <CommentList comments={post.comments} />}
                     </p>
-                </div>
-
-                <div>
-                    <span>Posted by {post.username} on {post.createdAt}</span>
                 </div>
 
                 {auth.loggedIn() && <CommentForm postId={post._id} />}
