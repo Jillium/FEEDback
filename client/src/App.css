@@ -508,6 +508,13 @@
         font-size: x-large;
     }
 
+    .home-list-container {
+        width: 90%;
+        margin: 0 auto;
+        margin-top: 50px;
+        padding-top: 160px;
+    }
+
 
   
 
