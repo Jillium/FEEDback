@@ -29,13 +29,13 @@ const CommentList = ({ comments }) => {
         <div>
           {comments &&
             comments.map(comment => (
-              <p key={comment._id}>
+              <div key={comment._id}>
                 {comment.commentText} {'// '}
                 {/* <Link to={`dashboard/${comment.username}`}> */}
                   {comment.username} on {comment.createdAt}
                   <a onClick={() =>handleDelete(comment._id)}>Delete</a>
                 {/* </Link> */}
-              </p>
+              </div>
             ))}
         </div>
       </div>
