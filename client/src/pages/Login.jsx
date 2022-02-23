@@ -126,7 +126,7 @@ const Login = (props) => {
           value={loginFormState.password}
           onChange={handleLoginFormChange}
         />
-        <button className="btn block-form-sections" type="submit">
+        <button className="btn block-form-sections mt-3 light-color" type="submit">
           Login
         </button>
       </form>
@@ -169,7 +169,7 @@ const Login = (props) => {
           value={signUpFormState.password}
           onChange={handleSignUpFormChange}
         />
-        <button className="btn block-form-sections" type="submit">
+        <button className="btn block-form-sections mt-3 light-color" type="submit">
           SignUp
         </button>
       </form>
