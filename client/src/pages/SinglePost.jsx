@@ -41,7 +41,6 @@ const SinglePost = props => {
         window.location.replace("/dashboard")
     };
 
-    console.log(userParam)
     return (
 
 
@@ -55,10 +54,6 @@ const SinglePost = props => {
                 </p>
 
                 <div>
-
-                    <div className='comment-p'>
-                        {post.commentCount > 0 && <CommentList comments={post.comments} />}
-                    </div>
 
                     <LinkPreview url={post.postLink} width='300px' height='300px' fallbackImageSrc='https://live.staticflickr.com/3238/3039847767_826d72d7a5_c.jpg' />
 
