@@ -21,16 +21,10 @@ db.once('open', async () => {
   }
   
   const createdUsers = await User.collection.insertMany(userData);
-  console.log(createdUsers);
-  // console.log(createdUsers.username)
-  // console.log(userData)
 
-
-  // // create friends
-  
+  // create friends
   for (let i = 0; i < 100; i += 1) {
     const randomUserIndex = Math.floor(Math.random() * createdUsers.insertedCount);
-    // console.log(randomUserIndex);
     const userId = createdUsers.insertedIds[randomUserIndex];
 
     let friendId = userId;
@@ -38,21 +32,12 @@ db.once('open', async () => {
     while (friendId === userId) {
       const randomUserIndex = Math.floor(Math.random() * createdUsers.insertedCount);
       friendId = createdUsers.insertedIds[randomUserIndex];
-
-      
-      
     }
     
     const updatedUser = await User.updateOne({ _id: userId }, { $addToSet: { friends: friendId } });
-    //console.log(updatedUser)
   }
-  
-
-
 
   // create posts
-
-  // const foundUsers = await User.collection.find(userData);
 
   let createdPosts = [];
   for (let i = 0; i < 100; i += 1) {
@@ -91,23 +76,6 @@ db.once('open', async () => {
 
     createdComments.push(createdComment);
   }
-
-  // create reactions
-  // for (let i = 0; i < 100; i += 1) {
-  //   const commentText = faker.lorem.words(Math.round(Math.random() * 20) + 1);
-
-  //   const randomUserIndex = Math.floor(Math.random() * createdUsers.ops.length);
-  //   const { username } = createdUsers.ops[randomUserIndex];
-
-  //   const randomPostIndex = Math.floor(Math.random() * createdPosts.length);
-  //   const { _id: postId } = createdPosts[randomPostIndex];
-
-  //   await Post.updateOne(
-  //     { _id: postId },
-  //     { $push: { comments: { commentText, username } } },
-  //     { runValidators: true }
-  //   );
-  // }
 
   console.log('all done!');
   process.exit(0);
