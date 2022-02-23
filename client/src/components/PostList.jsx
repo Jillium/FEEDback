@@ -14,8 +14,9 @@ const PostList = ({ posts }) => {
                         <div key={post._id} className='card mb-3'>
                             <div className='card mb-0'>
                                 <div className="card-body list-body">
-                                    <Link to={`/singlepost/${post._id}`} style={{ fontWeight: 700 }}
-                                        className="text-light">
+                                    <Link to={`/singlepost/${post._id}`} style={{ fontWeight: 700, textDecoration: 'none' }}
+                                        className="text-light"
+                                        className="hover">
                                         <h3>{post.title}</h3>
                                         <p >{post.postBody}</p>
                                         <p className="mb-0">

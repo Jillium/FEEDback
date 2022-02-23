@@ -154,7 +154,7 @@ const PostForm = () => {
                             onChange={handlePostFormChange}
                         ></textarea>
                     </div>
-                    <button className="btn col-12 col-md-3" type="submit">
+                    <button className="btn col-12 col-md-3 light-color" type="submit">
                         Post!
                     </button>
                 </form>
