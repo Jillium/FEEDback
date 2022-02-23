@@ -8,7 +8,7 @@ import FriendList from '../components/FriendList';
 import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_ME, QUERY_USER } from '../graphql/queries';
 import { ADD_FRIEND } from '../graphql/mutations';
-import Auth from '../utils/auth';
+import Auth from '../graphql/auth';
 
 const Dashboard = (props) => {
   const { username: userParam } = useParams();
@@ -17,8 +17,6 @@ const Dashboard = (props) => {
   const { loading, data } = useQuery((!userParam) ? QUERY_ME : QUERY_USER, {variables: { username: userParam }});
 
   const user = data?.me || data?.user || {};
-
-  // console.log(user);
 
   // redirect to personal profile page if username is yours
   if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
@@ -30,25 +28,19 @@ const Dashboard = (props) => {
   }
 
   const loggedIn = Auth.loggedIn();
-    if (!loggedIn) {
-        return <Redirect to="/login" />;
-    }
+  if (!loggedIn) {
+      return <Redirect to="/login" />;
+  }
 
   const handleClick = async () => {
     console.log("clicked", user);
-    // try {
-      await addFriend({
-        variables: { friendId: user._id },
-      });
-    // } catch (e) {
-    //   console.error(e);
-    // }
+    await addFriend({
+      variables: { friendId: user._id },
+    });
   };
 
   return (
-
     <div className="dashboard-container main-background">
-
       <div className="flex-row mb-3">
         <h2 className="bg-dark text-secondary p-3 display-inline-block">
           Dashboard
@@ -62,25 +54,23 @@ const Dashboard = (props) => {
       </div>
 
       <div className ="dashboard-post-container">
-
-            <div className="dashboard-list">
+        <div className="dashboard-list">
           <div className="flex-row justify-space-between mb-3">
-              <PostList
-                posts={user.posts}
-                title={`${user.username}'s thoughts...`}
-              />
-            </div>
+            <PostList
+              posts={user.posts}
+              title={`${user.username}'s thoughts...`}
+            />
           </div>
+        </div>
 
-            <div className="col-12 col-lg-3 mb-3">
-              {console.log(user)}
-              <FriendList
-                username={user.username}
-                friendCount={user.friendCount}
-                friends={user.friends}
-              />
-            </div>
-          <div className="mb-3">{!userParam}</div>
+        <div className="col-12 col-lg-3 mb-3">
+          <FriendList
+            username={user.username}
+            friendCount={user.friendCount}
+            friends={user.friends}
+          />
+        </div>
+        <div className="mb-3">{!userParam}</div>
 
       </div>
     </div>
@@ -88,29 +78,3 @@ const Dashboard = (props) => {
 };
 
 export default Dashboard;
-
-
-// function Dashboard() {
-
-// //   const { loading, data } = useQuery(QUERY_POSTS);
-// //   const [addFriend] = useMutation(ADD_FRIEND);
-
-// //   const posts = data?.posts || [];
-// //   console.log(posts);
-  
-
-//   return (
-//     <>
-//     <h1>This is the dashboard</h1>
-//     <h2>These are your posts</h2>
-//     <h2>This is your friends list</h2>
-//     {/* <PostList 
-//     posts={user.posts}/>
-//     <FriendList 
-//     username={user.username}
-//     friends={user.friends}/> */}
-//     </>
-//   )
-// }
-
-// export default Dashboard;
