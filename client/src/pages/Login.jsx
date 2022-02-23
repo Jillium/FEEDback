@@ -92,7 +92,7 @@ const Login = (props) => {
       </div>
     );
   };
-
+  
   const hideModal = () => {
     setErrorDisplayState({ message: '', show: false });
   };
@@ -173,10 +173,6 @@ const Login = (props) => {
         </button>
       </form>
 
-      <Modal show={errorDisplayState.show} handleClose={hideModal}>
-        <p>{errorDisplayState.message}</p>
-      </Modal>
-
       <div>
         <h3>Welcome to the site where we all know how much work goes into Websites!</h3>
         <h4>Rules!</h4>
@@ -188,6 +184,10 @@ const Login = (props) => {
           <li>Have Fun!</li>
         </ul>
       </div>
+
+      <Modal show={errorDisplayState.show} handleClose={hideModal}>
+        <p>{errorDisplayState.message}</p>
+      </Modal>
 
     </div>
   );

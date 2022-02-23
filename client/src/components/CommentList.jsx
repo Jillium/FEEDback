@@ -1,7 +1,6 @@
 
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 import { REMOVE_COMMENT } from '../graphql/mutations';
 import { useMutation } from '@apollo/client';
 
