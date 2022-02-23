@@ -53,7 +53,7 @@ const PostForm = () => {
             username = Auth.getProfile().data.username;
         }
         postFormState.postLink = postFormState.postLink.trim();
-        let linkHead = postFormState.postLink.substring(0,4).toLowerCase();
+        let linkHead = postFormState.postLink.substring(0, 4).toLowerCase();
         if (linkHead !== 'http') {
             postFormState.postLink = 'http://' + postFormState.postLink;
         }
@@ -89,69 +89,77 @@ const PostForm = () => {
     }
 
     return (
-        <div className="create-post-cont">
 
-            <form
-                className="flex-row justify-center justify-space-between-md align-stretch"
-                onSubmit={handleFormSubmit}
-            >
-                <p
-                    className={`m-0 ${characterCountState.title === characterLimit.title || error ? 'text-error' : ''} charcount`}
+        <div className="padding-top">
+
+            <h2 className="bg-dark text-secondary p-3 display-inline-block">
+                Show us your new Creation!
+            </h2>
+
+            <div className="create-post-cont">
+
+                <form
+                    className="flex-row justify-center justify-space-between-md align-stretch"
+                    onSubmit={handleFormSubmit}
                 >
-                    Title Character Count: {characterCountState.title}/{characterLimit.title}
-                    {error && <span className="ml-2">Title is too long...</span>}
-                </p>
+                    <p
+                        className={`m-0 ${characterCountState.title === characterLimit.title || error ? 'text-error' : ''} charcount margin-top-sm`}
+                    >
+                        Title Character Count: {characterCountState.title}/{characterLimit.title}
+                        {error && <span className="ml-2">Title is too long...</span>}
+                    </p>
 
-                <div className="text-area">
-                    <label>Title:</label>
-                    <textarea
-                        placeholder="SoccerPRO"
-                        name='title'
-                        value={postFormState.title}
-                        className="form-input col-12 col-md-9"
-                        onChange={handlePostFormChange}
-                    ></textarea>
-                </div>
+                    <div className="text-area mt-1">
+                        <label>Title:</label>
+                        <textarea
+                            placeholder="SoccerPRO"
+                            name='title'
+                            value={postFormState.title}
+                            className="form-input col-12 col-md-9"
+                            onChange={handlePostFormChange}
+                        ></textarea>
+                    </div>
 
-                <p
-                    className={`m-0 ${characterCountState.postBody === characterLimit.postBody || error ? 'text-error' : ''} charcount`}
-                >
-                    Description Character Count: {characterCountState.postBody}/{characterLimit.postBody}
-                    {error && <span className="ml-2">Description is too long...</span>}
-                </p>
+                    <p
+                        className={`m-0 ${characterCountState.postBody === characterLimit.postBody || error ? 'text-error' : ''} charcount margin-top-sm`}
+                    >
+                        Description Character Count: {characterCountState.postBody}/{characterLimit.postBody}
+                        {error && <span className="ml-2">Description is too long...</span>}
+                    </p>
 
-                <div className="text-area">
-                    <label>Description:</label>
-                    <textarea
-                        placeholder="Thoughts on UI and UX..."
-                        name='postBody'
-                        value={postFormState.postBody}
-                        className="form-input col-12 col-md-9"
-                        onChange={handlePostFormChange}
-                    ></textarea>
-                </div>
+                    <div className="text-area mt-1">
+                        <label>Description:</label>
+                        <textarea
+                            placeholder="Thoughts on UI and UX..."
+                            name='postBody'
+                            value={postFormState.postBody}
+                            className="form-input col-12 col-md-9"
+                            onChange={handlePostFormChange}
+                        ></textarea>
+                    </div>
 
-                <p
-                    className={`m-0 ${characterCountState.postLink === characterLimit.postLink || error ? 'text-error' : ''} charcount`}
-                >
-                    Link Character Count: {characterCountState.postLink}/{characterLimit.postLink}
-                    {error && <span className="ml-2">Link is too long...</span>}
-                </p>
+                    <p
+                        className={`m-0 ${characterCountState.postLink === characterLimit.postLink || error ? 'text-error' : ''} charcount margin-top-sm`}
+                    >
+                        Link Character Count: {characterCountState.postLink}/{characterLimit.postLink}
+                        {error && <span className="ml-2">Link is too long...</span>}
+                    </p>
 
-                <div className="text-area">
-                    <label>Live Site URL:</label>
-                    <textarea
-                        placeholder="Enter your WWW..."
-                        name='postLink'
-                        value={postFormState.postLink}
-                        className="form-input col-12 col-md-9"
-                        onChange={handlePostFormChange}
-                    ></textarea>
-                </div>
-                <button className="btn col-12 col-md-3" type="submit">
-                    Post!
-                </button>
-            </form>
+                    <div className="text-area mt-1">
+                        <label>Live Site URL:</label>
+                        <textarea
+                            placeholder="Enter your WWW..."
+                            name='postLink'
+                            value={postFormState.postLink}
+                            className="form-input col-12 col-md-9"
+                            onChange={handlePostFormChange}
+                        ></textarea>
+                    </div>
+                    <button className="btn col-12 col-md-3" type="submit">
+                        Post!
+                    </button>
+                </form>
+            </div>
         </div>
     );
 };

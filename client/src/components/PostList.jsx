@@ -42,7 +42,8 @@ const PostList = ({ posts }) => {
                                     <Link
                                         to={`/dashboard/${post.username}`}
                                         style={{ fontWeight: 700 }}
-                                        className="text-light"
+                                        className="comment-p"
+                                        style={{ textDecoration: 'none' }}
                                     >
 
                                         

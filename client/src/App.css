@@ -112,14 +112,18 @@
 /* create post page */
 .create-post-cont {
     display: block;
-    width: 50%;
+    width: 40%;
     height: 80%;
     border: 2px solid black;
     border-radius: 4px;
     margin: auto;
-    margin-top: 160px;
+    margin-top: 10%;
     background-color: var(white);
 
+}
+
+.margin-top-sm {
+    margin-top: 20px;
 }
 
 .create-post-cont form {
@@ -139,10 +143,11 @@
     margin: 0 auto 25px;
     border-radius: 4px;
     background-color: var(--heading);
+    opacity: 0.8;
+    color: white;
 }
 
 .text-area {
-    align-items: le
 }
 
 .btn {
@@ -161,10 +166,10 @@
 }
 /* homepage */
 .home-list-container {
-    width: 50%;
+    width: 30%;
     margin: 0 auto;
     margin-top: 50px;
-    padding-top: 160px;
+    padding-top: 50px;
 }
 
 .list-body p {
@@ -194,8 +199,9 @@
 }
 
 .dashboard-post-container {
-    width: 50%;
+    width: 30%;
     margin: 0 auto;
+    padding-bottom: 100px;
 }
 
 
@@ -221,10 +227,19 @@
     padding: 30px;
 }
 
+.rules-container {
+    margin-top: 10%;
+    margin-left: 1%;
+}
+
 /* util */
 .comment-p {
     font-size: 16px;
     color: black;
+}
+
+.comment-form textarea {
+    display: block;
 }
 
 .description-p {
@@ -237,6 +252,10 @@
 .header-font {
     color:#346751;
     font-size: 24px;
+}
+
+.padding-top {
+    padding-top: 160px;
 }
 
 /* Modal */
