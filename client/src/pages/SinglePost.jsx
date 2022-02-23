@@ -55,13 +55,13 @@ const SinglePost = props => {
                 </div>
 
                 <div>
+                    <span>Posted by {post.username} on {post.createdAt}</span>
+                </div>
+                
+                <div>
                     <p className='comment-p'>
                         {post.commentCount > 0 && <CommentList comments={post.comments} />}
                     </p>
-                </div>
-
-                <div>
-                    <span>Posted by {post.username} on {post.createdAt}</span>
                 </div>
 
                 {auth.loggedIn() && <CommentForm postId={post._id} />}
