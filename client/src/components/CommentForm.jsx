@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { ADD_COMMENT } from '../graphql/mutations';
 import { useMutation } from '@apollo/client';
-import Auth from "../utils/auth";
-
-
+import Auth from "../graphql/auth";
 
 const CommentForm = ({ postId }) => {
     const [commentText, setText] = useState('');
@@ -30,29 +28,23 @@ const CommentForm = ({ postId }) => {
                 variables: { commentText, postId, username }
             });
             setText('');
-        setCharacterCount(0);
-
-        
+            setCharacterCount(0);
 
         } catch (e) {
             console.error(e);
-        }
-        
-        
+        }        
     };
-
 
     return (
         <div>
             <p>Character Count: {characterCount}/250
             {error && <span className="ml-2">Something went wrong...</span>}</p>
             <form className='comment-form'
-            onSubmit={handleFormSubmit}>
+                onSubmit={handleFormSubmit}>
                 <textarea
-                placeholder="Please give me FEEDback...."
-                value={commentText}
-                onChange={handleChange}>
-
+                    placeholder="Please give me FEEDback...."
+                    value={commentText}
+                    onChange={handleChange}>
                 </textarea>
             <button className="mt-2" type="submit">Submit</button>    
             </form>

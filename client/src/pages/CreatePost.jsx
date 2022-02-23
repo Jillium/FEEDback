@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { ADD_POST } from '../graphql/mutations';
-import { Redirect, useParams } from 'react-router-dom';
-import Auth from '../utils/auth';
+import { Redirect } from 'react-router-dom';
+import Auth from '../graphql/auth';
 
 const PostForm = () => {
     // Store limit of text inputs
@@ -74,7 +74,6 @@ const PostForm = () => {
                 postLink: postFormState.postLink.length
             });
 
-            //return <Redirect to="/dashboard" />;
             return window.location.assign('/dashboard');
 
         } catch (e) {

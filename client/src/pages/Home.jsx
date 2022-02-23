@@ -1,6 +1,6 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
-import { QUERY_POSTS, QUERY_ME_BASIC } from "../graphql/queries";
+import { QUERY_POSTS } from "../graphql/queries";
 import PostList from '../components/PostList';
 
 
