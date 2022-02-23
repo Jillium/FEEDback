@@ -1,11 +1,11 @@
 :root {
-    --primary: #7C9473;
-    --secondary: #CFDAC8;
-    --tertiary: #b2c2c1;
+    --primary: black;
+    --secondary: black;
+    --tertiary: black;
     --quatrinary: #CDD0CB;
     --light: #e1f5f4;
-    --dark: grey;
-    --heading: #346751;
+    --dark: #0c5959;
+    --heading: #520120;
     --error: rgb(228, 46, 1);
     --border-radius: 0.3rem;
     --spacing-one: calc(1rem * 0.25);
@@ -32,11 +32,11 @@
     top: 0px;
     left: 0px;
     z-index:1000;
-    background-color: gray;
+    background-color: var(--dark);
 }
 
 .logo {
-    background-color: gray;
+    background-color: var(--dark);
 }
 .nav {
    list-style-type: none;
@@ -50,7 +50,7 @@
 
 .nav-item {
     margin: 0 1rem;
-    background-color: gray;
+    background-color: var(--dark);
 }
 
 .nav-item a {
@@ -80,9 +80,9 @@
     text-decoration: none;
 }
 /* app.jsx page */
-.main-background {
+/* .main-background {
     background-color: var(--tertiary);
-}
+} */
 
 .header {
     background-color: var(--dark);
@@ -118,7 +118,7 @@
     border-radius: 4px;
     margin: auto;
     margin-top: 160px;
-    background-color: var(--tertiary);
+    background-color: var(white);
 
 }
 
@@ -138,21 +138,26 @@
     width:80%;
     margin: 0 auto 25px;
     border-radius: 4px;
-    background-color: var(--secondary)
+    background-color: var(--heading);
+}
+
+.text-area {
+    align-items: le
 }
 
 .btn {
     margin-bottom: 25px;
-    width: 50px;
-    height: 25px;
-    background-color: var(--secondary);
+    width: 150px;
+    height: 35px;
+    background-color: var(--heading);
     border-radius: 4px;
     text-decoration: none;
-    border-color: var(--primary);
+    border-color: var(--heading);
 }
 
 .charcount {
-    margin: 25px;
+    margin-left: 25px;
+    font-size: 14px;
 }
 /* homepage */
 .home-list-container {
@@ -165,6 +170,7 @@
 .list-body p {
     color: black;
 }
+
 
 .list-body h3, h4 {
     color: var(--heading);
@@ -180,6 +186,7 @@
 .dashboard-container {
     padding-top: 160px;
     margin: 0;
+    height: 100%;
 }
 
 .dashboard-list {
@@ -191,24 +198,10 @@
     margin: 0 auto;
 }
 
-.dash-title {
-    
-}
-/* 
-.dashboard-posts {
-    height: 100%;
-    width: 50%;
-    margin: 0 auto;
-} */
-
 /* singlepost */
 .single-post-container {
     padding-top: 160px;
-
-}
-
-.comment-form {
-
+    /* height: 100vh; */
 }
 
 /* login */
@@ -229,7 +222,8 @@
 
 /* util */
 .comment-p {
-    font-size: 18px;
+    font-size: 16px;
+    color: black;
 }
 
 .description-p {

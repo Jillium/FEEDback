@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
-import { QUERY_POST, QUERY_ME } from '../graphql/queries';
+import { QUERY_POST } from '../graphql/queries';
 import { REMOVE_POST } from '../graphql/mutations';
 import { LinkPreview } from '@dhaiwat10/react-link-preview';
 import auth from '../utils/auth';
@@ -9,15 +9,15 @@ import CommentForm from '../components/CommentForm';
 import CommentList from '../components/CommentList';
 
 const SinglePost = props => {
-    const { id, username: userParam } = useParams();
+    const { id, username } = useParams();
     console.log(id);
 
     const [removePost] = useMutation(REMOVE_POST);
-    const { loading, data } = useQuery(QUERY_POST, {
-        variables: { _id: id }},
-        QUERY_ME, {
-            variables: { username: userParam }}
-        );
+    const { loading, data } = useQuery(
+        QUERY_POST, {
+        variables: { _id: id }
+    }
+    );
 
     const post = data?.post || {};
     console.log(post);
@@ -55,18 +55,25 @@ const SinglePost = props => {
                 </p>
 
                 <div>
-                    <p className='comment-p'>
+
+                    <div className='comment-p'>
                         {post.commentCount > 0 && <CommentList comments={post.comments} />}
-                    </p>
-                </div>
-                <div>
+                    </div>
+
                     <LinkPreview url={post.postLink} width='300px' height='300px' fallbackImageSrc='https://live.staticflickr.com/3238/3039847767_826d72d7a5_c.jpg' />
+
                 </div>
 
                 <div>
-                    {auth.loggedIn() && auth.getProfile().data.username === userParam && (
-                    <button className="btn ml-auto" onClick={handleClick}>Delete This Post</button>
+                    {auth.loggedIn() && auth.getProfile().data.username === post.username && (
+                    <button className="btn btn-secondary ml-auto m-1" onClick={handleClick}>Delete This Post</button>
                     )}
+                </div>
+
+                <div>
+                    <p className='comment-p'>
+                        {post.commentCount > 0 && <CommentList comments={post.comments} />}
+                    </p>
                 </div>
 
                 <div>
