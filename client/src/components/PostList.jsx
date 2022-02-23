@@ -44,9 +44,9 @@ const PostList = ({ posts }) => {
                                         style={{ fontWeight: 700 }}
                                         className="text-light"
                                     >
-                                        <p>
+                                        
                                             Posted by {post.username}, Posted on {post.createdAt}
-                                        </p>
+                                        
                                     </Link>{' '}
                                 </p>
                             </div>

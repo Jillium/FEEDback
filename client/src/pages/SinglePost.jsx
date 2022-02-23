@@ -52,9 +52,9 @@ const SinglePost = props => {
                 </p>
 
                 <div>
-                    <p className='comment-p'>
+                    <div className='comment-p'>
                         {post.commentCount > 0 && <CommentList comments={post.comments} />}
-                    </p>
+                    </div>
                 </div>
                 <div>
                     <LinkPreview url={post.postLink} width='300px' height='300px' fallbackImageSrc='https://live.staticflickr.com/3238/3039847767_826d72d7a5_c.jpg' />
