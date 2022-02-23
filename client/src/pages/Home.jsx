@@ -1,6 +1,6 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
-import { QUERY_POSTS, QUERY_ME_BASIC } from "../graphql/queries";
+import { QUERY_POSTS } from "../graphql/queries";
 import PostList from '../components/PostList';
 
 
@@ -8,16 +8,12 @@ import PostList from '../components/PostList';
 function Home() {
 
     const { loading, data } = useQuery(QUERY_POSTS);
-    // const { data: userData } = useQuery(QUERY_ME_BASIC);
     
-
     const posts = data?.posts || [];
     
-
-
     return (
-        <main>
-           <div className='main-background'>
+      <main>
+        <div className='main-background'>
           {loading ? (
             <div>Loading...</div>
           ) : (
@@ -26,10 +22,9 @@ function Home() {
             </div>
           )}
         </div>
-        </main>
+      </main>
     );
-
-
+    
 };
 
 export default Home;
