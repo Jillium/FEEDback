@@ -192,7 +192,7 @@ const Login = (props) => {
         <h4>Rules!</h4>
         <ul>
           <li>Contribute</li>
-          <li>Be Contructive</li>
+          <li>Be Constructive</li>
           <li>Don't post any malicious content</li>
           <li>Give us feedback on our website too!</li>
           <li>Have Fun!</li>
