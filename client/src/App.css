@@ -198,16 +198,7 @@
     margin: 0 auto;
 }
 
-.dash-title {
-    
-}
-/* adding a comment to test repo updates */
-/* 
-.dashboard-posts {
-    height: 100%;
-    width: 50%;
-    margin: 0 auto;
-} */
+
 
 /* singlepost */
 .single-post-container {
@@ -215,9 +206,7 @@
     /* height: 100vh; */
 }
 
-.comment-form {
-    /* height: 100vh; */
-}
+
 
 /* login */
 .login-container {
