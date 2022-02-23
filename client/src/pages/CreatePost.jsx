@@ -16,15 +16,15 @@ const PostForm = () => {
         {
             title: '',
             postBody: '',
-            postLink: ''
+            postLink: 'http://'
         }
     );
     // State for keep character counts
     const [characterCountState, setCharacterCountState] = useState(
         {
-            title: 0,
-            postBody: 0,
-            postLink: 0
+            title: postFormState.title.length,
+            postBody: postFormState.postBody.length,
+            postLink: postFormState.postLink.length
         }
     );
     const [addPost, { error }] = useMutation(ADD_POST);
@@ -52,6 +52,11 @@ const PostForm = () => {
         if (loggedIn) {
             username = Auth.getProfile().data.username;
         }
+        postFormState.postLink = postFormState.postLink.trim();
+        let linkHead = postFormState.postLink.substring(0,4).toLowerCase();
+        if (linkHead !== 'http') {
+            postFormState.postLink = 'http://' + postFormState.postLink;
+        }
 
         try {
             await addPost({
@@ -61,12 +66,12 @@ const PostForm = () => {
             setPostFormState({
                 title: '',
                 postBody: '',
-                postLink: ''
+                postLink: 'http://'
             });
             setCharacterCountState({
-                title: 0,
-                postBody: 0,
-                postLink: 0
+                title: postFormState.title.length,
+                postBody: postFormState.postBody.length,
+                postLink: postFormState.postLink.length
             });
 
             //return <Redirect to="/dashboard" />;
