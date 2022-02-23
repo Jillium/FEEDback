@@ -9,13 +9,15 @@ import CommentForm from '../components/CommentForm';
 import CommentList from '../components/CommentList';
 
 const SinglePost = props => {
-    const { id } = useParams();
+    const { id, username } = useParams();
     console.log(id);
 
     const [removePost] = useMutation(REMOVE_POST);
-    const { loading, data } = useQuery(QUERY_POST, {
+    const { loading, data } = useQuery(
+        QUERY_POST, {
         variables: { _id: id }
-    });
+    }
+    );
 
     const post = data?.post || {};
     console.log(post);
@@ -52,16 +54,21 @@ const SinglePost = props => {
                 </p>
 
                 <div>
-                    <p className='comment-p'>
-                        {post.commentCount > 0 && <CommentList comments={post.comments} />}
-                    </p>
-                </div>
-                <div>
+
                     <LinkPreview url={post.postLink} width='300px' height='300px' fallbackImageSrc='https://live.staticflickr.com/3238/3039847767_826d72d7a5_c.jpg' />
+
                 </div>
 
                 <div>
-                    <button className="btn ml-auto" onClick={handleClick}>Delete This Post</button>
+                    {auth.loggedIn() && auth.getProfile().data.username === post.username && (
+                    <button className="btn btn-secondary ml-auto m-1" onClick={handleClick}>Delete This Post</button>
+                    )}
+                </div>
+
+                <div>
+                    <p className='comment-p'>
+                        {post.commentCount > 0 && <CommentList comments={post.comments} />}
+                    </p>
                 </div>
 
                 <div>
