@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
-import { QUERY_POST } from '../graphql/queries';
+import { QUERY_POST, QUERY_ME } from '../graphql/queries';
 import { REMOVE_POST } from '../graphql/mutations';
 import { LinkPreview } from '@dhaiwat10/react-link-preview';
 import auth from '../utils/auth';
@@ -9,13 +9,15 @@ import CommentForm from '../components/CommentForm';
 import CommentList from '../components/CommentList';
 
 const SinglePost = props => {
-    const { id } = useParams();
+    const { id, username: userParam } = useParams();
     console.log(id);
 
     const [removePost] = useMutation(REMOVE_POST);
     const { loading, data } = useQuery(QUERY_POST, {
-        variables: { _id: id }
-    });
+        variables: { _id: id }},
+        QUERY_ME, {
+            variables: { username: userParam }}
+        );
 
     const post = data?.post || {};
     console.log(post);
@@ -39,6 +41,7 @@ const SinglePost = props => {
         window.location.replace("/dashboard")
     };
 
+    console.log(userParam)
     return (
 
 
@@ -61,7 +64,9 @@ const SinglePost = props => {
                 </div>
 
                 <div>
+                    {auth.loggedIn() && auth.getProfile().data.username === userParam && (
                     <button className="btn ml-auto" onClick={handleClick}>Delete This Post</button>
+                    )}
                 </div>
 
                 <div>
