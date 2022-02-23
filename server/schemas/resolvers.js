@@ -16,23 +16,26 @@ const resolvers = {
 
         return userData;
       }
-
       throw new AuthenticationError('Not logged in');
     },
+    
     // get all post by username
     allPosts: async () => {
       return Post.find().sort({ createdAt: -1 })
         .populate("comments");
     },
+
     // get all post by username
     posts: async (parent, { username }) => {
       const params = username ? { username } : {};
       return Post.find(params).sort({ createdAt: -1 }).populate("comments");
     },
+
     // get a post by id
     post: async (parent, { _id }) => {
       return Post.findOne({ _id });
     },
+
     // get all users
     users: async () => {
       return User.find()
@@ -40,6 +43,7 @@ const resolvers = {
         .populate('friends')
         .populate('posts');
     },
+
     // get a user by username 
     user: async (parent, { username }) => {
       return User.findOne({ username })
@@ -50,12 +54,12 @@ const resolvers = {
   },
   Mutation: {
     addUser: async (parent, { username, email, password }) => {
-      // Check if username is used #TBU
+      // Check if username is used
       const previousUsername = await User.findOne({ username });
       if (previousUsername) {
         throw new AuthenticationError('The username has been already registered!');
       }
-      // Check if email is used #TBU
+      // Check if email is used
       const previousEmail = await User.findOne({ email });
       if (previousEmail) {
         throw new AuthenticationError('The email has been already registered!');
@@ -68,20 +72,17 @@ const resolvers = {
     },
 
     login: async (parent, { email, password }) => {
-
-      // Check if the username is wrong #TBU
+      // Check if the username is wrong
       const user = await User.findOne({ email });
       if (!user) {
         throw new AuthenticationError('Incorrect Credentials');
       }
-      // Check if the password is wrong #TBU
+      // Check if the password is wrong
       const correctPw = await user.isCorrectPassword(password);
       if (!correctPw) {
         throw new AuthenticationError('Incorrect Credentials');
       }
-
       const token = signToken(user);
-
       return { token, user };
     },
 
@@ -105,34 +106,6 @@ const resolvers = {
         }
       }
     },
-
-    // addComment: async (parent, { username, commentText })  => {
-    //   if (username == '') {
-    //     console.log('it is empty username');
-    //     throw new AuthenticationError('You are not logged in');
-    //   } else {
-    //     console.log('username passed');
-    //     const post = await Post.findOne({ username });
-    //     if (post) {
-    //       console.log('Post found');
-    //       const ID = post._id;
-    //       console.log('ID : ', ID);
-    //       const comment = await Comment.create({ commentText, username, ID });
-    //       console.log('comment Added')
-    //       await User.findOneAndUpdate(
-    //         { username : username },
-
-    //         { $push: { comments: { commentText, username } } },
-    //         { new: true, runValidators: true }
-    //       );
-
-    //       return post; 
-    //     } else {
-    //       console.log('Post not found');
-    //       throw new AuthenticationError('Post not found!');
-    //     }
-    //   }
-    // },
 
     addFriend: async (parent, { friendId }, context) => {
       if (context.user) {

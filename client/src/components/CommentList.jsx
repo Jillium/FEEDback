@@ -22,7 +22,7 @@ const CommentList = ({ comments }) => {
   }
     
     return (
-        <div>
+      <div>
         <div>
           <span className= "header-font">Comments</span>
         </div>
@@ -31,16 +31,12 @@ const CommentList = ({ comments }) => {
             comments.map(comment => (
               <div key={comment._id}>
                 {comment.commentText} {'// '}
-                {/* <Link to={`dashboard/${comment.username}`}> */}
                   {comment.username} on {comment.createdAt}
                   <a onClick={() =>handleDelete(comment._id)}>Delete</a>
-                {/* </Link> */}
               </div>
             ))}
         </div>
-      </div>
-      
-       
+      </div>       
     );
 };
 

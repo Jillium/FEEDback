@@ -3,33 +3,31 @@ const bcrypt = require('bcrypt');
 
 
 const userSchema = new Schema({
-  username: {
-    type: String,
-    required: true,
-    unique: true,
-    trim: true
+    username: {
+      type: String,
+      required: true,
+      unique: true,
+      trim: true
+    },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+      match: [/.+@.+\..+/, 'Must match an email address!']
+    },
+    password: {
+      type: String,
+      required: true,
+      minLength: 5
+    },
+    posts: [{ type: Schema.Types.ObjectId, ref: "Post" }],
+    friends: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+      }
+    ]
   },
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-    match: [/.+@.+\..+/, 'Must match an email address!']
-  },
-  password: {
-    type: String,
-    required: true,
-    minLength: 5
-  },
-  posts: [{ type: Schema.Types.ObjectId, ref: "Post" }],
-  // comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
-  // replies: [{ type: Schema.Types.ObjectId, ref: "Reply" }],
-  friends: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'User'
-    }
-  ]
-},
   {
     toJSON: {
       virtuals: true

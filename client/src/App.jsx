@@ -10,13 +10,11 @@ import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
 import CreatePost from './pages/CreatePost';
 import Home from "./pages/Home"
-import logo from "../src/assets/feedback.png";
-import logo2 from "../src/assets/Feedback2.png";
 import logo3 from "../src/assets/Feedback3.png";
 import SinglePost from './pages/SinglePost';
 import NoMatch from './pages/NoMatch';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Auth from './utils/auth';
+import Auth from './graphql/auth';
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -79,9 +77,9 @@ function App() {
 
         <footer className="footer">
           <h4 className='footer-made-by'>Made by FEEDBACK 2022</h4>
-          <ul className='footer-list'>
-            <li className='footer-item'>Check us out on <a href="https://github.com/Jillium/FEEDback" target="_blank" rel="noreferrer" style={{ textDecoration: 'none' }}>Github</a>!</li>
-          </ul>
+          
+          <h4 className='footer-made-by'>Check us out on <a href="https://github.com/Jillium/FEEDback" target="_blank" rel="noreferrer" style={{ textDecoration: 'none' }}>Github</a>!</h4>
+          
         </footer>
       </div>
 
