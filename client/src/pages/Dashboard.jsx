@@ -29,13 +29,10 @@ const Dashboard = (props) => {
     return <div>Loading. One Moment, Please...</div>;
   }
 
-  if (!user?.username) {
-    return (
-      <h4>
-        You need to be logged in to see this. Please log in or sign up with a new account.
-      </h4>
-    );
-  }
+  const loggedIn = Auth.loggedIn();
+    if (!loggedIn) {
+        return <Redirect to="/login" />;
+    }
 
   const handleClick = async () => {
     console.log("clicked", user);
