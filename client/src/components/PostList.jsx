@@ -20,8 +20,8 @@ const PostList = ({ posts }) => {
                 {posts &&
                     posts.map(post => (
                         <div key={post._id} className='card mb-3'>
-                            <div className='card mb-0 post-card'>
-                                <div className="card-body list-body post-card">
+                            <div className='card mb-0'>
+                                <div className="card-body list-body">
                                     <Link to={`/singlepost/${post._id}`} style={{ fontWeight: 700 }}
                                         className="text-light">
                                         <h3>{post.title}</h3>
@@ -33,12 +33,12 @@ const PostList = ({ posts }) => {
                                     </Link>
                                 </div>
 
-                                <div className="link-preview post-card">
-                                    <LinkPreview url={post.postLink} width='300px' height='300px' descriptionLength={0}
+                                <div className="link-preview">
+                                    <LinkPreview url={post.postLink} descriptionLength={0} className='preview-box'
                                         fallbackImageSrc='https://live.staticflickr.com/3238/3039847767_826d72d7a5_c.jpg' />
                                 </div>
 
-                                <p className="card-header post-card">
+                                <p className="card-header">
                                     <Link
                                         to={`/dashboard/${post.username}`}
                                         style={{ fontWeight: 700 }}

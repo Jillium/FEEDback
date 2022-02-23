@@ -79,9 +79,9 @@ function App() {
 
         <footer className="footer">
           <h4 className='footer-made-by'>Made by FEEDBACK 2022</h4>
-          <ul className='footer-list'>
-            <li className='footer-item'>Check us out on <a href="https://github.com/Jillium/FEEDback" target="_blank" rel="noreferrer" style={{ textDecoration: 'none' }}>Github</a>!</li>
-          </ul>
+          
+          <h4 className='footer-made-by'>Check us out on <a href="https://github.com/Jillium/FEEDback" target="_blank" rel="noreferrer" style={{ textDecoration: 'none' }}>Github</a>!</h4>
+          
         </footer>
       </div>
 
