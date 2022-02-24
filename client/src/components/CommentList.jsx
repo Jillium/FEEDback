@@ -32,7 +32,7 @@ const CommentList = ({ comments }) => {
               <div key={comment._id}>
                 {comment.commentText} {'// '}
                   {comment.username} on {comment.createdAt}
-                  <a onClick={() =>handleDelete(comment._id)}>Delete</a>
+                  <button className="btn btn-secondary" onClick={() =>handleDelete(comment._id)}>Delete</button>
               </div>
             ))}
         </div>
