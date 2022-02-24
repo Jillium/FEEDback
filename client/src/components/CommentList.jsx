@@ -3,6 +3,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { REMOVE_COMMENT } from '../graphql/mutations';
 import { useMutation } from '@apollo/client';
+import auth from '../graphql/auth';
 
 const CommentList = ({ comments }) => {
 
@@ -31,7 +32,9 @@ const CommentList = ({ comments }) => {
               <div key={comment._id}>
                 {comment.commentText} {'// '}
                   {comment.username} on {comment.createdAt}
+                  {auth.loggedIn() && auth.getProfile().data.username === comment.username && (
                   <a onClick={() =>handleDelete(comment._id)}>Delete</a>
+                  )}
               </div>
             ))}
         </div>
