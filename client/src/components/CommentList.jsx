@@ -22,16 +22,16 @@ const CommentList = ({ comments }) => {
     
     return (
       <div>
-        <div>
+        <div className="align-left">
           <span className= "header-font">Comments</span>
         </div>
         <div>
           {comments &&
             comments.map(comment => (
-              <div key={comment._id}>
+              <div className="align-left justify-space-between" key={comment._id}>
                 {comment.commentText} {'// '}
-                  {comment.username} on {comment.createdAt}
-                  <a onClick={() =>handleDelete(comment._id)}>Delete</a>
+                  <span className="">{comment.username} on {comment.createdAt}</span>
+                  <button className="display-block delete-btn-sm m-1" onClick={() =>handleDelete(comment._id)}>Delete Comment</button>
               </div>
             ))}
         </div>
