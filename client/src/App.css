@@ -157,6 +157,14 @@
     border-color: var(--heading);
 }
 
+.delete-btn-sm {
+    color: red;
+    text-decoration: none;
+    background-color: white;
+    border: none;
+    font-size: smaller;
+}
+
 .charcount {
     margin-left: 25px;
     font-size: 14px;
@@ -268,6 +276,14 @@
 
 .single-post-center {
     text-align: center;
+}
+
+.align-left {
+    text-align: left;
+}
+
+.align-right {
+    text-align: right;
 }
 /* .spc-preview {
     margin-left: 30%;

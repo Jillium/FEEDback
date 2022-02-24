@@ -39,8 +39,8 @@ const SinglePost = props => {
         <div className="single-post-container main-background">
             <div className="single-post-card">
 
-                <h3 className='main-header-font single-post-center'>{post.title}</h3>
-                <p className='description-p single-post-center'>
+                <h3 className='main-header-font single-post-center align-left'>{post.title}</h3>
+                <p className='description-p single-post-center align-left'>
                     {post.postBody}
                 </p>
 
@@ -48,13 +48,13 @@ const SinglePost = props => {
                     <LinkPreview url={post.postLink} width='100%' height='130%' fallbackImageSrc='https://live.staticflickr.com/3238/3039847767_826d72d7a5_c.jpg' />
                 </div>
 
-                <div>
+                <div className="align-right">
                     {auth.loggedIn() && auth.getProfile().data.username === post.username && (
-                        <button className="btn btn-secondary ml-auto m-1 mt-4" onClick={handleClick}>Delete This Post</button>
+                        <button className="btn btn-secondary ml-auto m-1 mt-4 mb-2" onClick={handleClick}>Delete This Post</button>
                     )}
                 </div>
 
-                <div className="single-post-center">
+                <div className="single-post-center align-right">
                     <span>Posted by {post.username} on {post.createdAt}</span>
                 </div>
                 
